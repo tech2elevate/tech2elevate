@@ -4,8 +4,10 @@
     "gitzy",
     "nextra",
     "seriph",
+    "shiki",
     "slidev",
-    "turborepo"
+    "turborepo",
+    "unocss"
   ],
   "editor.formatOnSave": true
 }
