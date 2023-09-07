@@ -1,4 +1,11 @@
 {
-  "cSpell.words": ["espree", "nextra", "seriph", "slidev"],
+  "cSpell.words": [
+    "espree",
+    "gitzy",
+    "nextra",
+    "seriph",
+    "slidev",
+    "turborepo"
+  ],
   "editor.formatOnSave": true
 }
