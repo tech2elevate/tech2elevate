@@ -1,4 +1,4 @@
-# K 12 Plus Docs
+# SNT Mentoring Docs
 
 ## 🔧 Technologies
 

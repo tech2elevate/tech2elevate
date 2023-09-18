@@ -1,4 +1,5 @@
 {
+  "name": "snt-mentoring-docs",
   "private": true,
   "scripts": {
     "build": "turbo run build",
@@ -7,12 +8,11 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
-    "eslint": "^8.48.0",
-    "gitzy": "^4.0.0",
-    "prettier": "^3.0.3",
+    "eslint": "8.48.0",
+    "gitzy": "4.0.0",
+    "prettier": "3.0.3",
     "tsconfig": "workspace:*",
     "turbo": "latest"
   },
-  "packageManager": "pnpm@8.6.10",
-  "name": "k-12plus-docs"
+  "packageManager": "pnpm@8.6.10"
 }
