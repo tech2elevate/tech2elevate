@@ -13,6 +13,42 @@
 
 ## 📋 Getting Started
 
+First, you need to make sure that you're running the correct node version, by running the following command:
+
+```
+nvm use
+```
+
+or if you `fnm` use:
+
+```
+fnm use
+```
+
+Then make sure you have `pnpm` installed, by running the following command:
+
+```
+corepack enable
+```
+
+Now you can install the correct pnpm version, by running the following command:
+
+```
+corepack prepare
+```
+
+Before running any command you need to install dependencies, by running the following command:
+
+```
+pnpm install
+```
+
+Finally, you can now run everything, by running the following command:
+
+```
+pnpm dev
+```
+
 ## 🧞 Commands
 
 | Command        | Action                                |
