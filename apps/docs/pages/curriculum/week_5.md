@@ -1,24 +1,22 @@
 ## Week 5
 
-Based on time available we might be able to merge 4 & 5
-
-- More JavaScript
-  - data structures
-    - How do we store items in an array?
-    - How do we access items in an array?
-    - How do we add items in array?
-    - How do removing items in array?
-    - How do we iterate through an array?
-    - How do we store properties within an object?
-    - How do access an item properties in an object?
-    - modify an object
-    - storing objects within an array
-  - more on functions
-    - what is a callback
+- What is JavaScript?
+- How do you add JavaScript?
+- Intro to JavaScript through Computer Science Fundamentals
+  - What are comments?
+  - What are variables?
+  - What are strings?
+  - What are numbers?
+  - What are arrays?
+  - What are boolean?
+  - What are functions?
+  - What are if/else?
+  - What are objects?
 
 ## Resources
 
-- https://www.codingame.com/ide/puzzle/onboarding
-- https://www.youtube.com/watch?v=7W4pQQ20nJg&t=48s
-- https://www.programiz.com/javascript/object
-- https://www.cram.com/flashcards/memorize/javascript-7466716
+- https://flexboxfroggy.com/
+- https://css-tricks.com/css-basics-syntax-matters-syntax-doesnt/
+- https://www.youtube.com/watch?v=qKoajPPWpmo
+- https://www.youtube.com/watch?v=UO0ZPL8yMpU
+- https://www.youtube.com/watch?v=JT0gyzbpD2U

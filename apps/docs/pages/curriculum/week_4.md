@@ -1,22 +1,21 @@
 ## Week 4
 
-- What is JavaScript?
-- How do you add JavaScript?
-- Intro to JavaScript through Computer Science Fundamentals
-  - What are comments?
-  - What are variables?
-  - What are strings?
-  - What are numbers?
-  - What are arrays?
-  - What are boolean?
-  - What are functions?
-  - What are if/else?
-  - What are objects?
+- CSS Basics cont.
+  - What is the box model?
+    - How do you add padding?
+    - How do you a border?
+    - How do you a margin?
+  - How do you add width?
+  - How do you add a background color?
+  - How do you change the color of element?
+  - How do you center an element?
+    - Ask students to look things up
+- CSS Layout
+  - How do you change the layout?
+    - How do you change the layout with flexbox?
 
 ## Resources
 
-- https://flexboxfroggy.com/
-- https://css-tricks.com/css-basics-syntax-matters-syntax-doesnt/
-- https://www.youtube.com/watch?v=qKoajPPWpmo
-- https://www.youtube.com/watch?v=UO0ZPL8yMpU
-- https://www.youtube.com/watch?v=JT0gyzbpD2U
+- https://www.youtube.com/watch?v=WQ4piPjD0ZA
+- https://www.youtube.com/watch?v=qz0aGYrrlhU
+- https://www.w3schools.com/css/css_text.asp

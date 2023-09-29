@@ -1,0 +1,10 @@
+{
+  "name": "workshop",
+  "private": true,
+  "scripts": {
+    "dev": "serve -p 1234 --cors"
+  },
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}

@@ -1,18 +1,16 @@
 ---
-title: Slides
+title: SNT Mentoring
 titleTemplate: '%s - Slides'
 theme: seriph
 background: https://source.unsplash.com/collection/94734566/1920x1080
-class: "text-center"
 highlighter: shiki
-lineNumbers: true
+lineNumbers: false
 drawings:
   persist: false
 transition: slide-left
-css: unocss
 ---
 
-# Welcome 👋
+# Welcome Hiawatha Collegiate Academy👋
 
 ---
 transition: fade-out
