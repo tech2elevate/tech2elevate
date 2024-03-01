@@ -20,8 +20,8 @@ What is the first thing that comes to your mind when you think of style?
   - Font
 
 ---
-layout: center
----
+
+## layout: center
 
 # Example
 
@@ -140,14 +140,14 @@ font-weight: bold;
 ```
 
 ---
-layout: center
----
+
+## layout: center
 
 # Intro Page Exercise
 
 ---
-layout: center
----
+
+## layout: center
 
 # Project: Shopping Cart
 
