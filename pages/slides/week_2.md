@@ -5,7 +5,7 @@ url: http://localhost:1234/final/src/about/about
 
 # What is HTML?
 
-- **H**yper**T**ext **M**arkup **L**anguage
+- Stands for **H**yper**T**ext **M**arkup **L**anguage
 - Tells the web browser what structure the page will be
 - Made of [elements](https://developer.mozilla.org/en-US/docs/Glossary/Element) that allow you to make things look that way you want
 
