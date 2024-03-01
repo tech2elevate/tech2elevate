@@ -28,13 +28,7 @@ fnm use
 Then make sure you have `pnpm` installed, by running the following command:
 
 ```
-corepack enable
-```
-
-Now you can install the correct pnpm version, by running the following command:
-
-```
-corepack prepare
+corepack enable && corepack prepare
 ```
 
 Before running any command you need to install dependencies, by running the following command:
