@@ -1,0 +1,35 @@
+version: "1"
+
+node-image: &use-node-image
+  image: hub.docker.target.com/node:18-alpine
+
+pull_request: &on-pull-request
+  ruleset:
+    event: pull_request
+
+stages:
+  setup:
+    steps:
+      - name: setup
+        <<: [*on-pull-request, *use-node-image]
+        commands:
+          - corepack enable && corepack prepare
+          - pnpm install
+
+  format:
+    needs: setup
+    steps:
+      - name: format
+        <<: [*on-pull-request, *use-node-image]
+        commands:
+          - corepack enable && corepack prepare
+          - pnpm format
+
+  build:
+    needs: setup
+    steps:
+      - name: build
+        <<: [*on-pull-request, *use-node-image]
+        commands:
+          - corepack enable && corepack prepare
+          - NEXT_TELEMETRY_DISABLED=1 pnpm build
