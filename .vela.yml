@@ -7,6 +7,11 @@ pull_request: &on-pull-request
   ruleset:
     event: pull_request
 
+push_to_main: &on_push_to_main
+  ruleset:
+    event: push
+    branch: main
+
 stages:
   setup:
     steps:
@@ -25,6 +30,21 @@ stages:
           - corepack enable && corepack prepare
           - pnpm format
 
+  publish:
+    steps:
+      - name: publish
+        image: docker.target.com/vela-plugins/kaniko:latest
+        pull: always
+        <<: [*on_push_to_main]
+        secrets: [docker_password]
+        parameters:
+          repo: "docker.target.com/app/${VELA_REPO_NAME}"
+          # cspell:disable-next-line
+          username: SVCPEJKN001
+          tags:
+            - "b${BUILD_NUMBER}-${BUILD_COMMIT:0:8}"
+          snapshot_mode: redo
+
   build:
     needs: setup
     steps:
@@ -33,3 +53,10 @@ stages:
         commands:
           - corepack enable && corepack prepare
           - NEXT_TELEMETRY_DISABLED=1 pnpm build
+
+secrets:
+  - name: docker_password
+    # cspell:disable-next-line
+    key: tap/vela-secrets/ARTIFACTORY_SVCPEJKN001_BINREPO
+    engine: native
+    type: shared

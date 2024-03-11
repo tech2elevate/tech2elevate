@@ -3,6 +3,7 @@
     "corepack",
     "espree",
     "gitzy",
+    "kaniko",
     "nextra",
     "ruleset",
     "seriph",
