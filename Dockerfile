@@ -1,10 +1,13 @@
 FROM hub.docker.target.com/node:18-alpine as builder
+
+ENV NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 RUNTIME_VERSION=v2.4.3
+
 WORKDIR /app
 COPY . .
 RUN corepack enable && corepack prepare
 RUN pnpm install
 
-RUN NEXT_TELEMETRY_DISABLED=1 pnpm build
+RUN pnpm build
 
 FROM hub.docker.target.com/node:18-alpine as runner 
 COPY --from=builder /app/.next/standalone ./
