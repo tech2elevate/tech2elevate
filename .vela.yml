@@ -1,7 +1,7 @@
 version: "1"
 
 node-image: &use-node-image
-  image: hub.docker.target.com/node:18-alpine
+  image: hub.docker.target.com/node:20.11.1-alpine
 
 pull_request: &on-pull-request
   ruleset:
