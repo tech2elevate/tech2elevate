@@ -7,7 +7,6 @@
 - HTML Crash Course: https://www.youtube.com/watch?v=qz0aGYrrlhU
 - HTML Tutorial: https://www.w3schools.com/html/
 
-
 ## CSS Basics
 
 - CSS Basics: https://css-tricks.com/css-basics-syntax-matters-syntax-doesnt/
@@ -19,14 +18,12 @@
 - Padding and Margin Explained: https://www.youtube.com/watch?v=WQ4piPjD0ZA
 - Simple visual cheat sheet for flexbox: https://flexbox.malven.co
 
-
 ## JavaScript
 
 - Arrays Crash Course: https://www.youtube.com/watch?v=7W4pQQ20nJg&t=48s
 - Coding Games and Programming Challenges: https://www.codingame.com/ide/puzzle/onboarding
 - JS Flashcards: https://www.cram.com/flashcards/memorize/javascript-7466716
 - JS Objects: https://www.programiz.com/javascript/object
-
 
 ## Intro to the DOM
 
