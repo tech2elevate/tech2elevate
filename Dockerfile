@@ -5,7 +5,7 @@ ENV NEXT_TELEMETRY_DISABLED=1 RUNTIME_VERSION=v2.4.3
 WORKDIR /app
 COPY . .
 RUN corepack enable && corepack prepare
-RUN pnpm install
+RUN CI=true pnpm install
 
 RUN NODE_ENV=production pnpm build
 
