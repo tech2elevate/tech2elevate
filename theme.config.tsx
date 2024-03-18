@@ -5,6 +5,7 @@ const nextraDocsThemeConfig: DocsThemeConfig = {
   head: "Docs",
   sidebar: {
     defaultMenuCollapseLevel: 1,
+    toggleButton: true,
   },
   useNextSeoProps: () => ({
     titleTemplate: "%s - Docs",
