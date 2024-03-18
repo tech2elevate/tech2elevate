@@ -11,8 +11,11 @@ RUN NODE_ENV=production pnpm build
 
 FROM hub.docker.target.com/node:20.11.1-alpine as runner 
 
+WORKDIR /app
+
 ENV NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 RUNTIME_VERSION=v2.4.3
 
+COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 
