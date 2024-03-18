@@ -1,7 +1,6 @@
 # 🚧 Welcome to the Tech2Elevate page
 
-<br>
-<Image src="/images/snt-cohort-2-tnc.jpeg" alt="Hiawatha students and mentors at Target Headquarters" height={200} />
+![Hiawatha students and mentors at Target Headquarters](/images/snt-cohort-2-tnc.jpeg)
 
 ## Tech2Elevate Goal
 

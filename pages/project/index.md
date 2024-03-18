@@ -4,8 +4,8 @@ During the 8-week program, the students will be required to build a simple shopp
 
 Here is an example of the Shopping Cart, but we will encourage students to create their own version of it and have fun experimenting with styles.
 
-<br>
-<Image src="/images/2024-03-17 21.37.18.gif" alt="shopping cart" width={300} />
+<br/>
+<img alt="shopping cart" src="/images/2024-03-17 21.37.18.gif" />
 
 ## Requirements
 
