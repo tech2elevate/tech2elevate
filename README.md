@@ -1,4 +1,4 @@
-# SNT Mentoring Docs
+# tech2elevate Mentoring Docs
 
 ## 🔧 Technologies
 

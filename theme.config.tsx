@@ -10,6 +10,11 @@ const nextraDocsThemeConfig: DocsThemeConfig = {
   useNextSeoProps: () => ({
     titleTemplate: "%s - Docs",
   }),
+  project: {
+    link: "https://git.target.com/tech2elevate/mentoring-docs",
+  },
+  docsRepositoryBase:
+    "https://git.target.com/tech2elevate/mentoring-docs/blob/main",
 };
 
 export default nextraDocsThemeConfig;
