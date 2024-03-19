@@ -1,6 +1,6 @@
 FROM hub.docker.target.com/node:20.11.1-alpine as builder
 
-ENV NEXT_TELEMETRY_DISABLED=1 CI=true 
+ENV NEXT_TELEMETRY_DISABLED=1 CI=true BUILD_STANDALONE=true
 
 WORKDIR /app
 

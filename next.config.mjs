@@ -12,4 +12,8 @@ const withNextra = nextra({
 /**
  * @type {import('next').NextConfig}
  */
-export default withNextra({ output: "standalone" });
+export default withNextra({
+  ...(process.env.BUILD_STANDALONE && {
+    output: "standalone",
+  }),
+});
