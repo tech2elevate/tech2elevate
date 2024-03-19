@@ -38,7 +38,7 @@ pnpm dev
 | `pnpm install` | Installs dependencies                                                               |
 | `pnpm dev`     | Starts local dev server at next available port starting at `localhost:3000`         |
 | `pnpm build`   | Build your production site to `./.next/`                                            |
-| `pnpm start`   | Preview your build locally, before deploying. Requires `pnpm build` to be ran first |
+| `pnpm preview` | Preview your build locally, before deploying. Requires `pnpm build` to be ran first |
 | `pnpm format`  | Validates formatting with prettier                                                  |
 
 ## 🐳 Docker
