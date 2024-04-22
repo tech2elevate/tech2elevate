@@ -1,48 +1,3 @@
-# Week 1: HTML
-
-## Objectives
-
-- Students will be able to identify the purpose of HTML
-- Students will be able to set up an HTML file
-- Students will be able to build HTML headings
-- Students will be able to build HTML div
-- Students will be able to build HTML paragraph
-- Students will be able to build HTML links
-- Students will be able to build HTML images
-- Students will be able to build HTML buttons
-- Students will be able to build HTML lists\
-
-## Goals
-
-- Students will have the basic structure of the shopping cart completed.
-- Students will have at least one item with a button.
-
-## Agenda
-
-1. Fun question
-2. Discuss plan for the session (5 min)
-3. Live coding (15 min)
-4. Students work with mentors (30 min)
-5. Review objectives & wrap up (5 min)
-
-## Instructor Notes
-
-- By the end of the lesson: students will have the basic structure for the cart with at least one item with a button
-
-<iframe
-  width="768"
-  height="432"
-  src="https://stackblitz.com/edit/js-79xf7c?file=index.html,index.js"
-  frameBorder="0"
-  scrolling="no"
-  allow="fullscreen; clipboard-read; clipboard-write"
-  allowFullScreen
-/>
-
-- Students will open IDE and create a new project
-- Name project: "Student Name Shopping Cart"
-- Have students code along with instructor
-
 ## Week 1 Content
 
 - Activity: Go to favorite website and right click inspect
@@ -86,7 +41,7 @@
 - link
 
 ```html
-<link>Biggest</link>
+<link />
 ```
 
 - button

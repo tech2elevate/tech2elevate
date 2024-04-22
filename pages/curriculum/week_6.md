@@ -1,3 +1,33 @@
+# Week 6: JavaScript 3 & DOM
+
+## Objectives
+
+- Students will be able to select an element from the DOM using querySelector
+- Students will be able to create new HTML elements and add them to the DOM
+- Students will be able to use array methods including push, pop, and splice
+- Students will be able to create a boolean variable
+- Students will be able to use different comparison operators
+- Students will be able to use if/else statements
+
+## Goals
+
+- Students will have...
+
+## Agenda for the day
+
+1. Recap from last week & Discuss plan for the session (10 min)
+2. Live coding (15 min)
+3. Students work with mentors (25 min)
+4. Review objectives & wrap up (5 min)
+
+## Instructor Notes
+
+- the code to be used when live coding
+- questions to ask & answers that we are looking for
+- key points (kind of like objectives)
+- cheat sheet
+- resources
+
 ## Week 6
 
 Based on time available we might be able to merge 4 & 5
