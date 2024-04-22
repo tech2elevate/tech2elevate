@@ -58,3 +58,8 @@ docker run -p 3000:3000 tech2elevate/mentoringdocs
 ```
 
 And you can view the container running at http://0.0.0.0:3000 🚀
+
+## 🤨 FAQ
+
+1. After running `pnpm dev`, the search is not working as expected, is something wrong?
+   - The search is mostly dependent on Next.JS's static output which is not available when running `pnpm dev`. To test the search feature locally, you can run `pnpm build` and then `pnpm preview` which will allow you to see that the search is working as expected.
