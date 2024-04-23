@@ -9,6 +9,7 @@
     "lint": "next lint",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
+    "clean": "rm -rf .next",
     "prepare": "is-ci || lefthook install"
   },
   "dependencies": {
