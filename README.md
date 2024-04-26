@@ -2,8 +2,8 @@
 
 ## 🔧 Technologies
 
-- [typescript](https://www.typescriptlang.org)
-  - javascript but with types
+- [typescript](https://www.typescriptlang.org) for JavaScript but with types
+- [nextra](https://nextra.site) for making websites with [Next.js](https://nextjs.org/) & [MDX](https://mdxjs.com/)
 
 ## 📋 Getting Started
 
@@ -63,3 +63,5 @@ And you can view the container running at http://0.0.0.0:3000 🚀
 
 1. After running `pnpm dev`, the search is not working as expected, is something wrong?
    - The search is mostly dependent on Next.JS's static output which is not available when running `pnpm dev`. To test the search feature locally, you can run `pnpm build` and then `pnpm preview` which will allow you to see that the search is working as expected.
+2. After running `pnpm dev`, the website is missing styles?
+   - The most likely culprit is that the cache is wrong so you can run `pnpm clean` and try `pnpm dev` again.
