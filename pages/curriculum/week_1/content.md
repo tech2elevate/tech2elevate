@@ -1,5 +1,7 @@
 ## Week 1 Content
 
+### HTML Tags
+
 - Activity: Go to favorite website and right click inspect
 - Change text on the page
 - HTML is made of up tags: opening tag `<ElementName>` closing tag `</ElementName>`
@@ -65,6 +67,29 @@
   allow="fullscreen; clipboard-read; clipboard-write"
   allowfullscreen
 ></iframe>
+
+### HTML w/ Attributes: Id and Class
+
+- Attributes provide additional information about an HTML element.
+- All HTML elements can have attributes.
+- Atributes are always included in the opening tag.
+- Attributes usually come in name/value pairs.
+
+```html
+<h1 id="student_id_num"></h1>
+```
+
+- id
+- The id attribute is used to specify a unique id for an HTML element. You cannot have more than one element with the same id in an HTML document.
+- An id attribute is used to seperate a specific element apart.
+
+```html
+<h1 class="student_class_num"></h1>
+```
+
+- class
+- The class attribute is used to specify a class for an HTML element. Multiple HTML elements can share the same class.
+- A class attribute is used to classify/group specific elements together.
 
 ## Additional Resources
 

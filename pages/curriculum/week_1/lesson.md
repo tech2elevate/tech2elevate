@@ -11,6 +11,7 @@
 - Students will be able to build HTML images
 - Students will be able to build HTML buttons
 - Students will be able to build HTML lists
+- Students will be able to add classes and ids to HTML elements
 
 ## Goals
 
