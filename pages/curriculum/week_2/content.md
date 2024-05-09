@@ -1,0 +1,149 @@
+# Week 2 Content
+
+- CSS stands for Cascading Style Sheets
+
+- The purpose of CSS is to style and layout webpages
+
+- To add the css file to the html file you want to style use the `<link>` tag
+
+  `<link href="style.css" rel="stylesheet" type="text/css" /> `
+
+  - This tag is added within the `<head> </head>` tag
+  - `href=` provides the location of the document
+  - `rel=` provides the relationship between the current document and external resource
+  - `types=` specifies the media type of the linked document
+
+- Id selector
+
+  - Allows to identify a single element in the html code
+  - Each element can only have one id and each page can only have one element with that id
+  - Create the the id the html file
+
+    `<div id="idname" > </div>`
+
+  - Select an Id in the css file by using `#` followed by the id
+
+  ```css
+    #idname {
+      Define properties here
+    }
+  ```
+
+- Class selector
+
+  - Classes can be assigned to multiple elements, therefore, reusable
+  - Create a class by using the `.` followed by the name of the class
+
+    ```css
+     .class-name {
+       Define properties here
+     }
+    ```
+
+  - Use the class in the html file
+
+    `<p class="class-name"> </p>`
+
+- Styles
+
+  - Color - For text use the `color` property - For the background use the `background-color` property - For the border use the `border-color` property
+
+  ```css
+    .class-name {
+           color: green; // makes the text green
+           background-color: red; // makes the background of the element red
+           border-color: black; // makes the border of the element black
+         }
+  ```
+
+  - Border
+
+    - Use `border` to choose the style and thickness of the border for the element
+
+      ```css
+      .solid-thin {
+        border: thin solid;
+      }
+      .dashed-medium {
+        border: medium dashed;
+      }
+      .dotted-thick {
+        border: thick dotted;
+      }
+      .no-boarder {
+        border: none;
+      }
+      .border-radius {
+        border-radius: 5px; // defines the radius of the elements corners
+      }
+      ```
+
+  - Padding
+
+    - Padding is the amount of space around an element's content, inside of any defined borders
+      ![box model](/images/box-model.png "box model")
+    - Use `padding` property to set the padding to all four sides of the element
+      ```css
+      .padding {
+        padding: 25px;
+      }
+      ```
+    - The following properties can be used to speficy padding on a certain side of the element
+
+      ```css
+      .padding {
+        padding-top: 25px;
+        padding-right: 50px;
+        padding-bottom: 75px;
+        padding-left: 15px;
+      }
+      ```
+
+  - Margin
+
+    - Margins are used to create space around elements, outside of any defined borders
+    - Use `margin` to set the margin to all four sides
+      ```css
+      .margin {
+        margin: 25px;
+      }
+      ```
+    - The following properties can be used to speficy the margin on a certain side of the element
+
+      ```css
+      .margin {
+        margin-top: 25px;
+        margin-right: 50px;
+        margin-bottom: 75px;
+        margin-left: 15px;
+      }
+      ```
+
+  - Width
+
+    - Use the property `width` to set the width of the element in pixels or percentage
+
+      ```css
+        .element {
+          width: 500px; // sets the width to 500 pixels
+          width: 50%; // sets the width of the element to 50% of the parent element
+        }
+
+      ```
+
+  - Fonts
+
+    - To select a font for text use the `font-family` property
+    - Select the font size by using the `font-size` property
+    - `font-style` property can be used to style the font normal, italic, or oblique
+    - Select the thicnkess of the font by using `font-weight` property
+      - choose between: normal, bold, bolder, lighter
+
+    ```css
+      element {
+        font-family: Courier New;  // selected font is Courier New
+        font-style: italic; // makes the font italic
+        font-size: 15px; // sets fonts szie to 15 pixels
+        font-weight: bold; // bolds the font
+     }
+    ```
