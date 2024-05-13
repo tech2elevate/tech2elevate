@@ -54,8 +54,3 @@
    <Image src="/images/goal-week-2.png" alt="week 2 goal" width={600} height={600}/>
 
 - Have students code along with instructor
-
-# Week 2 Resources
-
-- https://stackblitz.com/edit/js-8ywwsf?file=index.html
-- https://flexboxfroggy.com/

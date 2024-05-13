@@ -1,0 +1,4 @@
+## Week 7: Resources
+
+- https://www.youtube.com/watch?v=2Tld4yyN_tw
+- https://www.freecodecamp.org/news/dom-explained-everything-you-need-to-know-about-the-document-object-model/

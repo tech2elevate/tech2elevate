@@ -90,7 +90,3 @@
 - class
 - The class attribute is used to specify a class for an HTML element. Multiple HTML elements can share the same class.
 - A class attribute is used to classify/group specific elements together.
-
-## Additional Resources
-
-- https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Getting_started
