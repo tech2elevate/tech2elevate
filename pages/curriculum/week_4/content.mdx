@@ -1,0 +1,165 @@
+import { Callout } from "nextra/components";
+
+# Intro to JavaScript (Lesson 4)
+
+### Purpose of JavaScript
+
+- JavaScript is a web development language
+- Adds functionality to the page:
+  - user interaction
+  - display data
+  - load content on a page
+
+#### Add a JavaScript file to HTML file
+
+- Add the script tag to the HTML file within the `<head>` element
+
+```html
+<script type="module" src="index.js"></script>
+```
+
+- This links the JavaScript file to the html file.
+
+<Callout type="info" emoji="ℹ️">
+  Make sure the `src` value is correct.
+</Callout>
+
+#### Log hello world
+
+- `console.log()` is a tool that developers often use for testing and debugging
+- like checking your work in math class
+- allows you to see what your code is doing
+- also a quick way to verify that JS and HTML files are hooked up
+- add type of somewhere
+
+```javascript
+console.log("hello world");
+```
+
+### Variables
+
+#### Create variables using let and const & assign them values
+
+- `let` and `const` are key words letting JavaScript know you are writing a variable
+- `let` is a variable that you can can re-assign
+
+```javascript
+let cat;
+cat = "Clara";
+console.log(cat);
+cat = "Jorge";
+console.log(cat);
+```
+
+- `const` is a variable that you cannot can re-assign
+- first you `declare` a variable
+- then you `assign` the variable a value
+
+```javascript
+// declaration or declaring the variable
+let cat;
+// assignment or assigning a value to the variable
+cat = "Tabby";
+```
+
+- to check to see what the output is, we will console log this variable
+
+```javascript
+console.log(cat);
+```
+
+- what would happen if we didn't assign a value to the variable?
+
+```javascript
+let pet;
+console.log(pet);
+```
+
+- generally, we will want to use `const`
+- declared and assigned in the same line
+
+```javascript
+const dog = "Ronnie";
+console.log(dog);
+```
+
+#### Identify words that cannot be used for variable naming
+
+- in JavaScript (and other languages) there are certain words that you cannot use as variable names
+- these are called `reserved keywords`
+- such as:
+  - class
+  - const
+  - let
+  - if
+  - typeof
+  - this
+- see here for a full list: https://www.w3schools.com/js/js_reserved.asp
+
+### Types of variables
+
+- variables can hold different types of data such as numbers, or strings (like words)
+- knowing the data type allows us to operate on variables, like add two numbers together
+- there are 8 data types in JavaScript (read more here: https://www.w3schools.com/js/js_datatypes.asp)
+- we will focus on 3
+  - `string`
+  - `number`
+  - special type of object called `array`
+
+#### Create a string variable
+
+- we've already done this!
+- to create a string variable, declare the variable and assign it to a string
+- a string is a value with "quotes" around it
+
+```javascript
+const word = "hello";
+console.log(word);
+```
+
+#### Create a number variable
+
+- same process as string, expect no quotes and it must be a number
+
+```javascript
+const count = 2;
+console.log(count);
+```
+
+### Advanced
+
+#### Use arithmetic operators
+
+- you can combine variables in different ways
+- with numbers, just like in math, you can add, subtract, multiply, divide
+- a common use case is counting the number of times something happens
+- you can assign a variable to itself plus a number
+
+```javascript
+let numberOfLikes = 3;
+console.log(numberOfLikes);
+numberOfLikes = numberOfLikes + 4;
+console.log(numberOfLikes);
+```
+
+- you can also "add" strings
+- this is called concatenation
+
+```javascript
+const firstName = "Alexandra";
+const lastName = "Rodriguez-Beuerman";
+const fullName = firstName + lastName;
+console.log(fullName);
+```
+
+#### Create and implement arrays
+
+- arrays are a set or list of values
+- could be of a single data type or multiple types
+- declared with `let` or `const` just like we've been doing
+- assigned values within `[]`
+
+```javascript
+const animals = ["dog", "cat", "mouse"];
+console.log(animals);
+```
