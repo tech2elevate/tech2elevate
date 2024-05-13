@@ -2,7 +2,7 @@
 
 ### HTML Tags
 
-- Activity: Go to favorite website and right click inspect
+- Activity: Go to your favorite website and right click inspect
 - Change text on the page
 - HTML is made of up tags: opening tag `<ElementName>` closing tag `</ElementName>`
 - For example:
