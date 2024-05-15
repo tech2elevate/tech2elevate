@@ -1,4 +1,4 @@
-FROM hub.docker.target.com/node:20.12.2-alpine as builder
+FROM hub.docker.target.com/node:20.13.1-alpine as builder
 
 ENV NEXT_TELEMETRY_DISABLED=1 CI=true BUILD_STANDALONE=true
 
@@ -10,7 +10,7 @@ RUN corepack enable && corepack prepare && pnpm install
 
 RUN pnpm build
 
-FROM hub.docker.target.com/node:20.12.2-alpine as runner 
+FROM hub.docker.target.com/node:20.13.1-alpine as runner 
 
 WORKDIR /app
 
