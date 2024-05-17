@@ -65,3 +65,5 @@ And you can view the container running at http://0.0.0.0:3000 🚀
    - The search is mostly dependent on Next.JS's static output which is not available when running `pnpm dev`. To test the search feature locally, you can run `pnpm build` and then `pnpm preview` which will allow you to see that the search is working as expected.
 2. After running `pnpm dev`, the website is missing styles?
    - The most likely culprit is that the cache is wrong so you can run `pnpm clean` and try `pnpm dev` again.
+3. I want to change the port for `pnpm dev`?
+   - You can pass `-p [port]`, for example `pnpm dev -p 5000`
