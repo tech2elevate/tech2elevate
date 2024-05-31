@@ -28,6 +28,11 @@
 ## Instructor Notes
 
 - the code to be used when live coding
+  - During the live coding give students the following challenges:
+    - Change the background color to blue
+    - Change the size of the header text
+    - Make paragraph text bold
+    - Make the image bigger
 
 <iframe
   width="768"
