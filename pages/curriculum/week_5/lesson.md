@@ -23,6 +23,10 @@
 ## Instructor Notes
 
 - the code to be used when live coding
+  - During the live coding, give students the following challenges:
+    - Write a function that calculates the y-position on a linear line given the slope, x-position, and y-intercept as parameters
+    - Create an Person object that describes 3 characteristics of yourself
+    - Add another event listener to a different button and output whatever you would like
 - questions to ask & answers that we are looking for
 - key points (kind of like objectives)
 - cheat sheet

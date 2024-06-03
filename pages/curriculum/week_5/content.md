@@ -70,6 +70,15 @@ console.log(result);
 console.log(multiplyTwoNumbers(5, 2));
 ```
 
+### Challenge 1:
+
+```
+TODO:
+Write a function that calculates the y-position of a linear curve given a slope, x-position, and y-intercept parameter
+
+y = mx + b
+```
+
 ## Objects
 
 A more complex data type over strings and numbers are <b>objects</b>. Objects allow you to group related data and functionality together, making it easier to organize and manage code.
@@ -147,6 +156,13 @@ sedan.topSpeed = 160;
 console.log(sedan);
 ```
 
+### Challenge 2:
+
+```
+TODO:
+Create a new Person object that describes at least 3 characteristics about yourself. Print out your object using console.log
+```
+
 ## The Document Object Model (DOM)
 
 The Document Object Model (DOM) put simply organizes the components of a web page into a tree-like hierarchy. Think back to what you learned about HTML in Week 1, do you remember some of the different components?
@@ -203,4 +219,11 @@ const buttonClick = () => {
 
 // Add an event listener to the button element
 button.addEventListener("click", buttonClick);
+```
+
+### Challenge 3:
+
+```
+TODO:
+Add another event listener to a different button on the shopping page. Choose whatever you would like the event listener to do or display
 ```
