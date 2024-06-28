@@ -32,15 +32,17 @@ stages:
 
   publish:
     steps:
+      - name: populate_docker_credentials
+        image: docker.target.com/managed/vela-plugins/artifactory-managed-auth:v1.4.0@sha256:4396697f30b3e6e42255350f19cbd95d0db8452b118e6fd444f2b7e3929b1a1f
+        parameters:
+          auth_server: https://artifactorytokenmanager.prod.target.com
+
       - name: publish
         image: docker.target.com/vela-plugins/kaniko:latest
         pull: always
         <<: [*on_push_to_main]
-        secrets: [docker_password]
         parameters:
-          repo: "docker.target.com/app/${VELA_REPO_NAME}"
-          # cspell:disable-next-line
-          username: SVCPEJKN001
+          repo: "docker.target.com/managed/tech2elevate/${VELA_REPO_NAME}"
           tags:
             - "b${BUILD_NUMBER}-${BUILD_COMMIT:0:8}"
           snapshot_mode: redo
@@ -53,10 +55,3 @@ stages:
         commands:
           - corepack enable && corepack prepare
           - NEXT_TELEMETRY_DISABLED=1 pnpm build
-
-secrets:
-  - name: docker_password
-    # cspell:disable-next-line
-    key: tap/vela-secrets/ARTIFACTORY_SVCPEJKN001_BINREPO
-    engine: native
-    type: shared
