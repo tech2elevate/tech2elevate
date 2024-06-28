@@ -54,7 +54,7 @@ Overall example:
 
   ![ifelse3 model](/images/if-else-breakdown-3.png "ifelse3 model")
 
-Real World Examples:
+Real World/Code Along Examples:
 
 - If it’s raining outside 🌧️ → I bring an umbrella ☂️
   Else → I bring sunglasses 🕶️
@@ -62,6 +62,18 @@ Real World Examples:
   Else → I listen to music 🎶
 - If it’s a weekday 🗓️ → I go to sleep at 10pm 😴
   Else → I stay up and play video games 🎮
+
+##### Live Code:
+
+  <iframe
+  width="768"
+  height="432"
+  src="https://stackblitz.com/edit/stackblitz-starters-d5djtq?file=index.html,styles.css,script.js"
+  frameborder="0"
+  scrolling="no"
+  allow="fullscreen; clipboard-read; clipboard-write"
+  allowfullscreen
+  ></iframe>
 
 ## Array Methods
 
