@@ -19,7 +19,7 @@ Then make sure you have `pnpm` installed, by running the following command:
 corepack enable && corepack prepare
 ```
 
-Before running any command you need to install dependencies, by running the following command:
+Before running any command you need to install dependencies. Do this by running the following command:
 
 ```
 pnpm install
