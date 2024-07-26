@@ -41,22 +41,6 @@ pnpm dev
 | `pnpm preview` | Preview your build locally, before deploying. Requires `pnpm build` to be ran first |
 | `pnpm format`  | Validates formatting with prettier                                                  |
 
-## 🐳 Docker
-
-_Before running `docker`, it must be installed, you can use [tgt-docker_helper_scripts](https://git.target.com/toolshed/docker-helper-scripts#docker-helper-scripts) to install [colima](https://github.com/abiosoft/colima)_
-
-To preview the deployable docker container, you can start by building the `Dockerfile`, by running the following:
-
-```
-docker build . -t tech2elevate/mentoringdocs
-```
-
-Then to run the previously built docker container, you can run the following
-
-```
-docker run -p 3000:3000 tech2elevate/mentoringdocs
-```
-
 And you can view the container running at http://0.0.0.0:3000 🚀
 
 ## 🤨 FAQ

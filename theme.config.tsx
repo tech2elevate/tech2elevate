@@ -23,10 +23,9 @@ const nextraDocsThemeConfig: DocsThemeConfig = {
   },
   head: Head,
   project: {
-    link: "https://git.target.com/tech2elevate/mentoring-docs",
+    link: "https://github.com/jimmy-guzman/tech2elevate",
   },
-  docsRepositoryBase:
-    "https://git.target.com/tech2elevate/mentoring-docs/blob/main",
+  docsRepositoryBase: "https://github.com/jimmy-guzman/tech2elevate/blob/main",
 };
 
 export default nextraDocsThemeConfig;
