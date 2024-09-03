@@ -10,6 +10,7 @@
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
     "clean": "rm -rf .next",
+    "knip": "knip",
     "prepare": "is-ci || lefthook install"
   },
   "dependencies": {
@@ -27,6 +28,7 @@
     "@types/react-dom": "18.3.0",
     "gitzy": "5.4.0",
     "is-ci": "3.0.1",
+    "knip": "5.29.2",
     "lefthook": "1.7.9",
     "prettier": "3.3.3",
     "typescript": "5.5.4"

@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/default -- there is no named import
 import nextra from "nextra";
 
 /**
@@ -14,8 +13,4 @@ const withNextra = nextra({
 /**
  * @type {import('next').NextConfig}
  */
-export default withNextra({
-  ...(process.env.BUILD_STANDALONE && {
-    output: "standalone",
-  }),
-});
+export default withNextra();
