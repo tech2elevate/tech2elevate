@@ -16,7 +16,13 @@ const Head = () => {
 };
 
 const nextraDocsThemeConfig: DocsThemeConfig = {
-  logo: "Docs",
+  logo: (
+    <img
+      alt="tech2elevate"
+      style={{ height: "40px", padding: "5px" }}
+      src="/images/tech2elevate-logo.png"
+    />
+  ),
   sidebar: {
     defaultMenuCollapseLevel: 1,
     toggleButton: true,
