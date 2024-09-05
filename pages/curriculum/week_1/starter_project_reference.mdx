@@ -11,11 +11,10 @@
 | script.js         | holds instructions for the web page                                                                                    |
 | styles.css        | holds styling information                                                                                              |
 
-
-
 ### Index.html
+
 ```html filename="index.html"
-<!DOCTYPE html> 
+<!doctype html>
 <html lang="en">
   <head>
     <title>Home</title>
@@ -35,6 +34,7 @@
   </body>
 </html>
 ```
+
 `<!DOCTYPE html>` tells the browser this page is written in html
 
 `<head>` will NOT be displayed in the browser. It contains metadata about that document, such as author, description, and links to CSS or JavaScript files that should be applied to the HTML.
@@ -43,11 +43,11 @@
 
 `<meta>` has metadata for the page, telling the browser how to display the page correctly
 
-`<link rel="stylesheet" href="styles.css" />` tell the page to use the file styles.css as the stylesheet 
+`<link rel="stylesheet" href="styles.css" />` tell the page to use the file styles.css as the stylesheet
 
 `<script type="module" src="script.js">` tells the page to use the file script.js as the script for the page
 
-`<body>` will be displayed in the browser. It is used to contain the content of the document, such as text, images, hyperlinks, tables, lists, etc. 
+`<body>` will be displayed in the browser. It is used to contain the content of the document, such as text, images, hyperlinks, tables, lists, etc.
 
 `<nav>` has navigation information. If you navigate to the page with the root url ending in `/` then it will display the current page. If you navigate to the root url ending in `/page2.html` it will display the page in the file `page2.html`
 
