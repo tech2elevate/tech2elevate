@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useConfig, type DocsThemeConfig } from "nextra-theme-docs";
+import { useConfig, type DocsThemeConfig, useTheme } from "nextra-theme-docs";
 
 const Head = () => {
   const config = useConfig();
@@ -15,8 +15,30 @@ const Head = () => {
   );
 };
 
+const Logo = () => {
+  const { theme } = useTheme();
+
+  return (
+    <>
+      {theme === "dark" ? (
+        <img
+          alt="tech2elevate"
+          style={{ height: "40px", padding: "5px" }}
+          src="/images/tech2elevate-logo-dark-mode.png"
+        />
+      ) : (
+        <img
+          alt="tech2elevate"
+          style={{ height: "40px", padding: "5px" }}
+          src="/images/tech2elevate-logo.png"
+        />
+      )}
+    </>
+  );
+};
+
 const nextraDocsThemeConfig: DocsThemeConfig = {
-  logo: "Docs",
+  logo: <Logo />,
   sidebar: {
     defaultMenuCollapseLevel: 1,
     toggleButton: true,
