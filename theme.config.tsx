@@ -16,24 +16,18 @@ const Head = () => {
 };
 
 const Logo = () => {
-  const { theme } = useTheme();
+  const { resolvedTheme, theme } = useTheme();
 
   return (
-    <>
-      {theme === "dark" ? (
-        <img
-          alt="tech2elevate"
-          style={{ height: "40px", padding: "5px" }}
-          src="/images/tech2elevate-logo-dark-mode.png"
-        />
-      ) : (
-        <img
-          alt="tech2elevate"
-          style={{ height: "40px", padding: "5px" }}
-          src="/images/tech2elevate-logo.png"
-        />
-      )}
-    </>
+    <img
+      alt="tech2elevate"
+      style={{ height: "40px", padding: "5px" }}
+      src={
+        resolvedTheme === "dark" || theme === "dark"
+          ? "/images/tech2elevate-logo-dark-mode.png"
+          : "/images/tech2elevate-logo.png"
+      }
+    />
   );
 };
 
