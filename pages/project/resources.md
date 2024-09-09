@@ -8,6 +8,8 @@
 
 - Target logo: https://target.scene7.com/is/image/Target/GUEST_22905f8e-f24c-4b6c-9dcc-06bd7d4165aa
 
+- Profile logo: https://target.scene7.com/is/content/Target/GUEST_459579d1-8996-4e3c-889a-a975f12c0fd4
+
 - Target Bullseye image: https://target.scene7.com/is/content/Target/GUEST_26eaf754-af71-48ba-9286-d884b7fed1d8
 
 ## Product Data
