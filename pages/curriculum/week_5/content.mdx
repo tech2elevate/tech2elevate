@@ -66,8 +66,8 @@ Now that we have written the function, we have to be able to actually use it:
 
 ```javascript
 let result = multiplyTwoNumbers(5, 2);
-console.log(result);
-console.log(multiplyTwoNumbers(5, 2));
+console.log("result", result);
+console.log("5 * 2 is:", multiplyTwoNumbers(5, 2));
 ```
 
 ### Challenge 1:
@@ -77,90 +77,6 @@ TODO:
 Write a function that calculates the y-position of a linear curve given a slope, x-position, and y-intercept parameter
 
 y = mx + b
-```
-
-## Objects
-
-A more complex data type over strings and numbers are <b>objects</b>. Objects allow you to group related data and functionality together, making it easier to organize and manage code.
-
-You declare and assign a value, just like we did previously with variables, but we use what are called curly braces to denote that this is an object
-
-```javascript
-let car = {};
-console.log(car);
-```
-
-### Why Use Objects?
-
-- Objects are useful when you have more complex data
-- Often we want data that represents things in the real world
-  - For example, like a car
-- Cars have different attributes, like: color, type, number of doors, etc.
-- We can use objects to describe these attributes using something called `key-value pairs`
-- Objects have the flexibility of using multiple `data types`, meaning it can have numbers, strings, and more!
-  - They can become very complex because you can even have an object within an object!
-
-```javascript
-const car = {
-  color: "black",
-};
-console.log(car);
-```
-
-In the example above:
-
-- color is the `key`
-- black is the `value`
-
-You can assign multiple key-value pairs to an object
-
-```javascript
-const sedan = {
-  color: "black",
-  make: "lexus",
-  year: 2007,
-  numberOfDoors: 4,
-};
-console.log(sedan);
-```
-
-- Notice how the `color` and `make` keys are strings and `year` and `numberOfDoors` are numbers values
-
-The examples above simply <b>creates</b> an object called `sedan`. To access the key-value pairs, you must:
-
-- Use the object variable name (in this case sedan) followed by the `.` character and then any existing key name in the object
-
-```javascript
-console.log(sedan.color);
-console.log(sedan.make);
-console.log(sedan.year);
-console.log(sedan.numberOfDoors);
-```
-
-Lastly, now that we know create objects and access key-value pairs of objects, we should learn how to set and add values to objects after creation
-
-Very similar to how you would as a variable, you can do the same with objects!
-
-```javascript
-sedan.color = "Orange";
-sedan.year = 2020;
-console.log(sedan);
-```
-
-- Notice how all other key-value pairs in the sudan object remain the same if they are not modified
-
-To add key-value pairs, "set" a value on a key that doesn't exist in the object already
-
-```javascript
-sedan.topSpeed = 160;
-console.log(sedan);
-```
-
-### Challenge 2:
-
-```
-TODO:
-Create a new Person object that describes at least 3 characteristics about yourself. Print out your object using console.log
 ```
 
 ## The Document Object Model (DOM)
