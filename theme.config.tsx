@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useConfig, type DocsThemeConfig, useTheme } from "nextra-theme-docs";
 
@@ -42,6 +43,13 @@ const nextraDocsThemeConfig: DocsThemeConfig = {
     link: "https://github.com/jimmy-guzman/tech2elevate",
   },
   docsRepositoryBase: "https://github.com/jimmy-guzman/tech2elevate/blob/main",
+  banner: {
+    content: (
+      <Link href="/stem-day-speaking-points-2025">
+        📢 Check out our STEM Day Speaking Points!
+      </Link>
+    ),
+  },
 };
 
 export default nextraDocsThemeConfig;
