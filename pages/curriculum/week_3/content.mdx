@@ -1,122 +1,290 @@
-# Week 3: More CSS - Animation and Selectors
+import { Callout } from "nextra/components";
 
----
+# Intro to JavaScript (Lesson 3)
 
-## Introduction
+### Purpose of JavaScript
 
-This week, we're diving deeper into CSS, exploring formatting, animations and selectors. We'll learn how to make our web page more eye-catching and interactive.
+- JavaScript is a web development language
+- Adds functionality to the page:
+  - user interaction
+  - display data
+  - load content on a page
 
----
+#### Add a JavaScript file to HTML file
 
-## Starting with formatting
+- Add the script tag to the HTML file within the `<head>` element
 
-We left off last week with a vertical stack of products
-![vertical stack of products](/images/stack-of-products.png "stack of products")
-
-and the goal is for them to be aligned in a row
-![horizontal row of products](/images/row-of-products.png "row of products")
-
-https://replit.com/@noahcalvo1/CSSWeek3
-
-For this we will use display: flex. The details won't be covered in this course since flexbox is a deeper subject and we only need this one line of code: `display: flex` to align the products in a row.
-
-## What are CSS Animations?
-
-Animations make it possible to transition from one CSS style to another. They're a way to have fun and engage users on your webpage!
-
-![animated stars example](/images/stars-example.gif "animated stars example")
-src: https://codepen.io/sarazond/pen/LYGbwj
-
----
-
-## Why are animations important?
-
-They're fun. That's the best reason. Fun to make, fun to look at. They can create a more alive and interesting website.
-
-![glowing card example](/images/glowing-card-example.gif "glowing card example")
-src: https://codepen.io/gayane-gasparyan/pen/jOmaBQK
-
----
-
-## Basic Animation Example
-
-![color changing animation example](/images/color-changing-animation.gif "color changing animation example")
-
-```css
-@keyframes example {
-  0% {
-    background-color: red;
-  }
-  50% {
-    background-color: yellow;
-  }
-  100% {
-    background-color: green;
-  }
-}
-
-div {
-  animation-name: example;
-  animation-duration: 4s;
-}
+```html
+<script type="module" src="index.js"></script>
 ```
 
----
+- This links the JavaScript file to the html file.
 
-<iframe
-  width="768"
-  height="432"
-  src="https://stackblitz.com/edit/web-platform-cezjre?file=index.html"
-  frameBorder="0"
-  scrolling="no"
-  allow="fullscreen; clipboard-read; clipboard-write"
-  allowfullscreen
-></iframe>
+<Callout type="info" emoji="ℹ️">
+  Make sure the `src` value is correct.
+</Callout>
 
-## What are CSS Selectors?
+#### Log hello world
 
-Selectors are how we pick which element to apply styles to. We've already learned some of them. We can select elements based on their name, id, and more!
+- `console.log()` is a tool that developers often use for testing and debugging
+- like checking your work in math class
+- allows you to see what your code is doing
+- also a quick way to verify that JS and HTML files are hooked up
 
-Let's introduce 2 new selectors: hovered and clicked on components.
-
----
-
-## Basic Selector Example
-
-```css
-p {
-  color: blue;
-}
-
-p:hover {
-  color: green;
-}
+```javascript
+console.log("hello world");
 ```
 
-This CSS will make all paragraph text blue, and when hovered on, the text will turn green
+### Variables
 
----
+#### Create variables using let and const & assign them values
 
-<iframe
-  width="768"
-  height="432"
-  src="https://stackblitz.com/edit/web-platform-ruqzoh?file=index.html"
-  frameBorder="0"
-  scrolling="no"
-  allow="fullscreen; clipboard-read; clipboard-write"
-  allowfullscreen
-></iframe>
+- `let` and `const` are key words letting JavaScript know you are writing a variable
+- `let` is a variable that you can can re-assign
 
-## Why are selectors important?
+```javascript
+let cat;
+cat = "Clara";
+console.log(cat);
+cat = "Jorge";
+console.log(cat);
+```
 
-Selectors give us the power to style specific elements on our page.
+- `const` is a variable that you cannot can re-assign
+- first you `declare` a variable
+- then you `assign` the variable a value
 
-They also allow us to apply effects only when a component is clicked or hovered on. This introduces visual feedback to our website, which creates a feeling of interaction for the user.
+```javascript
+// declaration or declaring the variable
+let cat;
+// assignment or assigning a value to the variable
+cat = "Tabby";
+```
 
----
+- to check to see what the output is, we will console log this variable
 
-## Conclusion
+```javascript
+console.log("cat:", cat);
+```
 
-With CSS animations and selectors we can create dynamic, interactive, and visually appealing web pages.
+- what would happen if we didn't assign a value to the variable?
 
-Keep exploring and experimenting with different styles and animations. ChatGPT can be a great resource for discovering if a certain effect or style is possible. And codepen.io has lots of beautiful animated css examples. Happy coding!
+```javascript
+let pet;
+console.log("pet:", pet);
+```
+
+- generally, we will want to use `const`
+- declared and assigned in the same line
+
+```javascript
+const dog = "Ronnie";
+console.log("dog:", dog);
+```
+
+#### Identify words that cannot be used for variable naming
+
+- in JavaScript (and other languages) there are certain words that you cannot use as variable names
+- these are called `reserved keywords`
+- such as:
+  - class
+  - const
+  - let
+  - if
+  - typeof
+  - this
+- see here for a full list: https://www.w3schools.com/js/js_reserved.asp
+
+### Types of variables
+
+- variables can hold different types of data such as numbers, or strings (like words)
+- knowing the data type allows us to operate on variables, like add two numbers together
+- there are 8 data types in JavaScript (read more here: https://www.w3schools.com/js/js_datatypes.asp)
+- we will focus on 4
+  - `string`
+  - `number`
+  - special type of object called `array`
+  - `object`
+
+#### Create a string variable
+
+- we've already done this!
+- to create a string variable, declare the variable and assign it to a string
+- a string is a value with "quotes" around it
+
+```javascript
+const word = "hello";
+console.log("word:", word);
+```
+
+- to double check the type of this variable you can try
+
+```javascript
+console.log("type of word is:", typeof word);
+```
+
+### Challenge 1:
+
+```
+TODO:
+Create a string variable and log it as well as its type
+```
+
+#### Create a number variable
+
+- same process as string, expect no quotes and it must be a number
+
+```javascript
+const count = 2;
+console.log("count:", count);
+```
+
+### Challenge 2:
+
+```
+TODO:
+Create a number variable and log it as well as its type
+```
+
+### Advanced
+
+#### Use arithmetic operators
+
+- you can combine variables in different ways
+- with numbers, just like in math, you can add, subtract, multiply, divide
+- a common use case is counting the number of times something happens
+- you can assign a variable to itself plus a number
+
+```javascript
+let numberOfLikes = 3;
+console.log("number of likes:", numberOfLikes);
+numberOfLikes = numberOfLikes + 4;
+console.log("number of likes:", numberOfLikes);
+```
+
+### Challenge 3:
+
+```
+TODO:
+Concatenate two string variables and guess what the output is then log the output to check
+```
+
+- you can also "add" strings
+- this is called concatenation
+
+```javascript
+const firstName = "Alexandra";
+const lastName = "Rodriguez-Beuerman";
+const fullName = firstName + lastName;
+console.log("full name:", fullName);
+```
+
+### Challenge 4:
+
+```
+TODO:
+Add two number variables together and guess what the output is then log the output to check
+```
+
+#### Create and implement arrays
+
+- arrays are a set or list of values
+- could be of a single data type or multiple types
+- declared with `let` or `const` just like we've been doing
+- assigned values within `[]`
+
+```javascript
+const animals = ["dog", "cat", "mouse"];
+console.log("animals", animals);
+```
+
+### Challenge 5:
+
+```
+TODO:
+Create an array and log it
+```
+
+#### Objects
+
+A more complex data type over strings and numbers are <b>objects</b>. Objects allow you to group related data and functionality together, making it easier to organize and manage code.
+
+You declare and assign a value, just like we did previously with variables, but we use what are called curly braces to denote that this is an object
+
+```javascript
+const car = {};
+console.log("car:", car);
+```
+
+##### Why Use Objects?
+
+- Objects are useful when you have more complex data
+- Often we want data that represents things in the real world
+  - For example, like a car
+- Cars have different attributes, like: color, type, number of doors, etc.
+- We can use objects to describe these attributes using something called `key-value pairs`
+- Objects have the flexibility of using multiple `data types`, meaning it can have numbers, strings, and more!
+  - They can become very complex because you can even have an object within an object!
+
+```javascript
+const car = {
+  color: "black",
+};
+console.log("car:", car);
+```
+
+In the example above:
+
+- color is the `key`
+- black is the `value`
+
+You can assign multiple key-value pairs to an object
+
+```javascript
+const sedan = {
+  color: "black",
+  make: "lexus",
+  year: 2007,
+  numberOfDoors: 4,
+};
+console.log("sedan:", sedan);
+```
+
+- Notice how the `color` and `make` keys are strings and `year` and `numberOfDoors` are numbers values
+
+The examples above simply <b>creates</b> an object called `sedan`. To access the key-value pairs, you must:
+
+- Use the object variable name (in this case sedan) followed by the `.` character and then any existing key name in the object
+
+```javascript
+console.log("the color of the sedan is:", sedan.color);
+console.log("the make of the sedan is:", sedan.make);
+console.log("the year of the sedan is:", sedan.year);
+console.log("the sedan has this many doors:", sedan.numberOfDoors);
+```
+
+Lastly, now that we know create objects and access key-value pairs of objects, we should learn how to set and add values to objects after creation
+
+Very similar to how you would as a variable, you can do the same with objects!
+
+```javascript
+sedan.color = "Orange";
+sedan.year = 2020;
+console.log("sedan:", sedan);
+```
+
+- Notice how all other key-value pairs in the sudan object remain the same if they are not modified
+
+To add key-value pairs, "set" a value on a key that doesn't exist in the object already
+
+```javascript
+sedan.topSpeed = 160;
+console.log("sedan:", sedan);
+```
+
+### Challenge 6:
+
+```
+TODO:
+Create a new Person object that describes at least 3 characteristics about yourself. Print out your object using console.log
+```

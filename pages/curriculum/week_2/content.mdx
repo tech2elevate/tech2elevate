@@ -147,3 +147,126 @@
         font-weight: bold; // bolds the font
      }
     ```
+
+# Week 3: More CSS - Animation and Selectors
+
+---
+
+## Introduction
+
+This week, we're diving deeper into CSS, exploring formatting, animations and selectors. We'll learn how to make our web page more eye-catching and interactive.
+
+---
+
+## Starting with formatting
+
+We left off last week with a vertical stack of products
+![vertical stack of products](/images/stack-of-products.png "stack of products")
+
+and the goal is for them to be aligned in a row
+![horizontal row of products](/images/row-of-products.png "row of products")
+
+https://replit.com/@noahcalvo1/CSSWeek3
+
+For this we will use display: flex. The details won't be covered in this course since flexbox is a deeper subject and we only need this one line of code: `display: flex` to align the products in a row.
+
+## What are CSS Animations?
+
+Animations make it possible to transition from one CSS style to another. They're a way to have fun and engage users on your webpage!
+
+![animated stars example](/images/stars-example.gif "animated stars example")
+src: https://codepen.io/sarazond/pen/LYGbwj
+
+---
+
+## Why are animations important?
+
+They're fun. That's the best reason. Fun to make, fun to look at. They can create a more alive and interesting website.
+
+![glowing card example](/images/glowing-card-example.gif "glowing card example")
+src: https://codepen.io/gayane-gasparyan/pen/jOmaBQK
+
+---
+
+## Basic Animation Example
+
+![color changing animation example](/images/color-changing-animation.gif "color changing animation example")
+
+```css
+@keyframes example {
+  0% {
+    background-color: red;
+  }
+  50% {
+    background-color: yellow;
+  }
+  100% {
+    background-color: green;
+  }
+}
+
+div {
+  animation-name: example;
+  animation-duration: 4s;
+}
+```
+
+---
+
+<iframe
+  width="768"
+  height="432"
+  src="https://stackblitz.com/edit/web-platform-cezjre?file=index.html"
+  frameBorder="0"
+  scrolling="no"
+  allow="fullscreen; clipboard-read; clipboard-write"
+  allowfullscreen
+></iframe>
+
+## What are CSS Selectors?
+
+Selectors are how we pick which element to apply styles to. We've already learned some of them. We can select elements based on their name, id, and more!
+
+Let's introduce 2 new selectors: hovered and clicked on components.
+
+---
+
+## Basic Selector Example
+
+```css
+p {
+  color: blue;
+}
+
+p:hover {
+  color: green;
+}
+```
+
+This CSS will make all paragraph text blue, and when hovered on, the text will turn green
+
+---
+
+<iframe
+  width="768"
+  height="432"
+  src="https://stackblitz.com/edit/web-platform-ruqzoh?file=index.html"
+  frameBorder="0"
+  scrolling="no"
+  allow="fullscreen; clipboard-read; clipboard-write"
+  allowfullscreen
+></iframe>
+
+## Why are selectors important?
+
+Selectors give us the power to style specific elements on our page.
+
+They also allow us to apply effects only when a component is clicked or hovered on. This introduces visual feedback to our website, which creates a feeling of interaction for the user.
+
+---
+
+## Conclusion
+
+With CSS animations and selectors we can create dynamic, interactive, and visually appealing web pages.
+
+Keep exploring and experimenting with different styles and animations. ChatGPT can be a great resource for discovering if a certain effect or style is possible. And codepen.io has lots of beautiful animated css examples. Happy coding!
