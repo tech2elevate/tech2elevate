@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useConfig, type DocsThemeConfig, useTheme } from "nextra-theme-docs";
+import {
+  useConfig,
+  type DocsThemeConfig,
+  useThemeConfig,
+} from "nextra-theme-docs";
 
 const Head = () => {
   const config = useConfig();
@@ -17,14 +21,14 @@ const Head = () => {
 };
 
 const Logo = () => {
-  const { resolvedTheme, theme } = useTheme();
+  const { darkMode } = useThemeConfig();
 
   return (
     <img
       alt="tech2elevate"
       style={{ height: "40px", padding: "5px" }}
       src={
-        resolvedTheme === "dark" || theme === "dark"
+        darkMode
           ? "/images/tech2elevate-logo-dark-mode.png"
           : "/images/tech2elevate-logo.png"
       }
@@ -32,7 +36,7 @@ const Logo = () => {
   );
 };
 
-const nextraDocsThemeConfig: DocsThemeConfig = {
+const nextraDocsThemeConfig = {
   logo: <Logo />,
   sidebar: {
     defaultMenuCollapseLevel: 1,
@@ -50,6 +54,6 @@ const nextraDocsThemeConfig: DocsThemeConfig = {
       </Link>
     ),
   },
-};
+} satisfies DocsThemeConfig;
 
 export default nextraDocsThemeConfig;

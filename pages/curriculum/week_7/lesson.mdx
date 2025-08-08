@@ -1,44 +1,117 @@
-# Week 7: JavaScript wrap up and the DOM
+# Week 7: Remove Items from the Cart
 
-## Objectives
+## Today you’ll build...
 
-- Students will be able to...
+The ability to **remove items** from your cart. This gives users control over what they want to buy, just like a real online shopping experience.
 
-## Goals
+You’ll add a **Remove** button next to each cart item. Clicking it will either:
 
-- Students will have
+- Decrease the quantity (if there’s more than one)
+- Remove the item completely (if there’s only one)
 
-## Agenda for the day
+---
 
-1. Recap from last week & Discuss plan for the session (10 min)
-2. Live coding (15 min)
-3. Students work with mentors (25 min)
-4. Review objectives & wrap up (5 min)
+## To do that, you’ll learn...
+
+- How to add event listeners to dynamically generated buttons
+- How to use `.findIndex()` to locate items in an array
+- How to use `.splice()` to remove items
+- How to conditionally update quantity or remove items based on logic
+
+---
+
+## By the end of today...
+
+Each student will:
+
+- Add a "Remove" button to each cart item
+- Implement logic to reduce quantity or remove the item
+- See the cart and total price update correctly
+
+### Example behavior:
+
+```
+[Remove] Minecraft - Qty: 2 → now Qty: 1
+[Remove] Sour Patch Kids - Qty: 1 → removed from cart
+```
+
+### Example code:
+
+```js
+function removeFromCart(productId) {
+  const index = cart.findIndex((item) => item.id === productId);
+
+  if (index > -1) {
+    if (cart[index].quantity > 1) {
+      cart[index].quantity--;
+    } else {
+      cart.splice(index, 1);
+    }
+  }
+
+  updateCart();
+}
+```
+
+Inside `updateCart()`, attach listeners:
+
+```js
+removeButton.addEventListener("click", () => removeFromCart(item.id));
+```
+
+---
+
+## Agenda (1 hour total)
+
+| Time   | Activity                                                             |
+| ------ | -------------------------------------------------------------------- |
+| 5 min  | Warm-up question: “Have you ever changed your mind while shopping?”  |
+| 15 min | Instructor walkthrough: add Remove button and show cart update logic |
+| 30 min | Students implement and test Remove behavior with mentor support      |
+| 10 min | Wrap-up and what’s next                                              |
+
+---
 
 ## Instructor Notes
 
-- the code to be used when live coding
-- questions to ask & answers that we are looking for
-- key points (kind of like objectives)
-- cheat sheet
-- resources
+### Setup
 
-## Week 7
+- Students should already have:
 
-- Intro to the DOM
-  - What is the DOM?
-    - What is the document?
-    - What is the window?
-    - What is a node?
-  - How do you select an element?
-  - What is available on each element?
-  - How do you modify an element?
-  - How do you create a new element?
-  - How do you add an element?
-  - How do you move an element?
-  - How do you remove an element?
-  - How do you change the style of an element?
-  - How do you create multiple elements?
-  - How do you change multiple elements?
-  - What is an event?
-  - How do you attach an event listener?
+  - `updateCart()` rendering each cart item
+  - A way to uniquely identify each item (`id`)
+
+- Add a "Remove" button when rendering each cart item:
+
+```js
+<button class="cart-remove" data-id="${item.id}">
+  Remove
+</button>
+```
+
+### Instructor Live Coding Goals
+
+- Show how to attach event listeners to dynamically created elements
+- Demonstrate `.findIndex()` to locate item in the cart
+- Use `.splice()` to remove from the cart array
+- Rerun `updateCart()` after any change
+
+### 1:1 Mentor Goals
+
+- Each student’s Remove button decreases quantity or removes item
+- Cart total and DOM update correctly after item is removed
+- If ahead:
+
+  - Improve layout of Remove button
+  - Add confirmation step or hover effect
+
+### Wrap-up and What’s Next
+
+Reinforce:
+
+- Your cart now has full **add, update, and remove** behavior
+- You’ve built all the core logic for a real cart system
+
+Preview:
+
+> “Next week is our final session. You’ll personalize your cart, add final styling, and polish your work for demo or portfolio use.”

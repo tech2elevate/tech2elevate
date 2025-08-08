@@ -1,68 +1,117 @@
-import Image from "next/image";
+# Week 2: Style Your Product Card with CSS
 
-# Week 2: CSS
+## Today you’ll build...
 
-## Objectives
+A **styled product grid** that looks more like an online store. You’ll take last week’s product card and improve how it looks and how it’s laid out on the page.
 
-- Students will be able to identify the purpose of CSS
-- Students will be able to add css style sheet
-- Students will be able to select elements with css by the element id
-- Students will be able to select elements with css by the element class
-- Students will be able to adjust the color of elements
-- Students will be able to add a border to elements
-- Students will be able to add a padding to elements
-- Students will be able to add a margin to elements
-- Students will be able to adjust the width of elements
-- Students will be able to adjust fonts of elements
+By the end of this session, your product cards will:
 
-## Goals
+- Appear side by side
+- Have clean spacing and padding
+- Use fonts, colors, and images that are easier to read
 
-- Students will begin to personalize their shopping cart
-- Students will have HTML done for their shopping cart
+---
 
-## Agenda for the day
+## To do that, you’ll learn...
 
-1. Recap from last week & Discuss plan for the session (10 min)
-2. Live coding (15 min)
-3. Students work with mentors (25 min)
-4. Review objectives & wrap up (5 min)
+- How to link a CSS file to an HTML page
+- How to write basic CSS rules with:
+
+  - Selectors (`.product-card`, `.product-image`, etc.)
+  - Properties like `color`, `padding`, `border-radius`, `font-size`
+
+- How to use `display: flex` to make a responsive product grid
+- How to keep CSS organized by grouping related styles
+
+---
+
+## By the end of today...
+
+Each student will have a styled product grid that looks something like:
+
+```html
+<div class="product-grid">
+  <div class="product-card">
+    <img src="..." class="product-image" />
+    <h2>Product Name</h2>
+    <p>$19.99</p>
+    <button class="add-to-cart-button">Add to Cart</button>
+  </div>
+  <!-- Add another product if time allows -->
+</div>
+```
+
+With styles like:
+
+```css
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.product-card {
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  padding: 15px;
+  width: 250px;
+  text-align: center;
+}
+```
+
+---
+
+## Agenda (1 hour total)
+
+| Time   | Activity                                                       |
+| ------ | -------------------------------------------------------------- |
+| 5 min  | Warm-up question: “What’s your favorite color and why?”        |
+| 15 min | Instructor walkthrough: style one product card and the grid    |
+| 30 min | Students add styling to their own projects with mentor support |
+| 10 min | Wrap-up and what’s next                                        |
+
+---
 
 ## Instructor Notes
 
-- the code to be used when live coding
-  - During the live coding give students the following challenges:
-    - Change the background color to blue
-    - Change the size of the header text
-    - Make paragraph text bold
-    - Make the image bigger
+### Setup
 
-<iframe
-  width="768"
-  height="432"
-  src="https://stackblitz.com/edit/week2csslesson?embed=1&file=style.css"
-  frameBorder="0"
-  scrolling="no"
-  allow="fullscreen; clipboard-read; clipboard-write"
-  allowfullscreen
-></iframe>
+- Students should reuse their project folder from Week 1
+- Ensure `index.html` includes the link to the `styles.css` file:
 
-- By the end of the lesson students will:
+```html
+<link rel="stylesheet" href="styles.css" />
+```
 
-  - Have added a CSS file to the project
-  - Be able to use color, border, font, width, margin, and padding in their project
-  - Have changed the color of the item button to red
-  - Have changed the font color of the item button to white
-  - Have styled the item button with padding and border
-  - Have selected a width for the images and buttons
-  - Have selected padding and margins for elements
-  - Have added a red header
-  - Have added the Target logo to the left corner
+### Instructor Live Coding Goals
 
-  <Image
-    src="/images/goal-week-2.png"
-    alt="week 2 goal"
-    width={600}
-    height={600}
-  />
+- Demonstrate how to write CSS rules in `styles.css`
+- Style `.product-card` and `.product-grid` step-by-step
+- Emphasize class-based styling and how styles apply to multiple elements
 
-- Have students code along with instructor
+### 1:1 Mentor Goals
+
+- Every student links their CSS file successfully
+- Students style at least one product card to match the design
+- Encourage experimenting with:
+
+  - Background colors
+  - Border radius
+  - Button colors and hover states
+
+- If students finish early:
+
+  - Style multiple cards
+  - Adjust spacing and layout
+
+### Wrap-up and What’s Next
+
+End by reinforcing:
+
+- CSS makes your HTML look good — structure and style now go hand-in-hand
+- You now have the start of a product catalog
+
+Preview:
+
+> “Next week, we’ll add the **shopping cart** section to your page and begin setting up the space where items will be added later.”
