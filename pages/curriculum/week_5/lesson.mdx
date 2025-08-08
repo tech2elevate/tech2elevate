@@ -11,7 +11,6 @@ You’ll display the item’s name, image, quantity, and price inside the cart s
 ## To do that, you’ll learn...
 
 - How to add event listeners in JavaScript
-- How to use `dataset` attributes to track product IDs
 - How to find items in arrays using `.find()`
 - How to push to an array and update the DOM
 - How to manage simple state (cart items stored in memory)
@@ -33,6 +32,7 @@ const cart = [];
 
 function addToCart(productId) {
   const product = products.find((p) => p.id === productId);
+  // TODO: stretch update quantity
   const existingItem = cart.find((item) => item.id === productId);
 
   if (existingItem) {
@@ -46,6 +46,7 @@ function addToCart(productId) {
 ```
 
 ```js
+// TODO: start by grabbing by id then grab all
 document.querySelectorAll(".add-to-cart-button").forEach((button) => {
   button.addEventListener("click", () => {
     addToCart(button.dataset.id);

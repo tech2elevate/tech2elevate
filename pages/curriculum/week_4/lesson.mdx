@@ -11,6 +11,8 @@ This is your first step toward making the cart interactive.
 ## To do that, you’ll learn...
 
 - How to link a JavaScript file to your HTML
+- How to create an object
+- How to create a function
 - How to write a product array using objects
 - How to access elements on the page with `document.getElementById`
 - How to use `innerHTML` to insert HTML using JavaScript
@@ -29,6 +31,7 @@ Each student will:
 ### Example:
 
 ```js
+// To simplify, could start with 1 product
 const products = [
   {
     name: "Minecraft - Xbox One",
@@ -38,7 +41,9 @@ const products = [
   // Add more products...
 ];
 
+// TODO: does not have to be function but it can a stretch goal
 function createProductHTML(product) {
+  // need to add id/data to button
   return `
     <img src="${product.image}" alt="${product.name}" class="product-image">
     <h2>${product.name}</h2>

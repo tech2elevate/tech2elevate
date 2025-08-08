@@ -177,13 +177,6 @@ function displayProducts() {
     productCard.innerHTML = createProductHTML(product);
     productGrid.appendChild(productCard);
   });
-
-  document.querySelectorAll(".add-to-cart-button").forEach((button) => {
-    button.addEventListener("click", () => {
-      const id = button.dataset.id;
-      console.log(`Clicked Add to Cart for ID: ${id}`);
-    });
-  });
 }
 
 displayProducts();
