@@ -1,0 +1,44 @@
+# Week 7 Cheatsheet: Remove from Cart
+
+## What You’re Building
+
+A **Remove** button that:
+
+- Decreases quantity if more than one
+- Removes item if quantity is 1
+
+## JavaScript Concepts
+
+- `.findIndex()` to locate item
+- `.splice()` to remove from array
+- Event listeners on dynamic elements
+
+## Example Code
+
+```js
+function removeFromCart(productId) {
+  const index = cart.findIndex((item) => item.id === productId);
+
+  if (index > -1) {
+    if (cart[index].quantity > 1) {
+      cart[index].quantity--;
+    } else {
+      cart.splice(index, 1);
+    }
+  }
+
+  updateCart();
+}
+```
+
+In `updateCart()`:
+
+```js
+removeButton.addEventListener("click", () => removeFromCart(item.id));
+```
+
+## Tips to Remember
+
+- Buttons must be created each time you render the cart
+- Use `dataset.id` to identify which item to remove
+- Always update the DOM after changing the cart array

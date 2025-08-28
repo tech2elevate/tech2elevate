@@ -1,47 +1,115 @@
-# Week 6: JavaScript 3 & DOM
+# Week 6: Track Quantity and Show Total Price
 
-## Objectives
+## Today you’ll build...
 
-- Students will be able to select an element from the DOM using querySelector
-- Students will be able to create new HTML elements and add them to the DOM
-- Students will be able to use array methods including push, pop, and splice
-- Students will be able to create a boolean variable
-- Students will be able to use different comparison operators
-- Students will be able to use if/else statements
+A smarter cart that:
 
-## Goals
+- **Tracks quantities** when a user adds the same item more than once
+- **Calculates the total price** of all items in the cart
 
-- Students will have...
+Your shopping cart will now reflect a real purchase experience.
 
-## Agenda for the day
+---
 
-1. Recap from last week & Discuss plan for the session (10 min)
-2. Live coding (15 min)
-3. Students work with mentors (25 min)
-4. Review objectives & wrap up (5 min)
+## To do that, you’ll learn...
+
+- How to update quantities instead of adding duplicate items
+- How to calculate a running total
+- How to use:
+
+  - `.find()` to look for items in the cart
+  - Basic math operations
+  - `toFixed(2)` for formatting dollar values
+
+- How to keep the DOM in sync with the cart data
+
+---
+
+## By the end of today...
+
+Each student will:
+
+- See quantity increase when the same item is added again
+- View a total price displayed in the cart area
+
+### Example (cart view):
+
+```
+Minecraft - Qty: 2 - $59.98
+Sour Patch Kids - Qty: 1 - $1.29
+Total: $61.27
+```
+
+### Code snippets:
+
+```js
+function updateCart() {
+  cartItemsContainer.innerHTML = "";
+
+  let total = 0;
+
+  cart.forEach((item) => {
+    const itemTotal = item.price * item.quantity;
+    total += itemTotal;
+
+    const cartItem = document.createElement("li");
+    cartItem.innerHTML = `
+      <span>${item.name}</span>
+      <span>Qty: ${item.quantity}</span>
+      <span>$${itemTotal.toFixed(2)}</span>
+    `;
+    cartItemsContainer.appendChild(cartItem);
+  });
+
+  cartTotalContainer.innerHTML = `<h2>Total: $${total.toFixed(2)}</h2>`;
+}
+```
+
+---
+
+## Agenda (1 hour total)
+
+| Time   | Activity                                                                |
+| ------ | ----------------------------------------------------------------------- |
+| 5 min  | Warm-up question: “What’s something you always buy more than one of?”   |
+| 15 min | Instructor walkthrough: show how to manage quantity and calculate total |
+| 30 min | Students implement quantity and total logic with mentor support         |
+| 10 min | Wrap-up and what’s next                                                 |
+
+---
 
 ## Instructor Notes
 
-- the code to be used when live coding
-- questions to ask & answers that we are looking for
-- key points (kind of like objectives)
-- cheat sheet
-- resources
+### Setup
 
-## Week 6
+- Students should already have:
 
-Based on time available we might be able to merge 4 & 5
+  - A `cart` array that stores item name, price, and quantity
+  - A way to render cart items
+  - A section (`#cart-total`) for displaying the total
 
-- More JavaScript
-  - data structures
-    - How do we store items in an array?
-    - How do we access items in an array?
-    - How do we add items in array?
-    - How do removing items in array?
-    - How do we iterate through an array?
-    - How do we store properties within an object?
-    - How do access an item properties in an object?
-    - modify an object
-    - storing objects within an array
-  - more on functions
-    - what is a callback
+### Instructor Live Coding Goals
+
+- Walk through how to update `quantity` instead of pushing a new item
+- Show how to calculate and update the total dynamically
+- Discuss how the cart and UI stay in sync every time `updateCart()` runs
+
+### 1:1 Mentor Goals
+
+- Every student sees quantity increase for repeated clicks
+- Every student sees total update in real time
+- If ahead:
+
+  - Style the cart layout
+  - Show dollar signs and format all prices
+
+### Wrap-up and What’s Next
+
+Reinforce:
+
+- Your cart now reflects quantities and cost — a big milestone
+- You’re managing dynamic data and updating the UI
+
+Preview:
+
+> “Next week, we’ll add a **remove** button so users can take items out of their cart.”

@@ -1,0 +1,45 @@
+# Week 4 Cheatsheet: Generating Products with JavaScript
+
+## What You’re Building
+
+Products appear on the page from a JavaScript array
+
+## JavaScript Concepts
+
+- Arrays of objects
+- DOM manipulation with `document.getElementById()`
+- `innerHTML`
+- `.forEach()`
+
+## Example Code
+
+```js
+const products = [{ name: "Item", price: 10, image: "...", id: "1" }];
+
+function createProductHTML(product) {
+  return `
+    <img src="${product.image}" alt="${product.name}">
+    <h2>${product.name}</h2>
+    <p>$${product.price.toFixed(2)}</p>
+    <button class="add-to-cart-button" data-id="${product.id}">Add to Cart</button>
+  `;
+}
+
+function displayProducts() {
+  const container = document.getElementById("product-list");
+  products.forEach((product) => {
+    const card = document.createElement("div");
+    card.className = "product-card";
+    card.innerHTML = createProductHTML(product);
+    container.appendChild(card);
+  });
+}
+
+displayProducts();
+```
+
+## Tips to Remember
+
+- Always call your `displayProducts()` function
+- Double-check element `id`s in your HTML
+- Use `data-id` for button tracking

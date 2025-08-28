@@ -1,49 +1,104 @@
-# Week 3: More CSS
+# Week 3: Build the Cart Layout
 
-## Objectives
+## Today you’ll build...
 
-- Students will be able to add `display: flex` to a parent div to better align the children contents.
-- Students will be able to use css animation and css selectors like :hover
-  - Add an animation to a component
-  - Add a :hover effect to a component
-- Students will be able to understand the importance of user experience
-  - Why does visual "feedback" matter for a web page?
+The **shopping cart section** of your page. This is where selected items will appear later.
 
-## Goals
+You’ll create:
 
-- Product's on the student's website will be listed horizontally in a row.
-- Students will add css animation and/or hover effects to their webpage.
+- A "Your Cart" heading
+- A placeholder message that says "Your cart is empty"
+- A container that will eventually hold items
+- A section to show the total price
 
-## Agenda for the day
+This gives your cart a place to grow as you add interactivity in later weeks.
 
-1. Recap from last week & Discuss plan for the session (content.md) (10 min)
-2. Live coding (10 min)
-   a. transform scale
-   b. background color
-   c. on hover effects
-3. Students work with mentors (30 min)
-4. Review objectives & wrap up (5 min)
+---
+
+## To do that, you’ll learn...
+
+- How to use semantic HTML to create sections of a page
+- How to organize your HTML into meaningful areas
+- How to use:
+
+  - `<header>`, `<section>`, `<h2>`, `<ul>`, `<p>`, `<div>`
+
+- How to create placeholders for future content
+- How to apply class names to prepare for styling
+
+---
+
+## By the end of today...
+
+Each student will add a **cart section** to their `index.html`, including:
+
+```html
+<section>
+  <h2 class="section-title">Your Cart</h2>
+  <div class="cart-container">
+    <p class="empty-cart" id="empty-cart-message">Your cart is empty.</p>
+    <ul class="cart-items" id="cart-items"></ul>
+    <div class="cart-total" id="cart-total"></div>
+  </div>
+</section>
+```
+
+And basic layout styles like:
+
+```css
+.cart-container {
+  background-color: #f9f9f9;
+  padding: 20px;
+  width: 80%;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+}
+```
+
+---
+
+## Agenda (1 hour total)
+
+| Time   | Activity                                                               |
+| ------ | ---------------------------------------------------------------------- |
+| 5 min  | Warm-up question: “What’s one thing you’d add to your cart right now?” |
+| 15 min | Instructor walkthrough: create cart section and explain each element   |
+| 30 min | Students add the cart to their own project with mentor support         |
+| 10 min | Wrap-up and what’s next                                                |
+
+---
 
 ## Instructor Notes
 
-- live coding base example: https://git.target.com/NoahCalvo/css-day2-example
-- questions to ask & answers that we are looking for
-  - What sorts of style did you learn to add to your website last week?
-    - colors
-    - padding
-    - margin
-    - border
-    - width/height
-    - font
-  - Is there any styling you wish you could add but don't know how?
-  - What keeps a person's attention when they're on a website?
-    - movement or change
-    - visual feedback
-- key points
-  - selectors
-  - animations and keyframes
-- cheat sheet
-- resources
-- https://git.target.com/NoahCalvo/css-day2-example
-- codepen.io search for pure css
-  - https://codepen.io/sarazond/pen/LYGbwj
+### Setup
+
+- Students should open their existing project and locate the end of the `<main>` section
+- Instructor demo should:
+
+  - Add a new `<section>` for the cart
+  - Walk through each element: heading, message, list, total container
+  - Explain use of `id` and `class` for future JavaScript and CSS
+
+### Instructor Live Coding Goals
+
+- Reinforce structure and readability of HTML
+- Help students nest elements properly (e.g., `<ul>` inside a container `<div>`)
+- Emphasize this is setup — it won't _do_ anything yet
+
+### 1:1 Mentor Goals
+
+- Every student adds a cart section with correct structure
+- Students match class names and IDs exactly for consistency
+- If ahead: begin styling the cart container with padding, borders, etc.
+
+### Wrap-up and What’s Next
+
+Reinforce:
+
+- Today’s work sets up a “home” for items once the cart becomes interactive
+- You now have a visible cart section on the page
+
+Preview:
+
+> “Next week, we’ll add real products using JavaScript — instead of copy/paste, the product cards will be generated for you.”

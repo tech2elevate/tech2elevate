@@ -2,74 +2,68 @@ import { FileTree } from "nextra/components";
 
 <FileTree>
   <FileTree.File name="index.html" />
-  <FileTree.File name="index.css" />
+  <FileTree.File name="styles.css" />
+  <FileTree.File name="script.js" />
 </FileTree>
-
-```css filename="index.css"
-
-```
 
 ```html filename="index.html"
 <!doctype html>
-<html>
+<html lang="en">
   <head>
-    <title>Shopping Cart</title>
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="assets/Target_Bullseye-Logo_Red_transparent.png"
-    />
     <meta charset="UTF-8" />
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
-
   <body>
     <main>
-      <div>
-        <div>
-          <h1>Your cart is empty.</h1>
-          <img
-            src="https://target.scene7.com/is/content/Target/GUEST_26eaf754-af71-48ba-9286-d884b7fed1d8"
-            alt="bullseye"
-            width="250"
-          />
-        </div>
-        <div>
-          <div>Cart Items</div>
-          <div>Cart Total Container</div>
-        </div>
-      </div>
-
-      <h1>Recently viewed items</h1>
-      <div>
-        <div>
-          <img
-            src="https://target.scene7.com/is/image/Target/GUEST_780d12cc-79ae-474b-a4a3-0de8477746f5?qlt=65&fmt=webp&hei=154&wid=154"
-            alt="Product 1"
-          />
-          <p>Minecraft - Xbox One</p>
-          <p>$29.99</p>
-          <button>Add to cart</button>
-        </div>
-        <div>
-          <img
-            src="https://target.scene7.com/is/image/Target/GUEST_ae8ed07e-fca7-47fb-9210-c4dbd739f6ec?qlt=65&fmt=webp&hei=154&wid=154"
-            alt="Product 2"
-          />
-          <p>Star Wars - Xbox One</p>
-          <p>$29.99</p>
-          <button>Add to cart</button>
-        </div>
-        <div>
-          <img
-            src="https://target.scene7.com/is/image/Target/GUEST_421807fd-cbe0-4b54-8e86-ccaed1dfca4d?qlt=65&fmt=webp&hei=154&wid=154"
-            alt="Product 3"
-          />
-          <p>Sour Patch Kids</p>
-          <p>$1.29</p>
-          <button>Add to cart</button>
+      <div class="product-grid">
+        <div class="product-card">
+          <img src="..." alt="Product" class="product-image" />
+          <h2>Product Name</h2>
+          <p>$19.99</p>
+          <button class="add-to-cart-button">Add to Cart</button>
         </div>
       </div>
     </main>
+    <script src="script.js"></script>
   </body>
 </html>
+```
+
+```css filename="styles.css"
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.product-card {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 5px;
+  width: 250px;
+  text-align: center;
+}
+
+.product-image {
+  width: 100%;
+  max-width: 140px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.add-to-cart-button {
+  background-color: #cc0000;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+```
+
+```js filename="script.js"
+// Empty for now
 ```

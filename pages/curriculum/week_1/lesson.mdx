@@ -1,45 +1,105 @@
-# Week 1: HTML
+# Week 1: Build a Product Card with HTML
 
-## Objectives
+## Today you’ll build...
 
-- Students will be able to identify the purpose of HTML
-- Students will be able to set up an HTML file
-- Students will be able to build HTML headings
-- Students will be able to build HTML div
-- Students will be able to build HTML paragraph
-- Students will be able to build HTML links
-- Students will be able to build HTML images
-- Students will be able to build HTML buttons
-- Students will be able to build HTML lists
-- Students will be able to add classes and ids to HTML elements
+A **product card**, the first building block of your shopping cart. It will include:
 
-## Goals
+- A product name
+- A product image
+- A price
+- A button labeled "Add to Cart"
 
-- Students will have the basic structure of the shopping cart completed.
-- Students will have at least one item with a button.
+This structure sets the foundation for future styling and functionality.
 
-## Agenda
+---
 
-1. Fun question
-2. Discuss plan for the session (5 min)
-3. Live coding (15 min)
-4. Students work with mentors (30 min)
-5. Review objectives & wrap up (5 min)
+## To do that, you’ll learn...
+
+- What HTML is and how it defines page structure
+- How to create a basic HTML file
+- How to use these HTML elements:
+
+  - `<!DOCTYPE html>`, `<html>`, `<head>`, `<body>`
+  - `<div>`, `<h2>`, `<p>`, `<img>`, `<button>`
+
+- How to use `class` and `id` attributes for styling and scripting
+- How to nest elements properly and stay organized
+
+---
+
+## By the end of today...
+
+Each student will have a basic HTML page that displays at least one product card, similar to:
+
+```html
+<div class="product-card">
+  <img src="..." alt="Product name" class="product-image" />
+  <h2>Product Name</h2>
+  <p>$19.99</p>
+  <button class="add-to-cart-button">Add to Cart</button>
+</div>
+```
+
+And this will be wrapped inside a product grid container:
+
+```html
+<div class="product-grid">
+  <!-- product cards go here -->
+</div>
+```
+
+---
+
+## Agenda (1 hour total)
+
+| Time   | Activity                                                             |
+| ------ | -------------------------------------------------------------------- |
+| 5 min  | Warm-up question: “What’s something fun you’ve bought online?”       |
+| 15 min | Instructor walkthrough: set up `index.html`, create one product card |
+| 30 min | Students build their own with 1:1 mentor support                     |
+| 10 min | Wrap-up and what’s next                                              |
+
+---
 
 ## Instructor Notes
 
-<iframe
-  width="768"
-  height="432"
-  src="https://stackblitz.com/edit/stackblitz-starters-m9m6et?embed=1&file=index.html"
-  frameBorder="0"
-  allow="fullscreen; clipboard-read; clipboard-write"
-  allowfullscreen
-></iframe>
+### Setup
 
-- By the end of the lesson: students will have the basic structure for the cart with at least one item with a button
-- Students will open IDE and create a [new Static(HTML,JS,CSS) project](https://stackblitz.com/fork/github/stackblitz/starters/tree/main/static?title=Static%20Starter&description=HTML/CSS/JS%20Starter&file=script.js,styles.css,index.html&terminalHeight=10)
-- Name project: "Student Name Scratchpad"
-- Have students code along with instructor
-- Next students will make a new project in the same way but call it "Student Name Shopping Cart"
-- Remind students to save as they go (CTRL + s)
+- Students should create a folder with:
+
+  - `index.html`
+  - `styles.css` (leave empty for now)
+  - `script.js` (leave empty for now)
+
+This week focuses only on `index.html`.
+
+### Instructor Live Coding Goals
+
+- Build a single product card from scratch, explaining each tag
+- Emphasize semantic structure and visual hierarchy
+- Encourage questions about nesting and element purpose
+
+### 1:1 Mentor Goals
+
+- Every student completes one working product card
+- Reinforce best practices:
+
+  - Use of consistent indentation
+  - Proper nesting of tags
+  - Use of `class` for styling hooks
+
+- If students finish early:
+
+  - Add a second card
+  - Customize product details
+
+### Wrap-up and What’s Next
+
+Close the session by reinforcing:
+
+- HTML is the backbone of every web page
+- We now have structure, next week we’ll make it visually appealing with **CSS**
+
+Preview:
+
+> “Next week, you’ll style your product cards to look like real store items using CSS. The product grid will come to life.”

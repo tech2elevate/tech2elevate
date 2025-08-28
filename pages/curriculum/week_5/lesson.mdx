@@ -1,41 +1,103 @@
-# Week 5: JavaScript 2
+# Week 5: Make "Add to Cart" Work
 
-## Objectives
+## Today you’ll build...
 
-- Students will be able to understand functions and what they are
-- Students will be able to write functions
-- Students will be able to explain what the DOM is
-- Students will be able to use event listeners
+A **working "Add to Cart" button**. When you click on a product’s button, it will appear in the cart section. This is the first time your site will respond to user input.
 
-## Goals
+You’ll display the item’s name, image, quantity, and price inside the cart section you built in Week 3.
 
-- Students will have an event listener to the 'Add Item' buttons
+---
 
-## Agenda for the day
+## To do that, you’ll learn...
 
-1. Recap from last week & Discuss plan for the session (10 min)
-2. Live coding (15 min)
-3. Students work with mentors (25 min)
-4. Review objectives & wrap up (5 min)
+- How to add event listeners in JavaScript
+- How to find items in arrays using `.find()`
+- How to push to an array and update the DOM
+- How to manage simple state (cart items stored in memory)
+
+---
+
+## By the end of today...
+
+Each student will:
+
+- Add a click event to each "Add to Cart" button
+- Store selected items in a `cart` array
+- Update the cart area to show items as they are added
+
+### Example flow:
+
+```js
+const cart = [];
+
+function addToCart(productId) {
+  const product = products.find((p) => p.id === productId);
+  // TODO: stretch update quantity
+  const existingItem = cart.find((item) => item.id === productId);
+
+  if (existingItem) {
+    existingItem.quantity++;
+  } else {
+    cart.push({ ...product, quantity: 1 });
+  }
+
+  updateCart();
+}
+```
+
+```js
+// TODO: start by grabbing by id then grab all
+document.querySelectorAll(".add-to-cart-button").forEach((button) => {
+  button.addEventListener("click", () => {
+    addToCart(button.dataset.id);
+  });
+});
+```
+
+---
+
+## Agenda (1 hour total)
+
+| Time   | Activity                                                                    |
+| ------ | --------------------------------------------------------------------------- |
+| 5 min  | Warm-up question: “What’s something you buy more than one of?”              |
+| 15 min | Instructor walkthrough: add event listener, create `cart` array, update DOM |
+| 30 min | Students add interactivity to their own projects with mentor support        |
+| 10 min | Wrap-up and what’s next                                                     |
+
+---
 
 ## Instructor Notes
 
-- the code to be used when live coding
-  - During the live coding, give students the following challenges:
-    - Write a function that calculates the y-position on a linear line given the slope, x-position, and y-intercept as parameters
-    - Create an Person object that describes 3 characteristics of yourself
-    - Add another event listener to a different button and output whatever you would like
-- questions to ask & answers that we are looking for
-- key points (kind of like objectives)
-- cheat sheet
-- resources
+### Setup
 
-<iframe
-  width="768"
-  height="432"
-  src="https://stackblitz.com/edit/js-v2bmsu?file=index.html"
-  frameBorder="0"
-  scrolling="no"
-  allow="fullscreen; clipboard-read; clipboard-write"
-  allowfullscreen
-></iframe>
+- Students should already have:
+
+  - A `products` array (from Week 4)
+  - A cart section (`#cart-items`, `#empty-cart-message`, etc.)
+
+- Add `data-id="${product.id}"` to each "Add to Cart" button
+
+### Instructor Live Coding Goals
+
+- Explain what event listeners are and when they run
+- Show how to use `.find()` to locate items in the array
+- Render items into the cart using `.innerHTML` or DOM creation
+- Emphasize correct cart structure and data updates
+
+### 1:1 Mentor Goals
+
+- Every student can click a button and see at least one cart item appear
+- Help debug logic around finding items or incorrect IDs
+- If ahead: display quantity or total price
+
+### Wrap-up and What’s Next
+
+Reinforce:
+
+- You now have a real, working cart
+- Items can be added dynamically by clicking — a key part of web interactivity
+
+Preview:
+
+> “Next week, you’ll track how many times a product is added, and calculate the total price of the cart.”
