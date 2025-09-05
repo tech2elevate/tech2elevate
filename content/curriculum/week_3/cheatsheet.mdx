@@ -1,42 +1,45 @@
-# Week 3 Cheatsheet: Cart Section (HTML Structure)
+# Week 4 Cheatsheet: Generating Products with JavaScript
 
 ## What You’re Building
 
-A visible shopping cart area with a placeholder message
+Products appear on the page from a JavaScript array
 
-## HTML Tags You’ll Use
+## JavaScript Concepts
 
-```html
-<section>
-  <!-- A logical section of the page -->
-  <h2>
-    <!-- Cart title -->
-    <div>
-      <!-- Cart container -->
-      <p><!-- "Your cart is empty" --></p>
-      <ul>
-        <!-- List of cart items -->
-      </ul>
-    </div>
-  </h2>
-</section>
-```
+- Arrays of objects
+- DOM manipulation with `document.getElementById()`
+- `innerHTML`
+- `.forEach()`
 
 ## Example Code
 
-```html
-<section>
-  <h2 class="section-title">Your Cart</h2>
-  <div class="cart-container">
-    <p class="empty-cart" id="empty-cart-message">Your cart is empty.</p>
-    <ul class="cart-items" id="cart-items"></ul>
-    <div class="cart-total" id="cart-total"></div>
-  </div>
-</section>
+```js
+const products = [{ name: "Item", price: 10, image: "...", id: "1" }];
+
+function createProductHTML(product) {
+  return `
+    <img src="${product.image}" alt="${product.name}">
+    <h2>${product.name}</h2>
+    <p>$${product.price.toFixed(2)}</p>
+    <button class="add-to-cart-button" data-id="${product.id}">Add to Cart</button>
+  `;
+}
+
+function displayProducts() {
+  const container = document.getElementById("product-list");
+  products.forEach((product) => {
+    const card = document.createElement("div");
+    card.className = "product-card";
+    card.innerHTML = createProductHTML(product);
+    container.appendChild(card);
+  });
+}
+
+displayProducts();
 ```
 
 ## Tips to Remember
 
-- Use unique `id`s for JavaScript hooks later
-- Use classes for styling
-- Place this section after your product grid
+- Always call your `displayProducts()` function
+- Double-check element `id`s in your HTML
+- Use `data-id` for button tracking

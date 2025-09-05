@@ -1,43 +1,45 @@
-# Week 5 Cheatsheet: Add to Cart with JavaScript
+# Week 6 Cheatsheet: Track Quantity & Total
 
 ## What You’re Building
 
-A working **Add to Cart** button. Clicking it adds a product to your cart.
+A cart that:
+
+- Increases quantity for repeated items
+- Displays the **total price**
 
 ## JavaScript Concepts
 
-- `addEventListener`
-- `dataset.id` to get product ID
-- `.find()` to look up a product
-- `.push()` to add to an array
+- Looping over cart with `.forEach()`
+- Multiplying price × quantity
+- Formatting with `.toFixed(2)`
+- Updating DOM with `innerHTML`
 
 ## Example Code
 
 ```js
-const cart = [];
+function updateCart() {
+  cartItemsContainer.innerHTML = "";
+  let total = 0;
 
-function addToCart(productId) {
-  const product = products.find((p) => p.id === productId);
-  const existingItem = cart.find((item) => item.id === productId);
+  cart.forEach((item) => {
+    const itemTotal = item.price * item.quantity;
+    total += itemTotal;
 
-  if (existingItem) {
-    existingItem.quantity++;
-  } else {
-    cart.push({ ...product, quantity: 1 });
-  }
-
-  updateCart();
-}
-
-document.querySelectorAll(".add-to-cart-button").forEach((button) => {
-  button.addEventListener("click", () => {
-    addToCart(button.dataset.id);
+    const cartItem = document.createElement("li");
+    cartItem.innerHTML = `
+      <span>${item.name}</span>
+      <span>Qty: ${item.quantity}</span>
+      <span>$${itemTotal.toFixed(2)}</span>
+    `;
+    cartItemsContainer.appendChild(cartItem);
   });
-});
+
+  cartTotalContainer.innerHTML = `<h2>Total: $${total.toFixed(2)}</h2>`;
+}
 ```
 
 ## Tips to Remember
 
-- Use `data-id` in your HTML to track each product
-- Always call `updateCart()` after changing the cart
-- Each product in `cart` should include a `quantity` property
+- Use `let total = 0` at the start, then add each item’s total
+- Always re-render the cart every time it changes
+- Keep price formatting consistent with `.toFixed(2)`

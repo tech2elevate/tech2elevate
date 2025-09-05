@@ -1,22 +1,20 @@
-# Week 7: Remove Items from the Cart
+# Week 8: Polish and Personalize Your Cart
 
 ## Today you’ll build...
 
-The ability to **remove items** from your cart. This gives users control over what they want to buy, just like a real online shopping experience.
+Your **final version** of the shopping cart. You’ll clean up your code, improve the look and feel, and add personal touches to make the project your own.
 
-You’ll add a **Remove** button next to each cart item. Clicking it will either:
-
-- Decrease the quantity (if there’s more than one)
-- Remove the item completely (if there’s only one)
+This is your chance to take everything you’ve learned and finish strong.
 
 ---
 
-## To do that, you’ll learn...
+## To do that, you’ll review and apply...
 
-- How to add event listeners to dynamically generated buttons
-- How to use `.findIndex()` to locate items in an array
-- How to use `.splice()` to remove items
-- How to conditionally update quantity or remove items based on logic
+- HTML structure and semantics
+- CSS styling and layout
+- JavaScript logic and DOM updates
+- Event listeners and array manipulation
+- Clean code practices: naming, indentation, clarity
 
 ---
 
@@ -24,51 +22,27 @@ You’ll add a **Remove** button next to each cart item. Clicking it will either
 
 Each student will:
 
-- Add a "Remove" button to each cart item
-- Implement logic to reduce quantity or remove the item
-- See the cart and total price update correctly
+- Have a fully working shopping cart that includes:
+  - Product list generated from JavaScript
+  - Working “Add to Cart” and “Remove” buttons
+  - Quantity tracking and total price
 
-### Example behavior:
-
-```
-[Remove] Minecraft - Qty: 2 → now Qty: 1
-[Remove] Sour Patch Kids - Qty: 1 → removed from cart
-```
-
-### Example code:
-
-```js
-function removeFromCart(productId) {
-  const index = cart.findIndex((item) => item.id === productId);
-
-  if (index > -1) {
-    if (cart[index].quantity > 1) {
-      cart[index].quantity--;
-    } else {
-      cart.splice(index, 1);
-    }
-  }
-
-  updateCart();
-}
-```
-
-Inside `updateCart()`, attach listeners:
-
-```js
-removeButton.addEventListener("click", () => removeFromCart(item.id));
-```
+- Personalize their cart with one or more changes, such as:
+  - New product list
+  - Custom color scheme or fonts
+  - Additional CSS polish (e.g. hover states, borders, spacing)
+  - Logo or header text
 
 ---
 
 ## Agenda (1 hour total)
 
-| Time   | Activity                                                             |
-| ------ | -------------------------------------------------------------------- |
-| 5 min  | Warm-up question: “Have you ever changed your mind while shopping?”  |
-| 15 min | Instructor walkthrough: add Remove button and show cart update logic |
-| 30 min | Students implement and test Remove behavior with mentor support      |
-| 10 min | Wrap-up and what’s next                                              |
+| Time   | Activity                                                               |
+| ------ | ---------------------------------------------------------------------- |
+| 5 min  | Warm-up question: “If you owned an online store, what would you sell?” |
+| 15 min | Instructor walkthrough: code cleanup tips + personalization ideas      |
+| 30 min | Students polish and personalize projects with mentor support           |
+| 10 min | Wrap-up and what’s next                                                |
 
 ---
 
@@ -76,40 +50,42 @@ removeButton.addEventListener("click", () => removeFromCart(item.id));
 
 ### Setup
 
-- Students should already have:
-  - `updateCart()` rendering each cart item
-  - A way to uniquely identify each item (`id`)
+- No new files needed. Students use their full project from Weeks 1–7.
+- Encourage backing up a version before making final changes.
 
-- Add a "Remove" button when rendering each cart item:
+### Instructor Live Walkthrough Ideas
 
-```js
-<button class="cart-remove" data-id="${item.id}">
-  Remove
-</button>
-```
-
-### Instructor Live Coding Goals
-
-- Show how to attach event listeners to dynamically created elements
-- Demonstrate `.findIndex()` to locate item in the cart
-- Use `.splice()` to remove from the cart array
-- Rerun `updateCart()` after any change
+- Clean up indentation and spacing
+- Use consistent naming for classes and variables
+- Add CSS polish (e.g. better padding, button hover styles)
+- Suggest: change fonts, colors, product images, or headings
 
 ### 1:1 Mentor Goals
 
-- Each student’s Remove button decreases quantity or removes item
-- Cart total and DOM update correctly after item is removed
+- Help students polish code and styling
+- Encourage at least one creative customization
 - If ahead:
-  - Improve layout of Remove button
-  - Add confirmation step or hover effect
+  - Add cart empty state styling
+  - Try different product categories
+  - Center layout responsively
 
 ### Wrap-up and What’s Next
 
 Reinforce:
 
-- Your cart now has full **add, update, and remove** behavior
-- You’ve built all the core logic for a real cart system
+- You now have a complete web project with real structure, logic, and design
+- You’ve used real developer tools and practices
 
 Preview:
 
-> “Next week is our final session. You’ll personalize your cart, add final styling, and polish your work for demo or portfolio use.”
+> “Next time we meet, it’s **Demo Day**. You’ll be walking others through your shopping cart — what it does, what you added, and what you’re proud of. This is your chance to show off all your hard work.”
+
+Encourage:
+
+- Clean presentation of features
+- Mentioning one thing they learned or enjoyed building
+- Optional: giving their cart a name or brand
+
+Final message:
+
+> “You built a full web app from scratch — that’s no small thing. This is how real web developers start, and you’re already doing it.”
