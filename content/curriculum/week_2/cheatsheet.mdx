@@ -1,37 +1,42 @@
-# Week 2 Cheatsheet: CSS Styling
+# Week 3 Cheatsheet: Cart Section (HTML Structure)
 
 ## What You’re Building
 
-Styled product cards in a responsive grid
+A visible shopping cart area with a placeholder message
 
-## CSS Concepts You’ll Use
+## HTML Tags You’ll Use
 
-- Selectors: `.class`, `element`, `#id`
-- Properties: `padding`, `margin`, `width`, `font-size`, `background-color`, etc.
-- Layout: `display: flex`, `gap`, `flex-wrap`, `justify-content`
+```html
+<section>
+  <!-- A logical section of the page -->
+  <h2>
+    <!-- Cart title -->
+    <div>
+      <!-- Cart container -->
+      <p><!-- "Your cart is empty" --></p>
+      <ul>
+        <!-- List of cart items -->
+      </ul>
+    </div>
+  </h2>
+</section>
+```
 
 ## Example Code
 
-```css
-.product-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
-.product-card {
-  background-color: #f9f9f9;
-  padding: 15px;
-  border-radius: 5px;
-  width: 250px;
-  text-align: center;
-}
+```html
+<section>
+  <h2 class="section-title">Your Cart</h2>
+  <div class="cart-container">
+    <p class="empty-cart" id="empty-cart-message">Your cart is empty.</p>
+    <ul class="cart-items" id="cart-items"></ul>
+    <div class="cart-total" id="cart-total"></div>
+  </div>
+</section>
 ```
 
 ## Tips to Remember
 
-- Link your CSS: `<link rel="stylesheet" href="styles.css" />`
-- Use `.` before class names in CSS
-- `display: flex` lets you align elements horizontally
-- Use `gap` instead of margin for spacing between flex items
+- Use unique `id`s for JavaScript hooks later
+- Use classes for styling
+- Place this section after your product grid

@@ -1,14 +1,14 @@
-# Week 2: Style Your Product Card with CSS
+# Week 2: Style the Page and Add a Cart Section
 
 ## Today you’ll build...
 
-A **styled product grid** that looks more like an online store. You’ll take last week’s product card and improve how it looks and how it’s laid out on the page.
+A **styled product grid** that looks more like an online store and a **shopping cart section** where selected items will appear later. You’ll take last week’s product card, improve how it looks, lay it out on the page, and set up the cart area for future interactivity.
 
-By the end of this session, your product cards will:
+By the end of this session, your page will:
 
-- Appear side by side
-- Have clean spacing and padding
-- Use fonts, colors, and images that are easier to read
+- Display product cards side by side with clean spacing and padding
+- Use fonts, colors, and images that are easy to read
+- Include a cart section with a heading, placeholder message, item container, and total price area
 
 ---
 
@@ -21,12 +21,14 @@ By the end of this session, your product cards will:
 
 - How to use `display: flex` to make a responsive product grid
 - How to keep CSS organized by grouping related styles
+- How to use semantic HTML to create sections of a page
+- How to apply class names and IDs to prepare for styling and future JavaScript
 
 ---
 
 ## By the end of today...
 
-Each student will have a styled product grid that looks something like:
+Each student will have a styled product grid and a cart section that looks something like:
 
 ```html
 <div class="product-grid">
@@ -38,6 +40,15 @@ Each student will have a styled product grid that looks something like:
   </div>
   <!-- Add another product if time allows -->
 </div>
+
+<section>
+  <h2 class="section-title">Your Cart</h2>
+  <div class="cart-container">
+    <p class="empty-cart" id="empty-cart-message">Your cart is empty.</p>
+    <ul class="cart-items" id="cart-items"></ul>
+    <div class="cart-total" id="cart-total"></div>
+  </div>
+</section>
 ```
 
 With styles like:
@@ -57,18 +68,27 @@ With styles like:
   width: 250px;
   text-align: center;
 }
+
+.cart-container {
+  background-color: #f9f9f9;
+  padding: 20px;
+  width: 80%;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+}
 ```
 
 ---
 
 ## Agenda (1 hour total)
 
-| Time   | Activity                                                       |
-| ------ | -------------------------------------------------------------- |
-| 5 min  | Warm-up question: “What’s your favorite color and why?”        |
-| 15 min | Instructor walkthrough: style one product card and the grid    |
-| 30 min | Students add styling to their own projects with mentor support |
-| 10 min | Wrap-up and what’s next                                        |
+| Time   | Activity                                                          |
+| ------ | ----------------------------------------------------------------- |
+| 5 min  | Warm-up question: “What’s your favorite online store UI and why?” |
+| 15 min | Instructor walkthrough: style one product card and the grid       |
+| 30 min | Students build their own with 1:1 mentor support                  |
+| 10 min | Wrap-up and what’s next                                           |
 
 ---
 
@@ -87,28 +107,32 @@ With styles like:
 
 - Demonstrate how to write CSS rules in `styles.css`
 - Style `.product-card` and `.product-grid` step-by-step
+- Show how to structure the cart section with semantic HTML
 - Emphasize class-based styling and how styles apply to multiple elements
+- Explain `id` usage for future JavaScript functionality
 
 ### 1:1 Mentor Goals
 
 - Every student links their CSS file successfully
 - Students style at least one product card to match the design
+- Students add the cart section with correct structure and class names
 - Encourage experimenting with:
   - Background colors
   - Border radius
   - Button colors and hover states
 
 - If students finish early:
-  - Style multiple cards
+  - Add multiple product cards
   - Adjust spacing and layout
 
 ### Wrap-up and What’s Next
 
 End by reinforcing:
 
-- CSS makes your HTML look good — structure and style now go hand-in-hand
-- You now have the start of a product catalog
+- CSS makes your HTML look good — structure and style now work together
+- The cart section is ready for interactive features later
+- You now have the start of a product catalog with a place for items to appear
 
 Preview:
 
-> “Next week, we’ll add the **shopping cart** section to your page and begin setting up the space where items will be added later.”
+> “Next week, we’ll add real products using JavaScript — instead of copy/paste, the product cards will be generated for you and added to the cart.”

@@ -1,44 +1,36 @@
-# Week 7 Cheatsheet: Remove from Cart
+# Week 8 Cheatsheet: Final Polish
 
 ## What You’re Building
 
-A **Remove** button that:
+Your **final personalized cart** with:
 
-- Decreases quantity if more than one
-- Removes item if quantity is 1
+- Clean layout
+- Custom styling
+- Working cart behavior
 
-## JavaScript Concepts
+## What You Can Add
 
-- `.findIndex()` to locate item
-- `.splice()` to remove from array
-- Event listeners on dynamic elements
+- New product images, names, or categories
+- Custom fonts or color themes
+- CSS hover styles
+- Branding (logo or store name)
 
-## Example Code
+## CSS Polish Examples
 
-```js
-function removeFromCart(productId) {
-  const index = cart.findIndex((item) => item.id === productId);
-
-  if (index > -1) {
-    if (cart[index].quantity > 1) {
-      cart[index].quantity--;
-    } else {
-      cart.splice(index, 1);
-    }
-  }
-
-  updateCart();
+```css
+.button:hover {
+  background-color: #990000;
 }
-```
 
-In `updateCart()`:
-
-```js
-removeButton.addEventListener("click", () => removeFromCart(item.id));
+.cart-remove:hover {
+  background-color: red;
+  color: white;
+}
 ```
 
 ## Tips to Remember
 
-- Buttons must be created each time you render the cart
-- Use `dataset.id` to identify which item to remove
-- Always update the DOM after changing the cart array
+- Review your indentation and formatting
+- Rename any unclear class or variable names
+- Avoid repeated code — use functions
+- Make sure all features work before Demo Day

@@ -128,11 +128,29 @@ function updateCart() {
   cart.forEach((item) => {
     const li = document.createElement("li");
     li.classList.add("cart-item");
-    li.textContent = `${item.name} (Qty: ${item.quantity})`;
+    li.innerHTML = `
+      ${item.name} (Qty: ${item.quantity})
+      <button class="remove-from-cart" data-id="${item.id}">Remove</button>
+    `;
     cartItemsContainer.appendChild(li);
     total += item.price * item.quantity;
   });
 
   cartTotalContainer.innerHTML = `<h2>Total: $${total.toFixed(2)}</h2>`;
+
+  document.querySelectorAll(".remove-from-cart").forEach((button) => {
+    button.addEventListener("click", () => {
+      const id = button.dataset.id;
+      const index = cart.findIndex((item) => item.id === id);
+      if (index > -1) {
+        if (cart[index].quantity > 1) {
+          cart[index].quantity--;
+        } else {
+          cart.splice(index, 1);
+        }
+        updateCart();
+      }
+    });
+  });
 }
 ```

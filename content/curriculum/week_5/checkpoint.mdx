@@ -29,16 +29,7 @@ import { FileTree } from "nextra/components";
       <section>
         <h2 class="section-title">Recently Viewed Items</h2>
         <div class="product-grid">
-          <div class="product-card">
-            <img
-              src="https://target.scene7.com/is/image/Target/GUEST_780d12cc-79ae-474b-a4a3-0de8477746f5"
-              alt="Minecraft - Xbox One"
-              class="product-image"
-            />
-            <h2 class="product-title">Minecraft - Xbox One</h2>
-            <p class="product-price">$29.99</p>
-            <button class="add-to-cart-button">Add to Cart</button>
-          </div>
+          <!-- Items will be rendered by JavaScript -->
         </div>
       </section>
     </main>
@@ -48,89 +39,7 @@ import { FileTree } from "nextra/components";
 ```
 
 ```css filename="styles.css"
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  text-align: center;
-}
-
-.section-title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-top: 40px;
-}
-
-.product-grid {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  padding: 40px;
-}
-
-.product-card {
-  background-color: #f9f9f9;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  width: 250px;
-}
-
-.product-image {
-  width: 100%;
-  max-width: 160px;
-  height: auto;
-  margin-bottom: 10px;
-}
-
-.product-title {
-  font-size: 18px;
-  margin: 10px 0 5px;
-}
-
-.product-price {
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.add-to-cart-button {
-  background-color: #cc0000;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 100%;
-}
-
-.add-to-cart-button:hover {
-  background-color: #a80000;
-}
-
-.cart-container {
-  background-color: #f1f1f1;
-  padding: 20px;
-  margin: 20px auto;
-  border-radius: 8px;
-  width: 80%;
-  max-width: 600px;
-}
-
-.cart-items {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.cart-total {
-  margin-top: 10px;
-  font-weight: bold;
-  font-size: 18px;
-}
-
-.empty-cart {
-  font-style: italic;
-  color: #555;
-}
+/* (same as previous – unchanged for Week 6) */
 ```
 
 ```js filename="script.js"
@@ -183,8 +92,15 @@ function displayProducts() {
   document.querySelectorAll(".add-to-cart-button").forEach((button) => {
     button.addEventListener("click", () => {
       const id = button.dataset.id;
-      const product = products.find((p) => p.id === id);
-      cart.push(product);
+      const existingItem = cart.find((item) => item.id === id);
+
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        const product = products.find((p) => p.id === id);
+        cart.push({ ...product, quantity: 1 });
+      }
+
       updateCart();
     });
   });
@@ -195,20 +111,28 @@ displayProducts();
 function updateCart() {
   const cartItemsContainer = document.getElementById("cart-items");
   const emptyCartMessage = document.getElementById("empty-cart-message");
+  const cartTotalContainer = document.getElementById("cart-total");
+
   cartItemsContainer.innerHTML = "";
 
   if (cart.length === 0) {
     emptyCartMessage.style.display = "block";
+    cartTotalContainer.innerHTML = "";
     return;
   }
 
   emptyCartMessage.style.display = "none";
 
-  cart.forEach((cartItem) => {
-    const cartItemElement = document.createElement("li");
-    cartItemElement.classList.add("cart-item");
-    cartItemElement.textContent = cartItem.name;
-    cartItemsContainer.appendChild(cartItemElement);
+  let total = 0;
+
+  cart.forEach((item) => {
+    const li = document.createElement("li");
+    li.classList.add("cart-item");
+    li.textContent = `${item.name} (Qty: ${item.quantity})`;
+    cartItemsContainer.appendChild(li);
+    total += item.price * item.quantity;
   });
+
+  cartTotalContainer.innerHTML = `<h2>Total: $${total.toFixed(2)}</h2>`;
 }
 ```
