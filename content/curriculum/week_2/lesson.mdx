@@ -1,94 +1,62 @@
-# Week 2: Style the Page and Add a Cart Section
+# Week 2: Build a Product Card with HTML
 
 ## Today you’ll build...
 
-A **styled product grid** that looks more like an online store and a **shopping cart section** where selected items will appear later. You’ll take last week’s product card, improve how it looks, lay it out on the page, and set up the cart area for future interactivity.
+A **product card**, the first building block of your shopping cart. It will include:
 
-By the end of this session, your page will:
+- A product name
+- A product image
+- A price
+- A button labeled "Add to Cart"
 
-- Display product cards side by side with clean spacing and padding
-- Use fonts, colors, and images that are easy to read
-- Include a cart section with a heading, placeholder message, item container, and total price area
+This structure sets the foundation for future styling and functionality.
 
 ---
 
 ## To do that, you’ll learn...
 
-- How to link a CSS file to an HTML page
-- How to write basic CSS rules with:
-  - Selectors (`.product-card`, `.product-image`, etc.)
-  - Properties like `color`, `padding`, `border-radius`, `font-size`
+- What HTML is and how it defines page structure
+- How to create a basic HTML file
+- How to use these HTML elements:
+  - `<!DOCTYPE html>`, `<html>`, `<head>`, `<body>`
+  - `<div>`, `<h2>`, `<p>`, `<img>`, `<button>`
 
-- How to use `display: flex` to make a responsive product grid
-- How to keep CSS organized by grouping related styles
-- How to use semantic HTML to create sections of a page
-- How to apply class names and IDs to prepare for styling and future JavaScript
+- How to use `class` and `id` attributes for styling and scripting
+- How to nest elements properly and stay organized
 
 ---
 
 ## By the end of today...
 
-Each student will have a styled product grid and a cart section that looks something like:
+Each student will have a basic HTML page that displays at least one product card, similar to:
+
+```html
+<div class="product-card">
+  <img src="..." alt="Product name" class="product-image" />
+  <h2>Product Name</h2>
+  <p>$19.99</p>
+  <button class="add-to-cart-button">Add to Cart</button>
+</div>
+```
+
+And this will be wrapped inside a product grid container:
 
 ```html
 <div class="product-grid">
-  <div class="product-card">
-    <img src="..." class="product-image" />
-    <h2>Product Name</h2>
-    <p>$19.99</p>
-    <button class="add-to-cart-button">Add to Cart</button>
-  </div>
-  <!-- Add another product if time allows -->
+  <!-- product cards go here -->
 </div>
-
-<section>
-  <h2 class="section-title">Your Cart</h2>
-  <div class="cart-container">
-    <p class="empty-cart" id="empty-cart-message">Your cart is empty.</p>
-    <ul class="cart-items" id="cart-items"></ul>
-    <div class="cart-total" id="cart-total"></div>
-  </div>
-</section>
-```
-
-With styles like:
-
-```css
-.product-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
-.product-card {
-  background-color: #f9f9f9;
-  border-radius: 5px;
-  padding: 15px;
-  width: 250px;
-  text-align: center;
-}
-
-.cart-container {
-  background-color: #f9f9f9;
-  padding: 20px;
-  width: 80%;
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: left;
-}
 ```
 
 ---
 
 ## Agenda (1 hour total)
 
-| Time   | Activity                                                          |
-| ------ | ----------------------------------------------------------------- |
-| 5 min  | Warm-up question: “What’s your favorite online store UI and why?” |
-| 15 min | Instructor walkthrough: style one product card and the grid       |
-| 30 min | Students build their own with 1:1 mentor support                  |
-| 10 min | Wrap-up and what’s next                                           |
+| Time   | Activity                                                             |
+| ------ | -------------------------------------------------------------------- |
+| 5 min  | Warm-up question: “What’s something fun you’ve bought online?”       |
+| 15 min | Instructor walkthrough: set up `index.html`, create one product card |
+| 30 min | Students build their own with 1:1 mentor support                     |
+| 10 min | Wrap-up and what’s next                                              |
 
 ---
 
@@ -96,43 +64,38 @@ With styles like:
 
 ### Setup
 
-- Students should reuse their project folder from Week 1
-- Ensure `index.html` includes the link to the `styles.css` file:
+- Students should create a folder with:
+  - `index.html`
+  - `styles.css` (leave empty for now)
+  - `script.js` (leave empty for now)
 
-```html
-<link rel="stylesheet" href="styles.css" />
-```
+This week focuses only on `index.html`.
 
 ### Instructor Live Coding Goals
 
-- Demonstrate how to write CSS rules in `styles.css`
-- Style `.product-card` and `.product-grid` step-by-step
-- Show how to structure the cart section with semantic HTML
-- Emphasize class-based styling and how styles apply to multiple elements
-- Explain `id` usage for future JavaScript functionality
+- Build a single product card from scratch, explaining each tag
+- Emphasize semantic structure and visual hierarchy
+- Encourage questions about nesting and element purpose
 
 ### 1:1 Mentor Goals
 
-- Every student links their CSS file successfully
-- Students style at least one product card to match the design
-- Students add the cart section with correct structure and class names
-- Encourage experimenting with:
-  - Background colors
-  - Border radius
-  - Button colors and hover states
+- Every student completes one working product card
+- Reinforce best practices:
+  - Use of consistent indentation
+  - Proper nesting of tags
+  - Use of `class` for styling hooks
 
 - If students finish early:
-  - Add multiple product cards
-  - Adjust spacing and layout
+  - Add a second card
+  - Customize product details
 
 ### Wrap-up and What’s Next
 
-End by reinforcing:
+Close the session by reinforcing:
 
-- CSS makes your HTML look good — structure and style now work together
-- The cart section is ready for interactive features later
-- You now have the start of a product catalog with a place for items to appear
+- HTML is the backbone of every web page
+- We now have structure, next week we’ll make it visually appealing with **CSS**
 
 Preview:
 
-> “Next week, we’ll add real products using JavaScript — instead of copy/paste, the product cards will be generated for you and added to the cart.”
+> “Next week, you’ll style your product cards to look like real store items using CSS. The product grid will come to life.”

@@ -1,13 +1,10 @@
 import { Meta } from "nextra";
 
 export default {
-  checkpoint: {
-    display: "hidden",
+  kickoff: {
+    title: "Kickoff",
   },
-  lesson: {
-    title: "Lesson",
-  },
-  cheatsheet: {
-    title: "Cheat Sheet",
+  resources: {
+    title: "Resources",
   },
 } satisfies Meta;

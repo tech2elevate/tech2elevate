@@ -1,44 +1,45 @@
-# Week 7 Cheatsheet: Remove from Cart
+# Week 6 Cheatsheet: Track Quantity & Total
 
 ## What You’re Building
 
-A **Remove** button that:
+A cart that:
 
-- Decreases quantity if more than one
-- Removes item if quantity is 1
+- Increases quantity for repeated items
+- Displays the **total price**
 
 ## JavaScript Concepts
 
-- `.findIndex()` to locate item
-- `.splice()` to remove from array
-- Event listeners on dynamic elements
+- Looping over cart with `.forEach()`
+- Multiplying price × quantity
+- Formatting with `.toFixed(2)`
+- Updating DOM with `innerHTML`
 
 ## Example Code
 
 ```js
-function removeFromCart(productId) {
-  const index = cart.findIndex((item) => item.id === productId);
+function updateCart() {
+  cartItemsContainer.innerHTML = "";
+  let total = 0;
 
-  if (index > -1) {
-    if (cart[index].quantity > 1) {
-      cart[index].quantity--;
-    } else {
-      cart.splice(index, 1);
-    }
-  }
+  cart.forEach((item) => {
+    const itemTotal = item.price * item.quantity;
+    total += itemTotal;
 
-  updateCart();
+    const cartItem = document.createElement("li");
+    cartItem.innerHTML = `
+      <span>${item.name}</span>
+      <span>Qty: ${item.quantity}</span>
+      <span>$${itemTotal.toFixed(2)}</span>
+    `;
+    cartItemsContainer.appendChild(cartItem);
+  });
+
+  cartTotalContainer.innerHTML = `<h2>Total: $${total.toFixed(2)}</h2>`;
 }
-```
-
-In `updateCart()`:
-
-```js
-removeButton.addEventListener("click", () => removeFromCart(item.id));
 ```
 
 ## Tips to Remember
 
-- Buttons must be created each time you render the cart
-- Use `dataset.id` to identify which item to remove
-- Always update the DOM after changing the cart array
+- Use `let total = 0` at the start, then add each item’s total
+- Always re-render the cart every time it changes
+- Keep price formatting consistent with `.toFixed(2)`

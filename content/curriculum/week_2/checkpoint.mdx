@@ -17,30 +17,18 @@ import { FileTree } from "nextra/components";
   </head>
   <body>
     <main>
-      <section>
-        <h2 class="section-title">Your Cart</h2>
-        <div class="cart-container">
-          <p class="empty-cart" id="empty-cart-message">Your cart is empty.</p>
-          <ul class="cart-items" id="cart-items"></ul>
-          <div class="cart-total" id="cart-total"></div>
+      <div class="product-grid">
+        <div class="product-card">
+          <img
+            src="https://target.scene7.com/is/image/Target/GUEST_780d12cc-79ae-474b-a4a3-0de8477746f5"
+            alt="Minecraft - Xbox One"
+            class="product-image"
+          />
+          <h2>Minecraft - Xbox One</h2>
+          <p>$29.99</p>
+          <button class="add-to-cart-button">Add to Cart</button>
         </div>
-      </section>
-
-      <section>
-        <h2 class="section-title">Recently Viewed Items</h2>
-        <div class="product-grid">
-          <div class="product-card">
-            <img
-              src="https://target.scene7.com/is/image/Target/GUEST_780d12cc-79ae-474b-a4a3-0de8477746f5"
-              alt="Minecraft - Xbox One"
-              class="product-image"
-            />
-            <h2 class="product-title">Minecraft - Xbox One</h2>
-            <p class="product-price">$29.99</p>
-            <button class="add-to-cart-button">Add to Cart</button>
-          </div>
-        </div>
-      </section>
+      </div>
     </main>
     <script src="script.js"></script>
   </body>
@@ -48,91 +36,9 @@ import { FileTree } from "nextra/components";
 ```
 
 ```css filename="styles.css"
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  text-align: center;
-}
-
-.section-title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-top: 40px;
-}
-
-.product-grid {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  padding: 40px;
-}
-
-.product-card {
-  background-color: #f9f9f9;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  width: 250px;
-}
-
-.product-image {
-  width: 100%;
-  max-width: 160px;
-  height: auto;
-  margin-bottom: 10px;
-}
-
-.product-title {
-  font-size: 18px;
-  margin: 10px 0 5px;
-}
-
-.product-price {
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.add-to-cart-button {
-  background-color: #cc0000;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 100%;
-}
-
-.add-to-cart-button:hover {
-  background-color: #a80000;
-}
-
-.cart-container {
-  background-color: #f1f1f1;
-  padding: 20px;
-  margin: 20px auto;
-  border-radius: 8px;
-  width: 80%;
-  max-width: 600px;
-}
-
-.cart-items {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.cart-total {
-  margin-top: 10px;
-  font-weight: bold;
-  font-size: 18px;
-}
-
-.empty-cart {
-  font-style: italic;
-  color: #555;
-}
+/* Empty for now */
 ```
 
 ```js filename="script.js"
-// Still empty — interactivity starts in Week 4
+// Empty for now
 ```
