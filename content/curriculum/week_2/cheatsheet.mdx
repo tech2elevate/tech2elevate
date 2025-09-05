@@ -1,42 +1,58 @@
-# Week 3 Cheatsheet: Cart Section (HTML Structure)
+# Week 1 Cheatsheet: HTML Product Card
 
 ## What You’re Building
 
-A visible shopping cart area with a placeholder message
+A product card with:
+
+- Product image
+- Name
+- Price
+- Button
 
 ## HTML Tags You’ll Use
 
 ```html
-<section>
-  <!-- A logical section of the page -->
-  <h2>
-    <!-- Cart title -->
-    <div>
-      <!-- Cart container -->
-      <p><!-- "Your cart is empty" --></p>
-      <ul>
-        <!-- List of cart items -->
-      </ul>
-    </div>
-  </h2>
-</section>
+<!doctype html>
+<html>
+  <!-- Root of your document -->
+  <head>
+    <!-- Meta, title, and links -->
+    <body>
+      <!-- Page content -->
+      <h1>
+        ,
+        <h2>
+          <!-- Headings -->
+          <p>
+            <!-- Paragraphs -->
+            <img />
+            <!-- Product image -->
+            <button>
+              <!-- "Add to Cart" -->
+              <div><!-- Grouping content --></div>
+            </button>
+          </p>
+        </h2>
+      </h1>
+    </body>
+  </head>
+</html>
 ```
 
 ## Example Code
 
 ```html
-<section>
-  <h2 class="section-title">Your Cart</h2>
-  <div class="cart-container">
-    <p class="empty-cart" id="empty-cart-message">Your cart is empty.</p>
-    <ul class="cart-items" id="cart-items"></ul>
-    <div class="cart-total" id="cart-total"></div>
-  </div>
-</section>
+<div class="product-card">
+  <img src="..." alt="Product name" class="product-image" />
+  <h2>Product Name</h2>
+  <p>$19.99</p>
+  <button class="add-to-cart-button">Add to Cart</button>
+</div>
 ```
 
 ## Tips to Remember
 
-- Use unique `id`s for JavaScript hooks later
-- Use classes for styling
-- Place this section after your product grid
+- Use meaningful `alt` text on images
+- Wrap related content in `<div>`
+- Use `class=""` for styling later
+- Use correct nesting and indentation
