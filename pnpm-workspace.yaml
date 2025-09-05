@@ -1,0 +1,4 @@
+onlyBuiltDependencies:
+  - lefthook
+  - oxc-resolver
+  - sharp
