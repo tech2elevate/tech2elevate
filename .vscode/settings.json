@@ -11,12 +11,15 @@
     "lefthook",
     "mentoringdocs",
     "nextra",
+    "pagefind",
     "ruleset",
     "seriph",
     "shiki",
     "slidev",
+    "turbopack",
     "turborepo",
-    "unocss"
+    "unocss",
+    "vercel"
   ],
   "editor.formatOnSave": true
 }
