@@ -2,3 +2,6 @@ onlyBuiltDependencies:
   - lefthook
   - oxc-resolver
   - sharp
+engineStrict: true
+savePrefix: ""
+autoInstallPeers: false
