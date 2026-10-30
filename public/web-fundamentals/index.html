@@ -151,6 +151,29 @@ pre.code{margin:0;font-family:var(--mono);font-size:13.5px;line-height:1.7;backg
 .result .rv{color:var(--green)}
 .result .rt{color:var(--pink)}
 .result .rdim{color:#6c7299}
+/* data-structure drawings in the result panel */
+.result.ds{white-space:normal}
+.result.ds .rnote{margin:10px 0 0}
+.dsvar{font-family:var(--mono);font-size:13px;color:var(--muted);margin-bottom:8px}
+.dsvar b{color:var(--text)}
+.dsobj{background:var(--ink);border:2px solid var(--blue);border-radius:12px;padding:10px 12px;font-family:var(--mono);font-size:13px;animation:pop .45s cubic-bezier(.2,1.5,.4,1) both}
+.dsobj .tag{display:inline-block;font-weight:800;color:var(--pink);background:var(--panel2);padding:2px 8px;border-radius:6px;margin-bottom:6px}
+.dsobj .row{display:flex;gap:8px;padding:3px 4px;align-items:flex-start}
+.dsobj .k{color:var(--gold);min-width:104px;flex:none}
+.dsobj .v{color:var(--green);word-break:break-word;min-width:0}
+.dsarr{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;padding:10px;background:var(--ink);border:2px solid var(--gold);border-radius:12px;min-height:72px;font-family:var(--mono);font-size:13px}
+.dsarr.inner{background:var(--panel2);border:1px dashed #4a5090;padding:8px;min-height:0}
+.dsarr.empty{align-items:center;color:var(--muted);font-style:italic;font-family:system-ui,sans-serif;min-height:56px}
+.dsslot{width:104px;text-align:center;cursor:pointer;animation:pop .45s cubic-bezier(.2,1.5,.4,1) both;animation-delay:calc(var(--i)*70ms)}
+.dsslot .sv{background:var(--panel2);border:2px solid #3a4080;border-radius:10px;padding:7px 4px;font-weight:700;color:var(--pink);transition:all .25s;line-height:1.3}
+.dsarr.inner .dsslot .sv{background:var(--ink)}
+.dsslot .sv small{display:block;font-weight:400;color:var(--muted);font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px}
+.dsslot .si{font-size:12px;color:var(--muted);margin-top:4px}
+.dsslot:hover .sv,.dsslot.on .sv{border-color:var(--gold);background:#3a3420;transform:translateY(-4px)}
+.dslen{align-self:center;margin-left:auto;font-size:12px;color:var(--muted);padding:4px 8px;border-radius:999px;background:var(--panel2);font-style:normal}
+.dsnull{border:2px dashed var(--red);border-radius:12px;padding:16px;text-align:center;color:var(--red);font:800 20px var(--mono);background:var(--ink)}
+.dsdrill:not(:empty){margin-top:12px;padding-top:12px;border-top:1px dashed #3a4080}
+.hover-hl{outline:3px dashed var(--gold)!important;outline-offset:2px}
 .mock{background:#fff;color:#222;border-radius:12px;padding:14px;display:grid;grid-template-columns:1.3fr 1fr;gap:12px;font-size:13px}
 .mock h2{font-size:14px;margin:4px 0}
 .mock p{margin:2px 0}
@@ -1117,44 +1140,92 @@ function runPg() {
     return;
   }
   found.forEach((el, i) => mark(el, i + 1));
-  res.classList.add(found.length ? "ok" : "null");
+  res.classList.add("ds", found.length ? "ok" : "null");
+  const name = varName(sel, pgMode === "querySelectorAll");
+  pgRefs = [];
   if (pgMode === "querySelectorAll") {
-    res.innerHTML = `<span class="rhead">→ NodeList(${found.length})</span> [\n${found.map((e, i) => `  <span class="rdim">${i}:</span> <span class="rt">${esc(describe(e))}</span>`).join("\n")}${found.length ? "\n" : ""}]`
-      + `<span class="rnote">${found.length ? `A <b>list</b> of ${found.length} element${found.length === 1 ? "" : "s"}. Use <code>.forEach</code> or <code>[0]</code>, <code>[1]</code>… to reach each one.` : "An <b>empty list</b>. No error, but <code>.forEach</code> runs zero times."}</span>`;
+    res.innerHTML = `<div class="dsvar">const <b>${name}</b> = document.querySelectorAll(…);</div>`
+      + listHTML(found, name)
+      + `<div class="dsdrill" id="pgDrill"></div>`
+      + `<p class="rnote">${found.length
+        ? `A <b>list</b> (NodeList) of ${found.length} element${found.length === 1 ? "" : "s"}, counted from 0. Reach one with <code>${name}[0]</code>, or all of them with <code>${name}.forEach(…)</code>. <b>Click a slot</b> to open it.`
+        : `An <b>empty list</b>: no error, <code>.length</code> is 0, and <code>.forEach</code> runs zero times.`}</p>`;
   } else if (!found.length) {
-    res.innerHTML = `<span class="rnull">→ null</span>\n<span class="rnote">Nothing was found, so the variable holds <code>null</code>. Trying <code>.textContent</code> or <code>.appendChild</code> on it crashes with “Cannot read properties of null”.</span>`;
+    res.innerHTML = `<div class="dsvar">const <b>${name}</b> = document.${pgMode}(…);</div>`
+      + `<div class="dsnull">null</div>`
+      + `<p class="rnote">Nothing was found, so the variable holds <code>null</code>: not an element, not an empty list, <b>nothing</b>. Trying <code>${name}.textContent</code> crashes with “Cannot read properties of null”.</p>`;
   } else {
-    res.innerHTML = inspect(found[0]);
+    res.innerHTML = `<div class="dsvar">const <b>${name}</b> = document.${pgMode}(…);</div>`
+      + elCardHTML(found[0])
+      + `<div class="dsdrill" id="pgDrill"></div>`
+      + `<p class="rnote"><b>One element</b>, drawn as one object card. It is not a list, even when it holds other elements: those sit inside it in <code>${name}.children</code>. <b>Click a child</b> to open it.</p>`;
   }
+  wireSlots(res, name);
   $("#pgTip").textContent = TIPS[sel] || (pgMode === "querySelector" && found.length ? "querySelector stops at the FIRST match, even if there are more." : "");
 }
-// What a single returned element looks like from JavaScript's side: the tag,
-// a few live properties, and the children it contains (one level down).
-function inspect(el) {
-  const kids = [...el.children].filter((k) => !k.classList.contains("badge"));
-  // Read the text from a copy with the playground's number badges removed.
-  const clean = el.cloneNode(true);
-  clean.querySelectorAll(".badge").forEach((b) => b.remove());
-  const text = clean.textContent.replace(/\s+/g, " ").trim();
-  const short = text.length > 42 ? text.slice(0, 42) + "…" : text;
-  const prop = (k, v) => `  <span class="rk">${k}</span> <span class="rdim">→</span> <span class="rv">${esc(v)}</span>`;
-  let out = `<span class="rhead">→ ${esc(describe(el))}</span>`;
-  out += `<span class="rnote"><b>One element</b> (an object), not a list. You can read its properties and call methods on it.</span>`;
-  out += `<span class="rsec">Properties</span>`;
-  out += [
-    prop(".id", JSON.stringify(el.id)),
-    prop(".className", JSON.stringify(el.className.replace(/\s*match\s*/, " ").trim())),
-    prop(".children.length", kids.length),
-    prop(".textContent", JSON.stringify(short)),
-  ].join("\n");
-  out += `<span class="rsec">Inside it (.children)</span>`;
-  out += kids.length
-    ? kids.map((k, i) => {
-        const sub = [...k.children].filter((c) => !c.classList.contains("badge")).length;
-        return `  <span class="rdim">${i}:</span> <span class="rt">${esc(describe(k))}</span>${sub ? ` <span class="rdim">(${sub} inside)</span>` : ""}`;
-      }).join("\n")
-    : `  <span class="rdim">(no child elements, only text)</span>`;
-  return out;
+
+/* ---- drawing what a call returns, with the same shapes as the Objects and
+   Arrays slides: one bordered card = one object, a tray of slots = a list ---- */
+let pgRefs = []; // elements behind the slots currently drawn, by data-ref
+const realKids = (el) => [...el.children].filter((k) => !k.classList.contains("badge"));
+function cleanText(el) {
+  const clone = el.cloneNode(true);
+  clone.querySelectorAll(".badge").forEach((b) => b.remove());
+  const t = clone.textContent.replace(/\s+/g, " ").trim();
+  return t.length > 40 ? t.slice(0, 40) + "…" : t;
+}
+function cleanClass(el) {
+  return (typeof el.className === "string" ? el.className : "").replace(/\b(match|hover-hl)\b/g, "").replace(/\s+/g, " ").trim();
+}
+// A readable variable name from what the student typed, e.g.
+// "product-list" → productList, ".add-to-cart-button" → addToCartButtons.
+function varName(sel, plural) {
+  const parts = sel.replace(/\[.*?=\s*"?([^"\]]*)"?\]/g, " $1 ").split(/[^a-zA-Z0-9]+/).filter(Boolean);
+  if (!parts.length) return "result";
+  let n = parts.map((p, i) => (i ? p[0].toUpperCase() + p.slice(1) : p.toLowerCase())).join("");
+  if (plural && !/s$/.test(n)) n += "s";
+  return n;
+}
+function slotHTML(el, i) {
+  const label = el.id ? "#" + el.id : el.alt || cleanClass(el).split(" ")[0] || cleanText(el);
+  pgRefs.push(el);
+  return `<div class="dsslot" style="--i:${i}" data-ref="${pgRefs.length - 1}">
+    <div class="sv">&lt;${el.tagName.toLowerCase()}&gt;<small>${esc(label.length > 20 ? label.slice(0, 20) + "…" : label)}</small></div>
+    <div class="si">[${i}]</div></div>`;
+}
+function listHTML(list, name, inner) {
+  if (!list.length) return `<div class="dsarr ${inner ? "inner" : ""} empty">empty <span class="dslen">.length 0</span></div>`;
+  return `<div class="dsarr ${inner ? "inner" : ""}">${list.map(slotHTML).join("")}<span class="dslen">.length ${list.length}</span></div>`;
+}
+function elCardHTML(el) {
+  const kids = realKids(el);
+  const row = (k, v) => `<div class="row"><span class="k">${k}</span><span class="v">${v}</span></div>`;
+  return `<div class="dsobj">
+    <span class="tag">&lt;${el.tagName.toLowerCase()}&gt;</span>
+    ${row("id:", esc(JSON.stringify(el.id)))}
+    ${row("className:", esc(JSON.stringify(cleanClass(el))))}
+    ${row("textContent:", esc(JSON.stringify(cleanText(el))))}
+    <div class="row"><span class="k">children:</span><span class="v" style="flex:1">${listHTML(kids, name, true)}</span></div>
+  </div>`;
+}
+// Slots light up their element on the mock page on hover and open it as an
+// object card on click, so students can walk down the tree by hand.
+function wireSlots(res, name) {
+  $$(".dsslot", res).forEach((slot) => {
+    const el = pgRefs[+slot.dataset.ref];
+    slot.addEventListener("mouseenter", () => el.classList.add("hover-hl"));
+    slot.addEventListener("mouseleave", () => el.classList.remove("hover-hl"));
+    slot.addEventListener("click", () => {
+      $$(".dsslot.on", res).forEach((s) => s.classList.remove("on"));
+      slot.classList.add("on");
+      const inList = slot.closest(".dsarr").classList.contains("inner");
+      const path = `${name}${inList ? ".children" : ""}[${slot.querySelector(".si").textContent.slice(1, -1)}]`;
+      const drill = $("#pgDrill");
+      drill.innerHTML = `<div class="dsvar"><b>${path}</b> is:</div>` + elCardHTML(el);
+      wireSlots(drill, path);
+      drill.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    });
+  });
 }
 $("#pgRun").addEventListener("click", runPg);
 pgInput.addEventListener("keydown", (e) => { if (e.key === "Enter") runPg(); });
