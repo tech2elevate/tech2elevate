@@ -41,7 +41,7 @@ const banner = (
 const navbar = (
   <Navbar
     logo={<Logo />}
-    projectLink="https://github.com/tech2elevate/webdev-primer"
+    projectLink="https://github.com/tech2elevate/tech2elevate"
   />
 );
 
@@ -59,7 +59,7 @@ export default async function RootLayout({
           navbar={navbar}
           footer={null}
           pageMap={await getPageMap()}
-          docsRepositoryBase="https://github.com/tech2elevate/webdev-primer/blob/main"
+          docsRepositoryBase="https://github.com/tech2elevate/tech2elevate/blob/main"
           sidebar={{
             defaultMenuCollapseLevel: 1,
             toggleButton: true,
