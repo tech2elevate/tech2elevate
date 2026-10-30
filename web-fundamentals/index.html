@@ -1,0 +1,1673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>JavaScript + the Page: A Complete Visual Guide</title>
+<style>
+:root{--bg:#0f1222;--panel:#181c33;--panel2:#20254a;--ink:#0b0e1c;--text:#eef0ff;--muted:#a9aed6;--red:#ff4d6d;--blue:#4dabff;--green:#3ddc97;--gold:#ffc94d;--purple:#b48cff;--pink:#ff8fa3;--r:16px;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--text);line-height:1.5;background:radial-gradient(circle at 12% 0%,#2a2f66 0,transparent 40%),radial-gradient(circle at 92% 18%,#3b1f4d 0,transparent 35%),var(--bg);overflow:hidden}
+code,.mono{font-family:var(--mono)}
+code{background:rgba(255,255,255,.08);padding:1px 6px;border-radius:6px;font-size:.92em}
+
+/* ---------- deck ---------- */
+.slide{display:none;position:absolute;inset:0 0 62px;overflow-y:auto;padding:36px 6vw 40px}
+.slide.active{display:block;animation:slideIn .5s ease both}
+.slide-inner{max-width:1240px;margin:0 auto}
+.kicker{display:inline-block;padding:5px 12px;border-radius:999px;background:rgba(255,255,255,.08);color:var(--gold);font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+h1{font-size:clamp(34px,5.4vw,62px);line-height:1.08;margin:14px 0 12px}
+h2{font-size:clamp(26px,3.2vw,38px);margin:10px 0 6px;line-height:1.15}
+h3{margin:0 0 8px;font-size:19px}
+.sub{color:var(--muted);font-size:18px;margin:0 0 24px;max-width:860px}
+.grad{background:linear-gradient(90deg,var(--blue),var(--purple),var(--red));-webkit-background-clip:text;background-clip:text;color:transparent}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{background:var(--panel);border:1px solid rgba(255,255,255,.07);border-radius:var(--r);padding:20px}
+.card h4{margin:0 0 12px;font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}
+.pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:700;background:var(--c,var(--blue));color:#111}
+.stagger>*{animation:rise .55s ease both}
+.stagger>*:nth-child(2){animation-delay:.08s}.stagger>*:nth-child(3){animation-delay:.16s}.stagger>*:nth-child(4){animation-delay:.24s}.stagger>*:nth-child(5){animation-delay:.32s}.stagger>*:nth-child(6){animation-delay:.4s}.stagger>*:nth-child(7){animation-delay:.48s}.stagger>*:nth-child(8){animation-delay:.56s}
+
+nav.bar{position:fixed;left:0;right:0;bottom:0;height:62px;display:flex;align-items:center;gap:12px;padding:0 18px;background:rgba(10,12,26,.92);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,.08);z-index:50}
+nav.bar button,.btn{border:0;border-radius:10px;padding:9px 14px;font-weight:700;cursor:pointer;background:var(--panel2);color:var(--text);font-size:14px;transition:transform .15s,background .2s}
+nav.bar button:hover,.btn:hover{background:#2d3366}
+.btn:active{transform:scale(.95)}
+.btn.primary{background:var(--blue);color:#0b0e1c}
+.btn.gold{background:var(--gold);color:#111}
+.btn.green{background:var(--green);color:#111}
+.btn.red{background:var(--red);color:#fff}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+nav select{background:var(--panel2);color:var(--text);border:0;border-radius:10px;padding:9px;font-size:14px;max-width:46vw}
+.progress{position:fixed;left:0;bottom:62px;height:3px;background:linear-gradient(90deg,var(--blue),var(--purple),var(--red));transition:width .4s;z-index:51}
+.count{color:var(--muted);font-variant-numeric:tabular-nums;margin-left:auto;font-size:14px}
+.keys{color:var(--muted);font-size:12px}
+
+/* ---------- code ---------- */
+pre.code{margin:0;font-family:var(--mono);font-size:13.5px;line-height:1.7;background:var(--ink);border-radius:12px;padding:16px 18px;overflow-x:auto;white-space:pre}
+.t-tag{color:var(--pink)}.t-attr{color:var(--gold)}.t-str{color:var(--green)}.t-kw{color:var(--purple)}.t-fn{color:var(--blue)}.t-cm{color:#6c7299;font-style:italic}.t-num{color:#ffb38a}
+.hov{border-radius:5px;padding:1px 2px;cursor:pointer;transition:box-shadow .25s,background .25s}
+.hov.on{box-shadow:0 0 0 2px var(--c,var(--gold));background:rgba(255,255,255,.08)}
+
+/* ---------- title ---------- */
+.hero{text-align:center;padding-top:5vh}
+.hero .sub{margin:0 auto 34px;font-size:20px}
+.floaty{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:30px}
+.floaty span{font-family:var(--mono);padding:10px 16px;border-radius:12px;background:var(--panel);border:1px solid rgba(255,255,255,.08);animation:float 4s ease-in-out infinite}
+.floaty span:nth-child(2n){animation-delay:-1s}.floaty span:nth-child(3n){animation-delay:-2s}
+.agenda{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:900px;margin:36px auto 0;text-align:left}
+.agenda div{background:var(--panel);border-radius:12px;padding:12px 14px;font-size:14px;border-left:4px solid var(--c)}
+
+/* ---------- pipeline ---------- */
+.pipe{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin:10px 0 26px}
+.step{background:var(--panel);border-radius:var(--r);padding:20px;border:1px solid rgba(255,255,255,.07);position:relative;transition:transform .3s,box-shadow .3s,border-color .3s}
+.step:hover{transform:translateY(-6px);border-color:var(--c);box-shadow:0 14px 40px -12px var(--c)}
+.step:not(:last-child)::after{content:"➜";position:absolute;right:-16px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:20px}
+.num{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:var(--c);color:#111;font-weight:800;margin-bottom:10px}
+.timeline{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.week{background:var(--panel);border-radius:12px;padding:12px;border-top:4px solid var(--c);font-size:13.5px}
+.week b{display:block;font-size:12px;color:var(--c);text-transform:uppercase;letter-spacing:.06em}
+
+/* ---------- files ---------- */
+.file{background:var(--panel);border-radius:var(--r);padding:18px;border-top:4px solid var(--c)}
+.file .ico{font-size:30px}
+.reader{position:relative}
+.reader .scan{position:absolute;left:0;right:0;height:24px;background:linear-gradient(90deg,rgba(255,201,77,.0),rgba(255,201,77,.18),rgba(255,201,77,0));top:16px;animation:scan 7s linear infinite;pointer-events:none;border-radius:6px}
+
+/* ---------- tag explorer ---------- */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.chip{font-family:var(--mono);font-size:13px;padding:7px 11px;border-radius:9px;background:var(--panel2);cursor:pointer;border:1px solid transparent;transition:all .2s;color:var(--text)}
+.chip:hover{border-color:var(--pink)}
+.chip.sel{background:var(--pink);color:#111;font-weight:700}
+.explain{background:var(--panel2);border-radius:12px;padding:16px;min-height:170px;animation:rise .35s ease both}
+.explain .tagname{font-family:var(--mono);color:var(--pink);font-size:22px;font-weight:700}
+.browser{background:#fff;border-radius:12px;overflow:hidden;color:#222;box-shadow:0 20px 50px -20px #000}
+.bbar{background:#e9ebf3;padding:8px 10px;display:flex;gap:10px;align-items:center;font-size:12px}
+.bbar .dots{color:#ff5f57;letter-spacing:2px}
+.bbar .tab{background:#fff;border-radius:6px 6px 0 0;padding:4px 12px}
+.wpage{padding:12px;display:grid;gap:10px}
+.wh1{font-weight:800;font-size:18px}
+.wgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:6px;border-radius:8px}
+.wcard{border:1px solid #e3e5ef;border-radius:8px;padding:8px;text-align:center;font-size:12px}
+.wimg{font-size:28px}
+.wbtn{display:inline-block;background:#cc0000;color:#fff;border-radius:6px;padding:4px 8px;font-weight:700;font-size:11px}
+.wbtn.sm{background:#e5e5e5;color:#333}
+.wcart{background:#f6f7fb;border-radius:8px;padding:8px;font-size:12px;display:grid;gap:6px}
+.wul{display:grid;gap:4px;padding:4px;border-radius:6px}
+.wli{display:flex;gap:8px;align-items:center;background:#fff;border-radius:6px;padding:4px 6px}
+.invis{background:#2a2f55;color:#cfd3ff;padding:8px 10px;font-size:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.invis span{font-family:var(--mono);padding:2px 6px;border-radius:5px;background:#1b1f40}
+[data-tag]{transition:box-shadow .25s,background .25s;border-radius:6px}
+.tglow{box-shadow:0 0 0 3px var(--pink)!important;background:rgba(255,143,163,.15)!important}
+
+/* ---------- attributes ---------- */
+.legend{display:grid;gap:10px}
+.li{display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:center;padding:12px;border-radius:12px;background:var(--panel2);cursor:pointer;border-left:4px solid var(--c);transition:transform .2s,background .2s}
+.li:hover,.li.on{transform:translateX(4px);background:#2a3060}
+.li code{color:var(--c);background:var(--ink);text-align:center}
+.li small{display:block;color:var(--muted);font-family:var(--mono);font-size:12px;margin-top:3px}
+
+/* ---------- DOM tree ---------- */
+.tree{font-family:var(--mono);font-size:13.5px}
+.tree ul{list-style:none;margin:0;padding-left:22px;border-left:1px dashed #3a4080}
+.tree>ul{border:0;padding:0}
+.tree li{position:relative;margin:6px 0}
+.node{display:inline-block;padding:4px 10px;border-radius:8px;background:var(--panel2);border:1px solid rgba(255,255,255,.1);animation:pop .5s cubic-bezier(.2,1.5,.4,1) both;animation-delay:calc(var(--i)*90ms)}
+.node.doc{background:var(--gold);color:#111;font-weight:800}
+.node em{font-style:normal;color:var(--gold)}
+.node i{font-style:normal;color:var(--green)}
+.props{display:grid;gap:8px}
+.prop{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;background:var(--panel2);padding:10px 12px;border-radius:10px;font-size:14px}
+.prop code{color:var(--blue);background:none;padding:0}
+
+/* ---------- finding ---------- */
+.method{background:var(--panel);border-radius:var(--r);padding:18px;border-top:4px solid var(--c)}
+.method .ret{margin-top:10px;font-size:13px;color:var(--muted)}
+.symtab{width:100%;border-collapse:collapse;font-size:14px}
+.symtab td,.symtab th{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.07);text-align:left}
+.symtab th{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+.big{font-family:var(--mono);font-size:22px;font-weight:800}
+
+/* ---------- playground ---------- */
+.tabs{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.tab-b{padding:7px 12px;border-radius:9px;background:var(--panel2);cursor:pointer;font-family:var(--mono);font-size:13px;border:0;color:var(--text)}
+.tab-b.sel{background:var(--blue);color:#111;font-weight:700}
+.presets{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.presets button{font-family:var(--mono);font-size:12.5px;padding:6px 10px;border-radius:8px;border:1px solid #3a4080;background:transparent;color:var(--text);cursor:pointer}
+.presets button:hover{background:var(--panel2)}
+.qline{display:flex;align-items:center;gap:6px;background:var(--ink);border-radius:10px;padding:10px 12px;font-family:var(--mono);font-size:14px;flex-wrap:wrap}
+.qline input{background:#1b2046;border:1px solid #3a4080;color:var(--gold);font-family:var(--mono);font-size:14px;border-radius:6px;padding:5px 8px;width:220px}
+.result{margin-top:10px;padding:12px;border-radius:10px;background:var(--panel2);font-family:var(--mono);font-size:13.5px;min-height:46px;white-space:pre-wrap}
+.result.null{box-shadow:inset 4px 0 0 var(--red)}
+.result.ok{box-shadow:inset 4px 0 0 var(--green)}
+.mock{background:#fff;color:#222;border-radius:12px;padding:14px;display:grid;grid-template-columns:1.3fr 1fr;gap:12px;font-size:13px}
+.mock h2{font-size:14px;margin:4px 0}
+.mock p{margin:2px 0}
+.mock .product-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mock .product-card{border:1px solid #e3e5ef;border-radius:8px;padding:8px;text-align:center}
+.mock img{width:44px;height:44px}
+.mock button{border:0;background:#cc0000;color:#fff;font-weight:700;font-size:11.5px;border-radius:7px;padding:6px 9px;cursor:pointer;transition:transform .15s,box-shadow .3s}
+.mock button:active{transform:scale(.94)}
+.mock button.remove,.mock .cart-items button{background:#e6e6e6;color:#333}
+.mock .cart-items{padding:0;margin:6px 0;display:grid;gap:5px}
+.mock .cart-item{display:flex;gap:6px;align-items:center;justify-content:space-between;background:#f3f4fa;border-radius:7px;padding:5px 7px;font-size:12px}
+.mock .cart-container{background:#f6f7fb;border-radius:8px;padding:8px}
+.match{outline:3px solid var(--blue)!important;outline-offset:2px;position:relative;animation:matchPulse .6s ease}
+.badge{position:absolute;top:-10px;left:-10px;background:var(--blue);color:#111;font:800 11px var(--mono);border-radius:999px;width:20px;height:20px;display:grid;place-items:center;z-index:3;animation:pop .4s both}
+
+/* ---------- basics ---------- */
+.optab{width:100%;border-collapse:collapse;font-size:14px}
+.optab td{padding:6px 8px;border-bottom:1px solid rgba(255,255,255,.06)}
+.optab td:first-child{font-family:var(--mono);color:var(--gold);width:70px;font-weight:700}
+.branch{padding:8px 12px;border-radius:9px;background:var(--ink);font-family:var(--mono);font-size:13.5px;opacity:.35;transition:opacity .3s,box-shadow .3s}
+.branch.on{opacity:1;box-shadow:inset 4px 0 0 var(--green)}
+.numin{width:70px;background:#1b2046;border:1px solid #3a4080;color:var(--gold);font:700 18px var(--mono);border-radius:8px;padding:6px;text-align:center}
+.vartype{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.vartype div{background:var(--panel2);border-radius:10px;padding:10px;font-size:13px}
+.vartype b{display:block;color:var(--c);font-family:var(--mono)}
+
+/* ---------- objects ---------- */
+.obj{background:var(--ink);border-radius:12px;padding:12px 14px;font-family:var(--mono);font-size:14px;border:2px solid var(--c,var(--purple));transition:all .4s;min-width:240px}
+.obj .row{display:flex;gap:6px;padding:3px 6px;border-radius:6px;transition:background .3s}
+.obj .row.flash{background:rgba(61,220,151,.2);animation:pop .4s both}
+.obj .k{color:var(--gold)}
+.obj-stage{display:flex;align-items:center;gap:18px;flex-wrap:wrap;min-height:190px}
+.plus{font-size:28px;color:var(--muted)}
+.out{font-family:var(--mono);background:var(--panel2);border-radius:10px;padding:10px 12px;margin-top:10px;min-height:42px;font-size:13.5px;white-space:pre-wrap}
+
+/* ---------- arrays ---------- */
+.arr{display:flex;gap:10px;flex-wrap:wrap;min-height:110px;align-items:flex-end;padding:14px;background:var(--ink);border-radius:12px}
+.box{width:96px;text-align:center;animation:pop .45s cubic-bezier(.2,1.5,.4,1) both}
+.box .v{background:var(--panel2);border:2px solid #3a4080;border-radius:10px;padding:14px 4px;font-family:var(--mono);font-weight:700;transition:all .3s}
+.box .i{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:4px}
+.box.hl .v{border-color:var(--gold);background:#3a3420;transform:translateY(-6px)}
+.box.yes .v{border-color:var(--green);background:#173a2c;transform:translateY(-8px)}
+.box.no .v{border-color:var(--red);opacity:.6}
+.box.bye{animation:bye .45s ease forwards}
+.ops{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;margin-top:12px}
+.op{display:flex;gap:6px;align-items:center;background:var(--panel2);border-radius:10px;padding:8px}
+.op .btn{padding:7px 10px;font-family:var(--mono);font-size:12.5px;white-space:nowrap}
+.op input,.op select{width:74px;background:#1b2046;border:1px solid #3a4080;color:var(--gold);font-family:var(--mono);border-radius:6px;padding:5px}
+.console{background:#05060d;border-radius:10px;padding:10px 12px;font-family:var(--mono);font-size:13px;color:var(--green);min-height:96px;max-height:150px;overflow:auto;margin-top:12px}
+.console div{animation:rise .3s both}
+.console .c{color:var(--muted)}
+
+/* ---------- functions ---------- */
+.anat{font-family:var(--mono);font-size:17px;background:var(--ink);border-radius:12px;padding:18px;line-height:2}
+.anat span{border-radius:6px;padding:2px 4px;cursor:pointer;transition:box-shadow .2s,background .2s}
+.anat span.on{box-shadow:0 0 0 2px var(--c);background:rgba(255,255,255,.07)}
+.fncard{background:var(--panel);border-radius:14px;padding:14px;border-left:4px solid var(--c);font-size:14px}
+.fncard .sig{font-family:var(--mono);color:var(--c);font-weight:700;font-size:14.5px}
+.calls{display:grid;gap:10px}
+.callrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel2);border-radius:12px;padding:10px}
+.callrow .n{font-family:var(--mono);font-size:13px;padding:6px 10px;border-radius:8px;background:var(--ink);border:1px solid #3a4080;transition:all .3s}
+.callrow .n.go{border-color:var(--gold);box-shadow:0 0 16px -2px var(--gold);transform:scale(1.06)}
+.callrow .a{color:var(--muted)}
+.callrow .trig{font-weight:700;color:var(--gold);min-width:130px}
+
+/* ---------- factory ---------- */
+.factory{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.zone{border:2px dashed #3a4080;border-radius:12px;padding:12px;min-height:150px;position:relative}
+.zone .lbl{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.zone.page{background:#fff;color:#222;border-color:#c9cde3}
+.zone.page .cart-items{display:grid;gap:6px}
+.newel{display:inline-block;min-width:160px;min-height:30px;padding:6px 10px;border:2px dashed var(--gold);border-radius:8px;font-size:13px;animation:pop .45s both;color:var(--text)}
+.newel.cart-item{border:0;background:#eef6ff;color:#173a5c;font-weight:700;box-shadow:0 2px 0 #c7dcf3}
+.newel.landed{animation:land .6s cubic-bezier(.2,1.4,.4,1) both}
+.fsteps{display:grid;gap:6px;margin-top:12px}
+.fs{font-family:var(--mono);font-size:13px;background:var(--ink);padding:8px 10px;border-radius:8px;opacity:.35;transition:all .3s}
+.fs.on{opacity:1;box-shadow:inset 4px 0 0 var(--gold)}
+.fs.done{opacity:.8}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.vs div{background:#fff;color:#222;border-radius:8px;padding:10px;min-height:44px;font-size:14px}
+.vs small{display:block;color:var(--muted);font-family:var(--mono);margin-bottom:4px}
+.txtin{width:100%;background:#1b2046;border:1px solid #3a4080;color:var(--gold);font-family:var(--mono);border-radius:8px;padding:8px}
+
+/* ---------- events ---------- */
+.anat2{font-family:var(--mono);font-size:16px;background:var(--ink);border-radius:12px;padding:20px;line-height:2.1}
+.anat2 .p{border-radius:6px;padding:3px 5px;border-bottom:3px solid var(--c)}
+.anat-labels{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.anat-labels div{background:var(--panel2);border-radius:10px;padding:10px;border-top:3px solid var(--c);font-size:13.5px}
+.pads{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.pad{background:var(--panel2);border-radius:12px;padding:14px;text-align:center;border:2px solid transparent;transition:all .25s;user-select:none}
+.pad .ev{font-family:var(--mono);color:var(--c);font-weight:700}
+.pad .big{display:block;margin:8px 0}
+.pad.hot{border-color:var(--c);box-shadow:0 0 24px -6px var(--c)}
+.pad input{width:100%;background:#1b2046;border:1px solid #3a4080;color:var(--gold);font-family:var(--mono);border-radius:8px;padding:8px;text-align:center}
+.ripple{position:fixed;width:14px;height:14px;border-radius:50%;pointer-events:none;border:3px solid var(--gold);transform:translate(-50%,-50%);animation:ripple .7s ease-out forwards;z-index:99}
+
+/* ---------- tracer ---------- */
+.tracer{display:grid;grid-template-columns:minmax(330px,.95fr) 1.25fr;gap:16px;align-items:start}
+.codebox{position:relative;max-height:calc(100vh - 230px);min-height:420px;overflow:auto;background:var(--ink);border-radius:12px;padding:10px 0;font-family:var(--mono);font-size:12.5px;line-height:1.62}
+.ln{display:flex;white-space:pre;padding:0 12px 0 0;transition:background .2s}
+.ln .no{width:38px;text-align:right;padding-right:10px;color:#454b7a;flex-shrink:0;user-select:none}
+.ln.cur{background:rgba(255,201,77,.18);box-shadow:inset 4px 0 0 var(--gold)}
+.ln.was{background:rgba(255,201,77,.05)}
+.vars{background:var(--ink);border-radius:12px;padding:12px;font-family:var(--mono);font-size:12.5px;margin-top:12px}
+.vars .row{display:flex;gap:8px;padding:2px 0;animation:rise .3s both}
+.vars .k{color:var(--gold);min-width:150px}
+.vars pre{margin:6px 0 0;color:var(--green);white-space:pre-wrap;font-size:12px}
+.ctrl{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.ctrl select{background:var(--panel2);color:var(--text);border:0;border-radius:8px;padding:8px}
+.status{font-size:13px;color:var(--gold);min-height:20px;margin-top:8px}
+#t-empty{color:#888;font-style:italic}
+.mock .glowz{box-shadow:0 0 0 3px var(--blue);transition:box-shadow .3s}
+.mock .cart-item.new{animation:pop .45s cubic-bezier(.2,1.6,.4,1) both}
+.mock .product-card.new{animation:pop .5s cubic-bezier(.2,1.5,.4,1) both}
+
+/* ---------- bugs + recap ---------- */
+.bug{background:var(--panel);border-radius:14px;padding:14px;border-top:4px solid var(--red);font-size:14px}
+.bug .sym{font-weight:800;color:var(--red);margin-bottom:6px}
+.bug .fix{margin-top:8px;color:var(--green)}
+.recap{width:100%;border-collapse:collapse;font-size:13.5px}
+.recap th{position:sticky;top:0;background:var(--panel);text-align:left;color:var(--muted);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;padding:9px}
+.recap td{padding:8px 9px;border-bottom:1px solid rgba(255,255,255,.06);vertical-align:top}
+.recap td:first-child{font-family:var(--mono);color:var(--blue);white-space:nowrap}
+.recap tr.grp td{background:var(--panel2);color:var(--c);font-weight:800;font-family:inherit;text-transform:uppercase;font-size:12px;letter-spacing:.08em}
+.recap .wk{font-family:var(--mono);color:var(--gold);white-space:nowrap}
+.filter{display:flex;gap:8px;margin-bottom:10px}
+.filter input{flex:1;background:var(--panel2);border:1px solid #3a4080;color:var(--text);border-radius:10px;padding:10px 12px;font-size:14px}
+.final{text-align:center;padding:30px;border-radius:var(--r);background:linear-gradient(135deg,#2a2f66,#3b1f4d);margin-top:18px}
+.formula{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:14px 0;font-weight:700}
+.formula span{padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.1)}
+.formula b{align-self:center;color:var(--muted)}
+
+@keyframes slideIn{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:none}}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+@keyframes bye{to{opacity:0;transform:translateY(20px) scale(.6)}}
+@keyframes float{50%{transform:translateY(-8px)}}
+@keyframes scan{0%{top:16px}90%{top:calc(100% - 40px)}100%{top:calc(100% - 40px);opacity:0}}
+@keyframes ripple{to{width:90px;height:90px;opacity:0}}
+@keyframes matchPulse{0%{outline-color:transparent}50%{outline-color:var(--gold)}}
+@keyframes land{0%{transform:translateY(-60px) scale(.8);opacity:0}100%{transform:none;opacity:1}}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+
+@media (max-width:980px){.g2,.g3,.g4,.pipe,.tracer,.factory,.mock{grid-template-columns:1fr}.timeline{grid-template-columns:repeat(3,1fr)}.step::after{display:none}.agenda{grid-template-columns:1fr 1fr}.pads,.anat-labels,.vartype{grid-template-columns:1fr 1fr}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<main id="deck">
+
+<!-- 1 TITLE -->
+<section class="slide" data-title="Welcome">
+ <div class="slide-inner hero">
+  <span class="kicker">Tech2Elevate · Shopping Cart Project</span>
+  <h1>How <span class="grad">JavaScript</span><br/>controls a webpage</h1>
+  <p class="sub">A complete visual tour of every HTML tag, JavaScript function, array, and method used to build the shopping cart, with interactive labs you can click through.</p>
+  <div class="floaty"><span>&lt;button&gt;</span><span>getElementById()</span><span>addEventListener()</span><span>cart.push()</span><span>.find()</span><span>.splice()</span><span>innerHTML</span><span>dataset.id</span></div>
+  <div class="agenda stagger">
+   <div style="--c:var(--pink)"><b>Part 1</b> · HTML: tags, attributes, the DOM</div>
+   <div style="--c:var(--blue)"><b>Part 2</b> · Finding elements on the page</div>
+   <div style="--c:var(--purple)"><b>Part 3</b> · JS basics: variables, operators, objects</div>
+   <div style="--c:var(--gold)"><b>Part 4</b> · Arrays and array methods</div>
+   <div style="--c:var(--green)"><b>Part 5</b> · Functions, building elements, events</div>
+   <div style="--c:var(--red)"><b>Part 6</b> · Full cart walkthrough, bugs, recap</div>
+  </div>
+  <p class="keys" style="margin-top:30px">Use ← → arrow keys or the buttons below to navigate</p>
+ </div>
+</section>
+
+<!-- 2 BIG PICTURE -->
+<section class="slide" data-title="The big picture">
+ <div class="slide-inner">
+  <span class="kicker">The big idea</span>
+  <h2>Every interaction follows the same four steps</h2>
+  <p class="sub">HTML gives the page structure. JavaScript finds parts of it, waits for a person to act, then changes the data and the page.</p>
+  <div class="pipe stagger">
+   <div class="step" style="--c:var(--pink)"><div class="num">1</div><h3>HTML landmarks</h3><p class="muted">Tags with <code>id</code>, <code>class</code>, and <code>data-id</code> labels.</p><p style="color:var(--pink);font-size:13px;font-weight:600">Like street signs on a map</p></div>
+   <div class="step" style="--c:var(--blue)"><div class="num">2</div><h3>Find elements</h3><p class="muted"><code>getElementById</code>, <code>querySelector</code>, <code>querySelectorAll</code>.</p><p style="color:var(--blue);font-size:13px;font-weight:600">Like looking up an address</p></div>
+   <div class="step" style="--c:var(--gold)"><div class="num">3</div><h3>Listen for events</h3><p class="muted"><code>addEventListener("click", …)</code> waits for the person to act.</p><p style="color:var(--gold);font-size:13px;font-weight:600">Like a lookout on watch</p></div>
+   <div class="step" style="--c:var(--green)"><div class="num">4</div><h3>Update data and page</h3><p class="muted">Change the <code>cart</code> array, then redraw with <code>updateCart()</code>.</p><p style="color:var(--green);font-size:13px;font-weight:600">Like updating a scoreboard</p></div>
+  </div>
+  <h3>Where each idea shows up in the program</h3>
+  <div class="timeline stagger">
+   <div class="week" style="--c:var(--pink)"><b>Week 2</b>HTML product card: <code>div</code>, <code>h2</code>, <code>p</code>, <code>img</code>, <code>button</code>, <code>class</code></div>
+   <div class="week" style="--c:var(--purple)"><b>Week 3</b>CSS + cart section with ids: <code>#cart-items</code>, <code>#cart-total</code></div>
+   <div class="week" style="--c:var(--blue)"><b>Week 4</b><code>products</code> array, <code>getElementById</code>, <code>forEach</code>, <code>innerHTML</code></div>
+   <div class="week" style="--c:var(--gold)"><b>Week 5</b><code>addEventListener</code>, <code>dataset.id</code>, <code>find</code>, <code>push</code></div>
+   <div class="week" style="--c:var(--green)"><b>Week 6</b>Quantity <code>++</code>, totals, <code>toFixed(2)</code>, <code>updateCart()</code></div>
+   <div class="week" style="--c:var(--red)"><b>Week 7</b><code>findIndex</code>, <code>splice</code>, listeners on new buttons</div>
+  </div>
+ </div>
+</section>
+
+<!-- 3 THREE FILES -->
+<section class="slide" data-title="Three files, three jobs">
+ <div class="slide-inner">
+  <span class="kicker">Part 1 · HTML</span>
+  <h2>Three files, three jobs</h2>
+  <p class="sub">The project folder holds three files. The HTML file connects the other two.</p>
+  <div class="g3 stagger" style="margin-bottom:18px">
+   <div class="file" style="--c:var(--pink)"><div class="ico">🦴</div><h3>index.html</h3><p class="muted">The <b>structure</b>: what is on the page.</p></div>
+   <div class="file" style="--c:var(--purple)"><div class="ico">🎨</div><h3>styles.css</h3><p class="muted">The <b>style</b>: colors, spacing, layout.</p></div>
+   <div class="file" style="--c:var(--gold)"><div class="ico">🧠</div><h3>script.js</h3><p class="muted">The <b>behavior</b>: what happens when you interact.</p></div>
+  </div>
+  <div class="g2">
+   <div class="card reader"><h4>index.html: the browser reads top to bottom</h4><div class="scan"></div>
+<pre class="code html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Tech Shop&lt;/title&gt;
+    &lt;link rel="stylesheet" href="styles.css" /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="product-list" class="product-grid"&gt;&lt;/div&gt;
+
+    &lt;h2 class="section-title"&gt;Your Cart&lt;/h2&gt;
+    &lt;p id="empty-cart-message"&gt;Your cart is empty.&lt;/p&gt;
+    &lt;div id="cart-items" class="cart-items"&gt;&lt;/div&gt;
+    &lt;div id="cart-total"&gt;&lt;/div&gt;
+
+    &lt;script src="script.js"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre></div>
+   <div class="card"><h4>Why it is ordered this way</h4>
+    <div class="props stagger">
+     <div class="prop" style="grid-template-columns:120px 1fr"><code>&lt;link&gt;</code><span>Goes in <code>&lt;head&gt;</code> so styles load <b>before</b> anything appears.</span></div>
+     <div class="prop" style="grid-template-columns:120px 1fr"><code>&lt;script&gt;</code><span>Goes just before <code>&lt;/body&gt;</code>. The browser reads top to bottom, so every element <b>already exists</b> when JavaScript looks for it.</span></div>
+     <div class="prop" style="grid-template-columns:120px 1fr"><code>empty ids</code><span><code>#product-list</code> and <code>#cart-items</code> start <b>empty</b>. They are placeholders JavaScript fills in later.</span></div>
+     <div class="prop" style="grid-template-columns:120px 1fr"><code>⚠ order bug</code><span>If <code>&lt;script&gt;</code> runs in <code>&lt;head&gt;</code>, <code>getElementById("cart-items")</code> returns <code>null</code> because the cart list has not been read yet.</span></div>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- 4 TAG EXPLORER -->
+<section class="slide" data-title="Every HTML tag we use">
+ <div class="slide-inner">
+  <span class="kicker">Part 1 · HTML</span>
+  <h2>Every HTML tag in the project</h2>
+  <p class="sub">Click a tag to see what it does and where it appears on the page.</p>
+  <div class="g2">
+   <div>
+    <div class="chips" id="chips"></div>
+    <div class="explain" id="explain"></div>
+   </div>
+   <div class="browser">
+    <div class="bbar"><span class="dots">●●●</span><span class="tab" data-tag="title head">Tech Shop</span></div>
+    <div class="wpage" data-tag="body html">
+     <div class="wh1" data-tag="h1">🛒 Tech Shop</div>
+     <div class="wgrid" data-tag="div">
+      <div class="wcard" data-tag="div"><div class="wimg" data-tag="img">🎮</div><div data-tag="h2"><b>Minecraft</b></div><div data-tag="p">$29.99</div><span class="wbtn" data-tag="button">Add to Cart</span></div>
+      <div class="wcard" data-tag="div"><div class="wimg" data-tag="img">🍬</div><div data-tag="h2"><b>Sour Patch Kids</b></div><div data-tag="p">$1.29</div><span class="wbtn" data-tag="button">Add to Cart</span></div>
+     </div>
+     <div class="wcart" data-tag="div">
+      <div data-tag="h2"><b>Your Cart</b></div>
+      <div data-tag="p" style="color:#888;font-style:italic">Your cart is empty.</div>
+      <div class="wul" data-tag="div">
+       <div class="wli" data-tag="div"><span data-tag="span">Minecraft</span><span data-tag="span">Qty: 1</span><span data-tag="span">$29.99</span><span class="wbtn sm" data-tag="button">Remove</span></div>
+      </div>
+      <div data-tag="div" style="font-weight:800;text-align:right">Total: $29.99</div>
+     </div>
+    </div>
+    <div class="invis">Invisible but important: <span data-tag="doctype">&lt;!DOCTYPE&gt;</span><span data-tag="head">&lt;head&gt;</span><span data-tag="title">&lt;title&gt;</span><span data-tag="link">&lt;link&gt;</span><span data-tag="script">&lt;script&gt;</span></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- 5 ATTRIBUTES -->
+<section class="slide" data-title="Attributes: labels for JavaScript">
+ <div class="slide-inner">
+  <span class="kicker">Part 1 · HTML</span>
+  <h2>Attributes are labels JavaScript can read</h2>
+  <p class="sub">Attributes go inside the opening tag as <code>name="value"</code>. Hover a row to find it in the code.</p>
+  <div class="g2">
+   <div class="card"><h4>One product card + the cart list</h4>
+<pre class="code noauto" id="attrCode"></pre></div>
+   <div class="legend stagger" id="attrLegend">
+    <div class="li" style="--c:var(--blue)" data-a="id"><code>id</code><div>A <b>unique</b> name. Only one element per page should have it.<small>getElementById("cart-items") · "#cart-items"</small></div></div>
+    <div class="li" style="--c:var(--purple)" data-a="class"><code>class</code><div>A <b>shared</b> label for groups, used by CSS <b>and</b> JS.<small>".add-to-cart-button" · el.className · el.classList.add()</small></div></div>
+    <div class="li" style="--c:var(--red)" data-a="data"><code>data-id</code><div>Your own custom data. Records <b>which product</b> a button belongs to.<small>button.dataset.id  →  "game"</small></div></div>
+    <div class="li" style="--c:var(--green)" data-a="src"><code>src</code><div>Where the image file lives.<small>img.src</small></div></div>
+    <div class="li" style="--c:var(--gold)" data-a="alt"><code>alt</code><div>Text read aloud by screen readers, and shown if the image fails to load.<small>Accessibility!</small></div></div>
+    <div class="li" style="--c:var(--pink)" data-a="href"><code>href / rel</code><div>Used by <code>&lt;link&gt;</code> to connect <code>styles.css</code>.<small>&lt;link rel="stylesheet" href="styles.css"&gt;</small></div></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- 6 DOM TREE -->
+<section class="slide" data-title="The DOM: how JS sees HTML">
+ <div class="slide-inner">
+  <span class="kicker">Part 1 · The DOM</span>
+  <h2>The DOM is the page as a family tree</h2>
+  <p class="sub">The browser turns your HTML into a tree of <b>objects</b> called the <b>D</b>ocument <b>O</b>bject <b>M</b>odel. JavaScript starts at <code>document</code> and works its way down to find any element.</p>
+  <div class="g2">
+   <div class="card tree" id="domTree"></div>
+   <div>
+    <div class="card"><h4>Every element object has properties you can read and change</h4>
+     <div class="props stagger">
+      <div class="prop"><code>.textContent</code><span>The plain text inside</span></div>
+      <div class="prop"><code>.innerHTML</code><span>The HTML inside, as a string</span></div>
+      <div class="prop"><code>.className</code><span>The class attribute, as text</span></div>
+      <div class="prop"><code>.classList.add()</code><span>Add one class without removing others</span></div>
+      <div class="prop"><code>.dataset.id</code><span>Reads the <code>data-id</code> attribute</span></div>
+      <div class="prop"><code>.style.display</code><span>Show (<code>"block"</code>) or hide (<code>"none"</code>)</span></div>
+      <div class="prop"><code>.appendChild()</code><span>Add a child element inside this one</span></div>
+      <div class="prop"><code>.addEventListener()</code><span>React when something happens to it</span></div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- 7 FINDING METHODS -->
+<section class="slide" data-title="Finding elements">
+ <div class="slide-inner">
+  <span class="kicker">Part 2 · Find</span>
+  <h2>Three ways to find elements</h2>
+  <p class="sub">Before JavaScript can change something, it has to <b>find</b> it. Each method asks the <code>document</code> a different kind of question.</p>
+  <div class="g3 stagger" style="margin-bottom:18px">
+   <div class="method" style="--c:var(--blue)"><span class="pill" style="--c:var(--blue)">ONE by id</span><h3 style="margin-top:10px">getElementById</h3>
+<pre class="code js">const cartItems =
+  document.getElementById("cart-items");</pre>
+    <div class="ret">✅ Returns <b>one element</b>. ❌ Returns <code>null</code> if no match.<br/>⚠ No <code>#</code>, just the id name.</div></div>
+   <div class="method" style="--c:var(--purple)"><span class="pill" style="--c:var(--purple)">FIRST match</span><h3 style="margin-top:10px">querySelector</h3>
+<pre class="code js">document.querySelector("p");          // tag
+document.querySelector(".my-div");    // class
+document.querySelector("#myDiv");     // id</pre>
+    <div class="ret">✅ Returns the <b>first</b> element that matches a CSS selector, or <code>null</code>.</div></div>
+   <div class="method" style="--c:var(--gold)"><span class="pill" style="--c:var(--gold)">ALL matches</span><h3 style="margin-top:10px">querySelectorAll</h3>
+<pre class="code js">const buttons = document
+  .querySelectorAll(".add-to-cart-button");
+buttons.forEach((button) =&gt; { ... });</pre>
+    <div class="ret">✅ Returns a <b>list</b> of every match (can be empty). Loop through it with <code>forEach</code>.</div></div>
+  </div>
+  <div class="card"><h4>Selector cheat sheet</h4>
+   <table class="symtab">
+    <tr><th>Write</th><th>Means</th><th>Matches in our project</th></tr>
+    <tr><td class="big" style="color:var(--blue)">#name</td><td>element with <code>id="name"</code></td><td><code>#cart-items</code> → the cart <code>&lt;div&gt;</code></td></tr>
+    <tr><td class="big" style="color:var(--purple)">.name</td><td>elements with <code>class="name"</code></td><td><code>.product-card</code> → every card</td></tr>
+    <tr><td class="big" style="color:var(--pink)">tag</td><td>elements of that tag</td><td><code>button</code> → every button</td></tr>
+    <tr><td class="big" style="color:var(--green)">a b</td><td><code>b</code> somewhere inside <code>a</code></td><td><code>#cart-items .cart-item</code> → rows in the cart</td></tr>
+    <tr><td class="big" style="color:var(--gold)">[attr]</td><td>by attribute value</td><td><code>[data-id="candy"]</code> → the candy button</td></tr>
+   </table>
+  </div>
+ </div>
+</section>
+
+<!-- 8 SELECTOR PLAYGROUND -->
+<section class="slide" data-title="Lab: selector playground">
+ <div class="slide-inner">
+  <span class="kicker">Part 2 · Lab</span>
+  <h2>🔬 Selector playground</h2>
+  <p class="sub">Choose a method, then a selector, or type your own. Matching elements light up on the real page below, numbered in the order JavaScript finds them.</p>
+  <div class="tabs" id="pgTabs">
+   <button class="tab-b sel" data-m="querySelectorAll">querySelectorAll</button>
+   <button class="tab-b" data-m="querySelector">querySelector</button>
+   <button class="tab-b" data-m="getElementById">getElementById</button>
+  </div>
+  <div class="qline">document.<span id="pgMethod" style="color:var(--blue)">querySelectorAll</span>("<input id="pgInput" value=".add-to-cart-button" spellcheck="false" />")<button class="btn primary" id="pgRun" style="margin-left:auto">Run ▶</button></div>
+  <div class="presets" id="pgPresets"></div>
+  <div class="g2">
+   <div class="mock" id="playground" style="grid-template-columns:1.3fr 1fr">
+    <div id="product-list" class="product-grid"></div>
+    <div class="cart-container">
+     <h2 class="section-title">Your Cart</h2>
+     <p class="empty-cart" id="empty-cart-message" style="color:#999;font-style:italic">Your cart is empty.</p>
+     <div class="cart-items" id="cart-items"><div class="cart-item" data-id="game"><span>Minecraft</span><span>Qty: 1</span><button class="remove" data-id="game">Remove</button></div></div>
+     <div class="cart-total" id="cart-total"><b>Total: $29.99</b></div>
+    </div>
+   </div>
+   <div><div class="result" id="pgResult">Press Run ▶</div><p class="muted" id="pgTip" style="font-size:14px"></p></div>
+  </div>
+ </div>
+</section>
+
+<!-- 9 JS BASICS -->
+<section class="slide" data-title="JS basics: variables & operators">
+ <div class="slide-inner">
+  <span class="kicker">Part 3 · JavaScript basics</span>
+  <h2>Variables, operators, and decisions</h2>
+  <p class="sub">A variable is a labeled box for a value. <code>const</code> means the label always points to the same box; <code>let</code> means you can swap in a new value later.</p>
+  <div class="vartype stagger" style="margin-bottom:16px">
+   <div style="--c:var(--green)"><b>String</b>Text in quotes<br/><code>"Minecraft"</code></div>
+   <div style="--c:#ffb38a"><b>Number</b>For math<br/><code>29.99</code></div>
+   <div style="--c:var(--purple)"><b>Boolean</b>Yes / no<br/><code>true</code>, <code>false</code></div>
+   <div style="--c:var(--gold)"><b>Object / Array</b>Groups of values<br/><code>{ }</code>, <code>[ ]</code></div>
+  </div>
+  <div class="g3">
+   <div class="card"><h4>Arithmetic</h4>
+    <table class="optab">
+     <tr><td>=</td><td>assign: <code>let total = 0</code></td></tr>
+     <tr><td>+ -</td><td>add / subtract</td></tr>
+     <tr><td>* /</td><td>multiply / divide: <code>price * quantity</code></td></tr>
+     <tr><td>+=</td><td>add to itself: <code>total += itemTotal</code></td></tr>
+     <tr><td>++</td><td>add 1: <code>quantity++</code></td></tr>
+     <tr><td>--</td><td>subtract 1: <code>quantity--</code></td></tr>
+    </table></div>
+   <div class="card"><h4>Comparison (gives true / false)</h4>
+    <table class="optab">
+     <tr><td>===</td><td>equal value <b>and</b> type ✅ use this</td></tr>
+     <tr><td>==</td><td>equal value, loose (avoid)</td></tr>
+     <tr><td>!==</td><td>not equal</td></tr>
+     <tr><td>&gt; &lt;</td><td>greater / less than</td></tr>
+     <tr><td>&gt;= &lt;=</td><td>or equal to</td></tr>
+    </table>
+    <p class="muted" style="font-size:13px;margin:8px 0 0"><code>"1" === 1</code> is <b>false</b>: a string is not a number.</p></div>
+   <div class="card"><h4>Try it: if / else in removeFromCart</h4>
+    <p style="margin:0 0 8px">cart[index].quantity = <input type="number" class="numin" id="qtyIn" value="2" min="1" max="9" /></p>
+    <div class="branch" id="brIf">if (cart[index].quantity &gt; 1) {<br/>&nbsp;&nbsp;cart[index].quantity--; <span class="t-cm">// take one away</span></div>
+    <div class="branch" id="brElse" style="margin-top:6px">} else {<br/>&nbsp;&nbsp;cart.splice(index, 1); <span class="t-cm">// remove the row</span><br/>}</div>
+    <p class="muted" id="brNote" style="font-size:13px;margin:8px 0 0"></p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- 10 OBJECTS -->
+<section class="slide" data-title="Objects">
+ <div class="slide-inner">
+  <span class="kicker">Part 3 · Objects</span>
+  <h2>Objects describe one thing</h2>
+  <p class="sub">An object groups related values as <b>key: value</b> pairs. Each product is an object, and each cart item is a product object plus a <code>quantity</code>.</p>
+  <div class="g2">
+   <div class="card"><h4>Lab: read, change, and add fields</h4>
+    <div class="obj-stage" id="objStage"></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+     <button class="btn" id="oRead">product.name</button>
+     <button class="btn" id="oSet">product.price = 2.00</button>
+     <button class="btn" id="oAdd">product.category = "Snack"</button>
+     <button class="btn gold" id="oSpread">{ ...product, quantity: 1 }</button>
+     <button class="btn" id="oReset">↺ Reset</button>
+    </div>
+    <div class="out" id="objOut">// click a button</div>
+   </div>
+   <div class="card"><h4>Why these matter in the cart</h4>
+<pre class="code js">// One product object (Week 4)
+const product = {
+  id: "candy",
+  name: "Sour Patch Kids",
+  price: 1.29,
+  image: "candy.jpg",
+};
+
+product.name;          // read  → "Sour Patch Kids"
+product.price = 2.00;  // change a field
+product.category = "Snack"; // add a new field
+
+// Spread ... copies every field into a NEW object,
+// then adds quantity (Week 5, addToCart)
+cart.push({ ...product, quantity: 1 });</pre>
+    <p class="muted" style="font-size:14px">💡 The <code>...</code> spread makes a <b>copy</b>, so changing the cart item's quantity doesn't change the original product.</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- 11 ARRAYS -->
+<section class="slide" data-title="Arrays">
+ <div class="slide-inner">
+  <span class="kicker">Part 4 · Arrays</span>
+  <h2>Arrays are ordered lists</h2>
+  <p class="sub">The project uses two arrays: <code>products</code> (everything for sale) and <code>cart</code> (what the shopper picked). Positions are counted from <b>0</b>.</p>
+  <div class="g2">
+   <div class="card"><h4>products: the store shelf (never changes)</h4>
+<pre class="code js">const products = [
+  { id: "game",  name: "Minecraft",       price: 29.99 },
+  { id: "candy", name: "Sour Patch Kids", price: 1.29  },
+];
+products[0].name;   // "Minecraft"
+products.length;    // 2</pre>
+    <div class="arr" style="margin-top:12px;min-height:0"><div class="box"><div class="v">🎮</div><div class="i">[0]</div></div><div class="box"><div class="v">🍬</div><div class="i">[1]</div></div></div>
+   </div>
+   <div class="card"><h4>cart: the shopping basket (changes on every click)</h4>
+<pre class="code js">const cart = [];   // starts empty
+
+// after clicking Minecraft twice and candy once:
+[
+  { id: "game",  name: "Minecraft", price: 29.99, quantity: 2 },
+  { id: "candy", name: "Sour Patch Kids", price: 1.29, quantity: 1 },
+]</pre>
+    <div class="arr" style="margin-top:12px;min-height:0"><div class="box"><div class="v">🎮×2</div><div class="i">[0]</div></div><div class="box"><div class="v">🍬×1</div><div class="i">[1]</div></div></div>
+   </div>
+  </div>
+  <div class="g4 stagger" style="margin-top:16px">
+   <div class="card" style="padding:14px"><span class="pill" style="--c:var(--green)">ADD</span><p style="margin:8px 0 0"><code>push()</code> adds to the end</p></div>
+   <div class="card" style="padding:14px"><span class="pill" style="--c:var(--red)">REMOVE</span><p style="margin:8px 0 0"><code>pop()</code> removes the last item · <code>splice()</code> removes from anywhere</p></div>
+   <div class="card" style="padding:14px"><span class="pill" style="--c:var(--blue)">SEARCH</span><p style="margin:8px 0 0"><code>find()</code> returns the item · <code>findIndex()</code> returns its position</p></div>
+   <div class="card" style="padding:14px"><span class="pill" style="--c:var(--gold)">LOOP</span><p style="margin:8px 0 0"><code>forEach()</code> runs code once for every item</p></div>
+  </div>
+ </div>
+</section>
+
+<!-- 12 ARRAY LAB -->
+<section class="slide" data-title="Lab: array methods">
+ <div class="slide-inner">
+  <span class="kicker">Part 4 · Lab</span>
+  <h2>🔬 Array method lab</h2>
+  <p class="sub">Run each method and watch the array change. Output is shown in the console below, just like <code>console.log</code>.</p>
+  <div class="card">
+   <div class="mono" style="margin-bottom:8px">let fruits = <span id="arrJson" style="color:var(--green)"></span> <span class="muted">// length: <b id="arrLen"></b></span></div>
+   <div class="arr" id="arr"></div>
+   <div class="ops">
+    <div class="op"><button class="btn" data-op="index">fruits[i]</button>i=<input type="number" id="aIdx" value="1" min="0" /></div>
+    <div class="op"><button class="btn green" data-op="push">push(x)</button><input id="aPush" value="kiwi" /></div>
+    <div class="op"><button class="btn red" data-op="pop">pop()</button><span class="muted" style="font-size:12px">remove last</span></div>
+    <div class="op"><button class="btn red" data-op="splice">splice(i, 1)</button>i=<input type="number" id="aSplice" value="0" min="0" /></div>
+    <div class="op"><button class="btn gold" data-op="forEach">forEach(…)</button><span class="muted" style="font-size:12px">visit each</span></div>
+    <div class="op"><button class="btn primary" data-op="find">find(=== x)</button><select id="aFind"></select></div>
+    <div class="op"><button class="btn primary" data-op="findIndex">findIndex(=== x)</button><select id="aFindI"></select></div>
+    <div class="op"><button class="btn" data-op="reset">↺ reset</button></div>
+   </div>
+   <div class="console" id="arrConsole"><div class="c">// console output</div></div>
+  </div>
+ </div>
+</section>
+
+<!-- 13 FUNCTIONS -->
+<section class="slide" data-title="Functions">
+ <div class="slide-inner">
+  <span class="kicker">Part 5 · Functions</span>
+  <h2>Functions are reusable recipes</h2>
+  <p class="sub">A function is a named set of steps. You <b>define</b> it once, then <b>call</b> it whenever you need it. Hover each part:</p>
+  <div class="g2">
+   <div>
+    <div class="anat" id="fnAnat"><span data-p="kw" style="--c:var(--purple)" class="t-kw">function</span> <span data-p="name" style="--c:var(--blue)" class="t-fn">addToCart</span>(<span data-p="param" style="--c:var(--gold)" class="t-attr">productId</span>) <span data-p="body" style="--c:var(--green)">{<br/>&nbsp;&nbsp;const product = products.find(...);<br/>&nbsp;&nbsp;...<br/>}</span><br/><br/><span data-p="call" style="--c:var(--pink)"><span class="t-fn">addToCart</span>(<span class="t-str">"game"</span>);</span> <span class="t-cm">// call it</span></div>
+    <div class="out" id="fnOut" style="min-height:64px">Hover a colored part of the function ↑</div>
+    <div class="card" style="margin-top:14px"><h4>Arrow functions: the short form</h4>
+<pre class="code js">// These two do the same thing:
+function (p) { return p.id === productId; }
+(p) =&gt; p.id === productId</pre>
+     <p class="muted" style="font-size:13.5px;margin:8px 0 0">You see arrow functions inside <code>forEach</code>, <code>find</code>, and <code>addEventListener</code>. They're small functions handed to another function.</p></div>
+   </div>
+   <div>
+    <h3>The 5 functions of the shopping cart</h3>
+    <div class="calls stagger">
+     <div class="fncard" style="--c:var(--blue)"><div class="sig">createProductHTML(product)</div>Takes one product object and <b>returns</b> its card HTML as a string. <span class="muted">· Week 4</span></div>
+     <div class="fncard" style="--c:var(--purple)"><div class="sig">displayProducts()</div>Loops through <code>products</code> and puts a card on the page for each one. <span class="muted">· Week 4</span></div>
+     <div class="fncard" style="--c:var(--gold)"><div class="sig">addToCart(productId)</div>Finds the product. If it's already in the cart, adds 1 to its quantity; if not, pushes a new item. <span class="muted">· Weeks 5–6</span></div>
+     <div class="fncard" style="--c:var(--green)"><div class="sig">updateCart()</div>Clears the cart list, then redraws every item, the Remove buttons, and the total. <span class="muted">· Weeks 6–7</span></div>
+     <div class="fncard" style="--c:var(--red)"><div class="sig">removeFromCart(productId)</div>Finds the item's index, then subtracts 1 from its quantity or splices it out. <span class="muted">· Week 7</span></div>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- 14 CALL MAP -->
+<section class="slide" data-title="Who calls whom">
+ <div class="slide-inner">
+  <span class="kicker">Part 5 · Functions</span>
+  <h2>Who calls whom?</h2>
+  <p class="sub">The functions call each other in a chain. Press a trigger to watch the chain run.</p>
+  <div class="calls" id="callMap">
+   <div class="callrow" data-chain="load"><button class="btn primary trig">📄 Page loads</button><span class="n">displayProducts()</span><span class="a">→</span><span class="n">products.forEach()</span><span class="a">→</span><span class="n">createElement("div")</span><span class="a">→</span><span class="n">createProductHTML(product)</span><span class="a">→</span><span class="n">appendChild(card)</span><span class="a">→</span><span class="n">addEventListener("click")</span></div>
+   <div class="callrow" data-chain="add"><button class="btn gold trig">🖱 Add to Cart</button><span class="n">listener runs</span><span class="a">→</span><span class="n">button.dataset.id</span><span class="a">→</span><span class="n">addToCart(id)</span><span class="a">→</span><span class="n">products.find()</span><span class="a">→</span><span class="n">cart.find()</span><span class="a">→</span><span class="n">push() or quantity++</span><span class="a">→</span><span class="n">updateCart()</span></div>
+   <div class="callrow" data-chain="remove"><button class="btn red trig">🗑 Remove</button><span class="n">listener runs</span><span class="a">→</span><span class="n">removeFromCart(item.id)</span><span class="a">→</span><span class="n">cart.findIndex()</span><span class="a">→</span><span class="n">quantity-- or splice()</span><span class="a">→</span><span class="n">updateCart()</span></div>
+   <div class="callrow" data-chain="update"><button class="btn green trig">🔄 updateCart()</button><span class="n">innerHTML = ""</span><span class="a">→</span><span class="n">let total = 0</span><span class="a">→</span><span class="n">cart.forEach()</span><span class="a">→</span><span class="n">price * quantity</span><span class="a">→</span><span class="n">createElement("div")</span><span class="a">→</span><span class="n">Remove button + listener</span><span class="a">→</span><span class="n">appendChild()</span><span class="a">→</span><span class="n">total.toFixed(2)</span></div>
+  </div>
+  <div class="card" style="margin-top:16px"><h4>Key rule</h4><p style="margin:0;font-size:17px">Every time the <code>cart</code> array changes, call <code>updateCart()</code> so the page <b>matches the data</b>. The data is the source of truth; the page is a picture of it.</p></div>
+ </div>
+</section>
+
+<!-- 15 ELEMENT FACTORY -->
+<section class="slide" data-title="Lab: building elements">
+ <div class="slide-inner">
+  <span class="kicker">Part 5 · Change the page</span>
+  <h2>🔬 Building new elements, step by step</h2>
+  <p class="sub"><code>createElement</code> makes an element in memory. It is <b>not on the page</b> until <code>appendChild</code> places it there.</p>
+  <div class="g2">
+   <div class="card">
+    <div class="factory">
+     <div class="zone"><div class="lbl">🧠 In memory (invisible)</div><div id="memZone"></div></div>
+     <div class="zone page"><div class="lbl">🖥 On the page: &lt;div class="cart-items"&gt;</div><div class="cart-items" id="pageZone"><div class="newel cart-item" style="animation:none">Apple — $1.00</div></div></div>
+    </div>
+    <div class="fsteps" id="fSteps">
+     <div class="fs">const row = document.<span class="t-fn">createElement</span>(<span class="t-str">"div"</span>);</div>
+     <div class="fs">row.className = <span class="t-str">"cart-item"</span>; <span class="t-cm">// or row.classList.add("cart-item")</span></div>
+     <div class="fs">row.textContent = <span class="t-str">"Banana — $2.00"</span>;</div>
+     <div class="fs">row.<span class="t-fn">setAttribute</span>(<span class="t-str">"data-id"</span>, <span class="t-str">"banana"</span>);</div>
+     <div class="fs">cartItems.<span class="t-fn">appendChild</span>(row); <span class="t-cm">// now it's visible!</span></div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:12px"><button class="btn gold" id="fNext">Next step ▶</button><button class="btn" id="fReset">↺ Reset</button></div>
+    <div class="out" id="fHtml">// the element's HTML will appear here</div>
+   </div>
+   <div>
+    <div class="card"><h4>Template literals build HTML with values</h4>
+<pre class="code js">const name = "Minecraft";
+const price = 29.99;
+
+// Backticks ` ` let you insert values with ${ }
+card.innerHTML = `
+  &lt;h2&gt;${name}&lt;/h2&gt;
+  &lt;p&gt;$${price.toFixed(2)}&lt;/p&gt;
+`;
+// toFixed(2) → "29.99" (always 2 decimals)</pre></div>
+    <div class="card" style="margin-top:14px"><h4>Try it: innerHTML vs textContent</h4>
+     <input class="txtin" id="ihIn" value="&lt;b&gt;Hello&lt;/b&gt; cart!" />
+     <div class="vs"><div><small>el.innerHTML = …</small><span id="ihOut"></span></div><div><small>el.textContent = …</small><span id="tcOut"></span></div></div>
+     <p class="muted" style="font-size:13px;margin:8px 0 0"><code>innerHTML</code> reads tags as HTML. <code>textContent</code> shows them as plain text. Use <code>textContent</code> for plain words.</p>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- 16 EVENTS -->
+<section class="slide" data-title="Events & listeners">
+ <div class="slide-inner">
+  <span class="kicker">Part 5 · Listen</span>
+  <h2>Event listeners make the page respond</h2>
+  <p class="sub">An event is something that happens: a click, the mouse moving over an element, or a key press. A listener is the function that runs when its event happens.</p>
+  <div class="anat2"><span class="p" style="--c:var(--blue)">button</span>.addEventListener(<span class="p" style="--c:var(--gold)">"click"</span>, <span class="p" style="--c:var(--green)">() =&gt; {<br/>&nbsp;&nbsp;addToCart(button.dataset.id);<br/>}</span>);</div>
+  <div class="anat-labels stagger">
+   <div style="--c:var(--blue)"><b>1. WHO</b><br/>The element to watch, found with <code>querySelectorAll</code></div>
+   <div style="--c:var(--gold)"><b>2. WHAT</b><br/>The event name: <code>"click"</code>, <code>"mouseover"</code>, <code>"keydown"</code></div>
+   <div style="--c:var(--green)"><b>3. THEN</b><br/>The function to run. It waits and does not run until the event happens.</div>
+  </div>
+  <h3 style="margin-top:20px">Try three event types</h3>
+  <div class="pads">
+   <div class="pad" id="padClick" style="--c:var(--gold)"><div class="ev">"click"</div><span class="big" id="clickCount">0</span><button class="btn gold" id="clickBtn">Click me</button></div>
+   <div class="pad" id="padHover" style="--c:var(--purple)"><div class="ev">"mouseover"</div><span class="big" id="hoverTxt">🙈</span><span class="muted" style="font-size:13px">Move your mouse over this box</span></div>
+   <div class="pad" id="padKey" style="--c:var(--green)"><div class="ev">"keydown"</div><span class="big" id="keyTxt">⌨️</span><input id="keyIn" placeholder="type here" /></div>
+  </div>
+  <div class="card" style="margin-top:16px"><h4>⚠ Elements created later need their listener when they're created</h4>
+   <p style="margin:0">Remove buttons don't exist when the page loads, so <code>querySelectorAll</code> at the start can't find them. Attach the listener <b>right after creating</b> each one inside <code>updateCart()</code>:</p>
+<pre class="code js" style="margin-top:8px">const removeButton = document.createElement("button");
+removeButton.textContent = "Remove";
+removeButton.addEventListener("click", () =&gt; removeFromCart(item.id));</pre>
+  </div>
+ </div>
+</section>
+
+<!-- 17 TRACER -->
+<section class="slide" data-title="Lab: the full cart, line by line">
+ <div class="slide-inner" style="max-width:1400px">
+  <span class="kicker">Part 6 · Everything together</span>
+  <h2>🔬 Watch the whole script.js run, line by line</h2>
+  <div class="tracer">
+   <div>
+    <div class="ctrl">
+     <button class="btn primary" id="tLoad">▶ Load the page</button>
+     <label class="muted" style="font-size:13px">Speed <select id="tSpeed"><option value="750">Slow</option><option value="380" selected>Normal</option><option value="120">Fast</option></select></label>
+     <button class="btn" id="tReset">↺ Reset</button>
+    </div>
+    <div class="mock" style="grid-template-columns:1fr">
+     <div><div class="muted mono" style="font-size:11px;color:#888">#product-list</div><div class="product-grid" id="t-list" style="min-height:120px;border-radius:8px"></div></div>
+     <div class="cart-container" id="t-cartbox">
+      <h2>Your Cart</h2>
+      <p id="t-empty">Your cart is empty.</p>
+      <div class="cart-items" id="t-items"></div>
+      <div id="t-total"></div>
+     </div>
+    </div>
+    <div class="status" id="tStatus">Press "Load the page" to start.</div>
+    <div class="vars" id="tVars"><span class="muted">Variables will appear here</span></div>
+   </div>
+   <div class="codebox" id="tCode"></div>
+  </div>
+ </div>
+</section>
+
+<!-- 18 BUGS -->
+<section class="slide" data-title="Common bugs & fixes">
+ <div class="slide-inner">
+  <span class="kicker">Part 6 · Debugging</span>
+  <h2>Common bugs and how to fix them</h2>
+  <p class="sub">Open DevTools (right-click → <b>Inspect</b> → <b>Console</b>) and add <code>console.log(something)</code> to see what's really in a variable.</p>
+  <div class="g4 stagger">
+   <div class="bug"><div class="sym">"Cannot read properties of null"</div>The id in <code>getElementById</code> doesn't match the HTML, or it includes a <code>#</code>.<div class="fix">✔ Copy the exact id from index.html</div></div>
+   <div class="bug"><div class="sym">No products appear</div><code>displayProducts</code> is defined but never <b>called</b>.<div class="fix">✔ Add <code>displayProducts();</code></div></div>
+   <div class="bug"><div class="sym">Cart data changes, page doesn't</div>The <code>cart</code> array was updated but the page was never redrawn.<div class="fix">✔ Call <code>updateCart()</code> after every change</div></div>
+   <div class="bug"><div class="sym">Items appear twice</div><code>updateCart</code> adds rows without clearing the old ones.<div class="fix">✔ Start with <code>innerHTML = ""</code></div></div>
+   <div class="bug"><div class="sym">Add button does nothing</div>Listeners were attached <b>before</b> the cards were created, or the <code>class</code> name has a typo.<div class="fix">✔ Attach after <code>displayProducts()</code></div></div>
+   <div class="bug"><div class="sym"><code>find</code> returns undefined</div><code>dataset.id</code> is always a <b>string</b>. <code>"1" === 1</code> is false.<div class="fix">✔ Use string ids, like <code>id: "1"</code></div></div>
+   <div class="bug"><div class="sym">Price shows 59.980000001</div>Computers can't store some decimals exactly.<div class="fix">✔ Display with <code>.toFixed(2)</code></div></div>
+   <div class="bug"><div class="sym">Remove button does nothing</div>No listener was attached when the button was created.<div class="fix">✔ Add <code>addEventListener</code> inside <code>updateCart</code></div></div>
+  </div>
+ </div>
+</section>
+
+<!-- 19 RECAP -->
+<section class="slide" data-title="Reference: everything we used">
+ <div class="slide-inner">
+  <span class="kicker">Reference</span>
+  <h2>Every tag, function, and method in one table</h2>
+  <div class="filter"><input id="rcFilter" placeholder="🔎 Filter, e.g. find, click, id, array…" /></div>
+  <div class="card" style="padding:0;overflow:hidden"><table class="recap" id="recap"></table></div>
+  <div class="final">
+   <h2>The pattern behind every interaction</h2>
+   <div class="formula"><span style="color:var(--blue)">Find the element</span><b>→</b><span style="color:var(--gold)">Listen for the event</span><b>→</b><span style="color:var(--green)">Change the data</span><b>→</b><span style="color:var(--purple)">Redraw the page</span></div>
+   <p style="color:var(--gold);font-style:italic;margin:0;font-size:18px">Discussion: what does JavaScript need to know to update the correct part of the page?</p>
+  </div>
+ </div>
+</section>
+
+</main>
+
+<nav class="bar">
+ <button id="prev">← Prev</button>
+ <select id="jump" aria-label="Jump to slide"></select>
+ <button id="next">Next →</button>
+ <span class="count" id="count"></span>
+</nav>
+<script>
+(() => {
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+/* ---------- syntax highlighting ---------- */
+function tokenize(src, re, wrap) {
+  let out = "", last = 0;
+  for (const m of src.matchAll(re)) {
+    out += esc(src.slice(last, m.index)) + wrap(m);
+    last = m.index + m[0].length;
+  }
+  return out + esc(src.slice(last));
+}
+const JS_RE = /(\/\/.*$)|("(?:[^"\\\n]|\\.)*"|`(?:[^`\\]|\\.)*`|'(?:[^'\\\n]|\\.)*')|\b(const|let|function|return|if|else|true|false|null|undefined)\b|\b([A-Za-z_$][\w$]*)(?=\()|\b(\d+(?:\.\d+)?)\b/gm;
+function hlJS(src) {
+  return tokenize(src, JS_RE, (m) => {
+    const t = esc(m[0]);
+    if (m[1]) return `<span class="t-cm">${t}</span>`;
+    if (m[2]) return `<span class="t-str">${t}</span>`;
+    if (m[3]) return `<span class="t-kw">${t}</span>`;
+    if (m[4]) return `<span class="t-fn">${t}</span>`;
+    return `<span class="t-num">${t}</span>`;
+  });
+}
+const HTML_RE = /(<!--[\s\S]*?-->)|(<\/?[A-Za-z!][\w-]*)|([\w-]+)(=)("[^"]*")|(\/?>)/g;
+function hlHTML(src) {
+  return tokenize(src, HTML_RE, (m) => {
+    if (m[1]) return `<span class="t-cm">${esc(m[1])}</span>`;
+    if (m[2]) return `<span class="t-tag">${esc(m[2])}</span>`;
+    if (m[3]) return `<span class="t-attr">${esc(m[3])}</span>=<span class="t-str">${esc(m[5])}</span>`;
+    return `<span class="t-tag">${esc(m[6])}</span>`;
+  });
+}
+$$("pre.code:not(.noauto)").forEach((p) => {
+  const raw = p.textContent.replace(/^\n/, "");
+  p.innerHTML = p.classList.contains("html") ? hlHTML(raw) : hlJS(raw);
+});
+
+const emojiImg = (e) =>
+  "data:image/svg+xml," + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><text x="4" y="50" font-size="48">${e}</text></svg>`);
+
+/* ---------- deck navigation ---------- */
+const slides = $$(".slide");
+const jump = $("#jump");
+slides.forEach((s, i) => jump.add(new Option(`${i + 1}. ${s.dataset.title}`, i)));
+let cur = 0;
+function go(n) {
+  cur = Math.max(0, Math.min(slides.length - 1, n));
+  slides.forEach((s, i) => s.classList.toggle("active", i === cur));
+  slides[cur].scrollTop = 0;
+  jump.value = cur;
+  $("#count").textContent = `${cur + 1} / ${slides.length}`;
+  $("#progress").style.width = `${((cur + 1) / slides.length) * 100}%`;
+  $("#prev").disabled = cur === 0;
+  $("#next").disabled = cur === slides.length - 1;
+  try { history.replaceState(null, "", `#${cur + 1}`); } catch (e) {}
+}
+$("#prev").onclick = () => go(cur - 1);
+$("#next").onclick = () => go(cur + 1);
+jump.onchange = () => go(+jump.value);
+document.addEventListener("keydown", (e) => {
+  if (/INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return;
+  if (["ArrowRight", "PageDown"].includes(e.key)) go(cur + 1);
+  if (["ArrowLeft", "PageUp"].includes(e.key)) go(cur - 1);
+  if (e.key === "Home") go(0);
+  if (e.key === "End") go(slides.length - 1);
+});
+go((parseInt(location.hash.slice(1), 10) || 1) - 1);
+
+function ripple(e) {
+  if (!e || !e.clientX) return;
+  const r = document.createElement("div");
+  r.className = "ripple";
+  r.style.left = e.clientX + "px";
+  r.style.top = e.clientY + "px";
+  document.body.appendChild(r);
+  setTimeout(() => r.remove(), 700);
+}
+
+/* ---------- tag explorer ---------- */
+const TAGS = [
+  ["doctype", "<!DOCTYPE html>", "Tells the browser: this is a modern HTML page. Always the very first line.", "<!DOCTYPE html>", "Top of index.html"],
+  ["html", "<html>", "The root that wraps the entire page. Every other tag lives inside it.", "<html> ... </html>", "Wraps everything"],
+  ["head", "<head>", "Information about the page that isn't shown in the page itself, like the title and the stylesheet link.", "<head>\n  <title>Tech Shop</title>\n</head>", "Holds <title> and <link>"],
+  ["title", "<title>", "The text in the browser tab.", "<title>Tech Shop</title>", "Browser tab"],
+  ["link", "<link>", "Connects the CSS file. Self-closing: it has no closing tag.", '<link rel="stylesheet" href="styles.css" />', "Week 3 · styles"],
+  ["body", "<body>", "Everything the user can see goes inside the body.", "<body> ... </body>", "The whole visible page"],
+  ["h1", "<h1>", "The biggest heading. Use one per page for the main title. <h2>, <h3>... are smaller.", "<h1>Tech Shop</h1>", "Store title"],
+  ["h2", "<h2>", "A section or item heading.", "<h2>Minecraft</h2>", "Product names, “Your Cart”"],
+  ["p", "<p>", "A paragraph of text.", "<p>$29.99</p>", "Prices, “Your cart is empty.”"],
+  ["div", "<div>", "A box that groups other elements. It has no look until CSS styles it. The cart uses a <div> for the list and one <div> per row.", '<div id="cart-items" class="cart-items">\n  <div class="cart-item">Minecraft · Qty: 1</div>\n</div>', "product-grid, product-card, cart-container, cart-items, each cart-item row, cart-total"],
+  ["img", "<img>", "Shows an image. Needs src (the file) and alt (text that describes it). Self-closing.", '<img src="game.jpg" alt="Minecraft" />', "Product pictures"],
+  ["button", "<button>", "Something the user can click. This is where most events start!", '<button class="add-to-cart-button" data-id="game">Add to Cart</button>', "Add to Cart, Remove"],
+  ["span", "<span>", "A small inline piece of text, used to style or separate parts of a line.", "<span>Qty: 2</span>", "Name / qty / price in a cart row"],
+  ["script", "<script>", "Loads the JavaScript file. Put it just before </body> so the HTML above already exists.", '<script src="script.js"><\/script>', "Week 4 · behavior"],
+];
+const chips = $("#chips");
+TAGS.forEach(([k, label]) => {
+  const c = document.createElement("button");
+  c.className = "chip";
+  c.textContent = label;
+  c.dataset.k = k;
+  c.addEventListener("click", () => selectTag(k));
+  chips.appendChild(c);
+});
+function selectTag(k) {
+  const t = TAGS.find((x) => x[0] === k);
+  $$(".chip", chips).forEach((c) => c.classList.toggle("sel", c.dataset.k === k));
+  $$(".tglow").forEach((e) => e.classList.remove("tglow"));
+  $$(`[data-tag~="${k}"]`).forEach((e) => e.classList.add("tglow"));
+  const ex = $("#explain");
+  ex.style.animation = "none"; void ex.offsetWidth; ex.style.animation = "";
+  ex.innerHTML = `<div class="tagname">${esc(t[1])}</div><p>${esc(t[2])}</p><pre class="code">${hlHTML(t[3])}</pre><p class="muted" style="font-size:13.5px;margin:10px 0 0">📍 In our project: ${esc(t[4])}</p>`;
+}
+selectTag("button");
+
+/* ---------- attributes ---------- */
+const attrSrc = [
+  ['<div ', ["class", 'class="product-card"'], '>'],
+  ['  <img ', ["src", 'src="game.jpg"'], ' ', ["alt", 'alt="Minecraft"'], ' />'],
+  ['  <h2>Minecraft</h2>'],
+  ['  <p>$29.99</p>'],
+  ['  <button ', ["class", 'class="add-to-cart-button"'], ''],
+  ['          ', ["data", 'data-id="game"'], '>Add to Cart</button>'],
+  ['</div>'],
+  [''],
+  ['<div ', ["id", 'id="cart-items"'], '></div>'],
+  ['<div ', ["id", 'id="cart-total"'], '></div>'],
+  [''],
+  ['<link ', ["href", 'rel="stylesheet" href="styles.css"'], ' />'],
+];
+const colors = { id: "var(--blue)", class: "var(--purple)", data: "var(--red)", src: "var(--green)", alt: "var(--gold)", href: "var(--pink)" };
+$("#attrCode").innerHTML = attrSrc.map((parts) => parts.map((p) =>
+  Array.isArray(p) ? `<span class="hov" data-a="${p[0]}" style="--c:${colors[p[0]]};color:${colors[p[0]]}">${esc(p[1])}</span>` : hlHTML(p)
+).join("")).join("\n");
+$$("[data-a]").forEach((el) => {
+  const on = (v) => $$(`[data-a="${el.dataset.a}"]`).forEach((x) => x.classList.toggle("on", v));
+  el.addEventListener("mouseenter", () => on(true));
+  el.addEventListener("mouseleave", () => on(false));
+});
+
+/* ---------- DOM tree ---------- */
+let ti = 0;
+const N = (label, kids) => ({ label, kids });
+const tree = N('<span class="node doc" style="--i:0">document</span>', [
+  N("&lt;html&gt;", [
+    N("&lt;head&gt;", [N("&lt;title&gt; <i>\"Tech Shop\"</i>"), N("&lt;link <em>href</em>=\"styles.css\"&gt;")]),
+    N("&lt;body&gt;", [
+      N("&lt;div <em>id</em>=\"product-list\"&gt;", [
+        N("&lt;div <em>class</em>=\"product-card\"&gt;", [N("&lt;img&gt;"), N("&lt;h2&gt; <i>\"Minecraft\"</i>"), N("&lt;p&gt; <i>\"$29.99\"</i>"), N("&lt;button <em>data-id</em>=\"game\"&gt;")]),
+      ]),
+      N("&lt;div <em>id</em>=\"cart-items\"&gt;", [N("&lt;div <em>class</em>=\"cart-item\"&gt; <i>(added by JS)</i>")]),
+      N("&lt;div <em>id</em>=\"cart-total\"&gt;"),
+      N("&lt;script <em>src</em>=\"script.js\"&gt;"),
+    ]),
+  ]),
+]);
+function renderTree(n) {
+  const lab = n.label.startsWith("<span") ? n.label : `<span class="node" style="--i:${++ti}">${n.label}</span>`;
+  return `<li>${lab}${n.kids ? `<ul>${n.kids.map(renderTree).join("")}</ul>` : ""}</li>`;
+}
+$("#domTree").innerHTML = `<ul>${renderTree(tree)}</ul>`;
+
+/* ---------- selector playground ---------- */
+const PG_PRODUCTS = [
+  { id: "game", name: "Minecraft", price: 29.99, e: "🎮" },
+  { id: "candy", name: "Sour Patch Kids", price: 1.29, e: "🍬" },
+];
+const pgList = $("#product-list");
+PG_PRODUCTS.forEach((p) => {
+  const card = document.createElement("div");
+  card.className = "product-card";
+  card.innerHTML = `<img src="${emojiImg(p.e)}" alt="${p.name}" class="product-image"><h2>${p.name}</h2><p>$${p.price.toFixed(2)}</p><button class="add-to-cart-button" data-id="${p.id}">Add to Cart</button>`;
+  pgList.appendChild(card);
+});
+const PRESETS = {
+  querySelectorAll: [".add-to-cart-button", ".product-card", "button", "p", "h2", "img", "#cart-items .cart-item", '[data-id="candy"]', ".missing"],
+  querySelector: ["button", ".product-card", "p", "#cart-total", "h2", ".missing"],
+  getElementById: ["product-list", "cart-items", "cart-total", "empty-cart-message", "#cart-items", "cart-item"],
+};
+const TIPS = {
+  "#cart-items": "⚠ getElementById takes only the id name. The # is part of selector syntax, so this returns null.",
+  "cart-item": "⚠ Typo: the real id is \"cart-items\". One letter off returns null, which causes the most common bug.",
+  ".missing": "Nothing matches. querySelectorAll returns an empty list; querySelector returns null.",
+  "button": "A tag selector matches every element with that tag, including the Remove button in the cart.",
+  '[data-id="candy"]': "Attribute selector: finds elements by the value of an attribute.",
+  "#cart-items .cart-item": "Descendant selector: only .cart-item rows inside #cart-items.",
+};
+let pgMode = "querySelectorAll";
+const pgInput = $("#pgInput");
+function renderPresets() {
+  const box = $("#pgPresets");
+  box.innerHTML = "";
+  PRESETS[pgMode].forEach((s) => {
+    const b = document.createElement("button");
+    b.textContent = s;
+    b.addEventListener("click", () => { pgInput.value = s; runPg(); });
+    box.appendChild(b);
+  });
+}
+$$("#pgTabs .tab-b").forEach((t) => t.addEventListener("click", () => {
+  pgMode = t.dataset.m;
+  $$("#pgTabs .tab-b").forEach((x) => x.classList.toggle("sel", x === t));
+  $("#pgMethod").textContent = pgMode;
+  pgInput.value = PRESETS[pgMode][0];
+  renderPresets();
+  runPg();
+}));
+function clearPg() {
+  $$(".match").forEach((e) => e.classList.remove("match"));
+  $$(".badge").forEach((e) => e.remove());
+}
+function mark(el, n) {
+  el.classList.add("match");
+  const b = document.createElement("span");
+  b.className = "badge";
+  b.textContent = n;
+  b.style.animationDelay = n * 0.08 + "s";
+  const host = el.tagName === "IMG" ? el.parentElement : el;
+  if (getComputedStyle(host).position === "static") host.style.position = "relative";
+  host.appendChild(b);
+}
+function describe(el) {
+  let d = "<" + el.tagName.toLowerCase();
+  if (el.id) d += ` id="${el.id}"`;
+  if (el.className && typeof el.className === "string") d += ` class="${el.className.replace(/\s*match\s*/, " ").trim()}"`;
+  if (el.dataset.id) d += ` data-id="${el.dataset.id}"`;
+  return d + ">";
+}
+function runPg() {
+  clearPg();
+  const sel = pgInput.value.trim();
+  const res = $("#pgResult");
+  const root = $("#playground");
+  res.className = "result";
+  let found = [];
+  try {
+    if (pgMode === "getElementById") {
+      const el = root.querySelector(`[id="${CSS.escape(sel)}"]`);
+      found = el ? [el] : [];
+    } else if (pgMode === "querySelector") {
+      const el = root.querySelector(sel);
+      found = el ? [el] : [];
+    } else found = [...root.querySelectorAll(sel)];
+  } catch (err) {
+    res.classList.add("null");
+    res.textContent = "❌ SyntaxError: that isn't a valid CSS selector";
+    $("#pgTip").textContent = "Check your # and . symbols and your quotes.";
+    return;
+  }
+  found.forEach((el, i) => mark(el, i + 1));
+  if (pgMode === "querySelectorAll") {
+    res.classList.add(found.length ? "ok" : "null");
+    res.textContent = `→ NodeList(${found.length}) [\n${found.map((e, i) => `  ${i}: ${describe(e)}`).join("\n")}${found.length ? "\n" : ""}]`;
+  } else {
+    res.classList.add(found.length ? "ok" : "null");
+    res.textContent = found.length ? `→ ${describe(found[0])}` : "→ null   (nothing was found!)";
+  }
+  $("#pgTip").textContent = TIPS[sel] || (pgMode === "querySelector" && found.length ? "querySelector stops at the FIRST match, even if there are more." : "");
+}
+$("#pgRun").addEventListener("click", runPg);
+pgInput.addEventListener("keydown", (e) => { if (e.key === "Enter") runPg(); });
+renderPresets();
+runPg();
+
+/* ---------- if / else ---------- */
+function branch() {
+  const q = +$("#qtyIn").value;
+  $("#brIf").classList.toggle("on", q > 1);
+  $("#brElse").classList.toggle("on", !(q > 1));
+  $("#brNote").innerHTML = `${q} &gt; 1 is <b>${q > 1}</b> → ${q > 1 ? `quantity becomes ${q - 1}` : "the item is removed from the cart"}`;
+}
+$("#qtyIn").addEventListener("input", branch);
+branch();
+
+/* ---------- objects ---------- */
+let prod, copy;
+function objHTML(o, color, flashKey) {
+  return `<div class="obj" style="--c:${color}">{${Object.entries(o).map(([k, v]) =>
+    `<div class="row ${k === flashKey ? "flash" : ""}"><span class="k">${k}</span>: <span class="t-str">${typeof v === "string" ? `"${esc(v)}"` : v.toFixed ? v.toFixed(2) : v}</span>,</div>`).join("")}}</div>`;
+}
+function renderObj(flash) {
+  $("#objStage").innerHTML = `<div><div class="muted mono" style="font-size:12px">product</div>${objHTML(prod, "var(--purple)", flash)}</div>` +
+    (copy ? `<span class="plus">→</span><div style="animation:pop .5s both"><div class="muted mono" style="font-size:12px">new cart item (a copy)</div>${objHTML(copy, "var(--green)", "quantity")}</div>` : "");
+}
+function resetObj() {
+  prod = { id: "candy", name: "Sour Patch Kids", price: 1.29, image: "candy.jpg" };
+  copy = null;
+  renderObj();
+  $("#objOut").textContent = "// click a button";
+}
+$("#oRead").onclick = () => { renderObj("name"); $("#objOut").textContent = `product.name\n→ "${prod.name}"`; };
+$("#oSet").onclick = () => { prod.price = 2; renderObj("price"); $("#objOut").textContent = "product.price = 2.00;  // the value changed"; };
+$("#oAdd").onclick = () => { prod.category = "Snack"; renderObj("category"); $("#objOut").textContent = 'product.category = "Snack";  // a brand-new key was added'; };
+$("#oSpread").onclick = () => { copy = { ...prod, quantity: 1 }; renderObj(); $("#objOut").textContent = "{ ...product, quantity: 1 }\n// copied every key, then added quantity"; };
+$("#oReset").onclick = resetObj;
+resetObj();
+
+/* ---------- array lab ---------- */
+const START = ["apple", "banana", "orange"];
+let fruits = [...START];
+let arrBusy = false;
+const con = $("#arrConsole");
+function log(s, cls = "") {
+  const d = document.createElement("div");
+  d.className = cls;
+  d.textContent = s;
+  con.appendChild(d);
+  con.scrollTop = con.scrollHeight;
+}
+function renderArr(popIndex = -1) {
+  const arr = $("#arr");
+  arr.innerHTML = "";
+  fruits.forEach((f, i) => {
+    const b = document.createElement("div");
+    b.className = "box";
+    if (i !== popIndex) b.style.animation = "none";
+    b.innerHTML = `<div class="v">${esc(f)}</div><div class="i">[${i}]</div>`;
+    arr.appendChild(b);
+  });
+  if (!fruits.length) arr.innerHTML = '<span class="muted mono">[ ]  empty array</span>';
+  $("#arrJson").textContent = JSON.stringify(fruits).replace(/,/g, ", ");
+  $("#arrLen").textContent = fruits.length;
+  const opts = [...new Set([...fruits, "banana", "mango"])];
+  ["#aFind", "#aFindI"].forEach((s) => {
+    const sel = $(s), keep = sel.value;
+    sel.innerHTML = opts.map((o) => `<option>${esc(o)}</option>`).join("");
+    if (opts.includes(keep)) sel.value = keep;
+    else sel.value = "banana";
+  });
+}
+const boxes = () => $$("#arr .box");
+async function arrOp(op) {
+  if (arrBusy) return;
+  arrBusy = true;
+  const bs = boxes();
+  bs.forEach((b) => b.classList.remove("hl", "yes", "no"));
+  if (op === "index") {
+    const i = +$("#aIdx").value;
+    log(`> fruits[${i}]`, "c");
+    if (bs[i]) { bs[i].classList.add("hl"); log(`"${fruits[i]}"`); } else log("undefined   // no item at that position");
+  } else if (op === "push") {
+    const v = $("#aPush").value.trim() || "kiwi";
+    fruits.push(v);
+    renderArr(fruits.length - 1);
+    log(`> fruits.push("${v}")`, "c"); log(`${fruits.length}   // push returns the new length`);
+  } else if (op === "pop") {
+    log("> fruits.pop()", "c");
+    if (!fruits.length) log("undefined   // nothing to remove");
+    else { bs[bs.length - 1].classList.add("bye"); await wait(430); const r = fruits.pop(); renderArr(); log(`"${r}"   // removed from the end`); }
+  } else if (op === "splice") {
+    const i = +$("#aSplice").value;
+    log(`> fruits.splice(${i}, 1)`, "c");
+    if (!bs[i]) log("[]   // nothing at that index");
+    else { bs[i].classList.add("bye"); await wait(430); const r = fruits.splice(i, 1); renderArr(); log(`${JSON.stringify(r)}   // everything after it shifts left`); }
+  } else if (op === "forEach") {
+    log("> fruits.forEach((fruit, i) => console.log(i, fruit))", "c");
+    for (let i = 0; i < bs.length; i++) {
+      bs[i].classList.add("hl"); log(`${i} "${fruits[i]}"`);
+      await wait(450); bs[i].classList.remove("hl");
+    }
+  } else if (op === "find" || op === "findIndex") {
+    const t = $(op === "find" ? "#aFind" : "#aFindI").value;
+    log(`> fruits.${op}((fruit) => fruit === "${t}")`, "c");
+    let hit = -1;
+    for (let i = 0; i < bs.length; i++) {
+      bs[i].classList.add("hl"); await wait(380); bs[i].classList.remove("hl");
+      if (fruits[i] === t) { bs[i].classList.add("yes"); hit = i; break; }
+      bs[i].classList.add("no");
+    }
+    if (op === "find") log(hit > -1 ? `"${fruits[hit]}"   // stops at the first match` : "undefined   // no match found");
+    else log(hit > -1 ? `${hit}   // the position of the match` : "-1   // no match: that's why we check index > -1");
+  } else if (op === "reset") {
+    fruits = [...START]; renderArr(); con.innerHTML = '<div class="c">// console output</div>';
+  }
+  arrBusy = false;
+}
+$$("[data-op]").forEach((b) => b.addEventListener("click", () => arrOp(b.dataset.op)));
+renderArr();
+
+/* ---------- function anatomy ---------- */
+const FN_TXT = {
+  kw: "<b>function</b>: the keyword that starts a function definition.",
+  name: "<b>Name</b>: what you'll call it. Use a verb that says what it does: addToCart, updateCart.",
+  param: "<b>Parameter</b>: an input. When you call addToCart(\"game\"), productId holds \"game\" inside the function.",
+  body: "<b>Body</b>: the steps inside { } that run every time the function is called. It can end with <code>return</code> to give a value back.",
+  call: "<b>Call</b>: actually runs the function. Defining it alone does nothing until something calls it!",
+};
+$$("#fnAnat [data-p]").forEach((s) => {
+  s.addEventListener("mouseenter", () => { s.classList.add("on"); $("#fnOut").innerHTML = FN_TXT[s.dataset.p]; });
+  s.addEventListener("mouseleave", () => s.classList.remove("on"));
+});
+
+/* ---------- call map ---------- */
+$$("#callMap .callrow").forEach((row) => {
+  let busy = false;
+  row.querySelector(".trig").addEventListener("click", async (e) => {
+    ripple(e);
+    if (busy) return;
+    busy = true;
+    const ns = $$(".n", row);
+    for (const n of ns) { n.classList.add("go"); await wait(420); n.classList.remove("go"); n.style.borderColor = "var(--green)"; }
+    await wait(800);
+    ns.forEach((n) => (n.style.borderColor = ""));
+    busy = false;
+  });
+});
+
+/* ---------- element factory ---------- */
+let fStep = 0, fEl = null;
+function fRender() {
+  $$("#fSteps .fs").forEach((s, i) => { s.classList.toggle("on", i === fStep - 1); s.classList.toggle("done", i < fStep - 1); });
+  $("#fHtml").textContent = fEl ? fEl.outerHTML.replace(' class="newel"', "").replace("newel ", "").replace(" landed", "") : "// the element's HTML will appear here";
+  $("#fNext").disabled = fStep >= 5;
+}
+$("#fNext").addEventListener("click", () => {
+  fStep++;
+  if (fStep === 1) { fEl = document.createElement("div"); fEl.className = "newel"; fEl.innerHTML = "&nbsp;"; $("#memZone").appendChild(fEl); }
+  if (fStep === 2) { fEl.className = "newel cart-item"; }
+  if (fStep === 3) { fEl.textContent = "Banana — $2.00"; }
+  if (fStep === 4) { fEl.setAttribute("data-id", "banana"); fEl.style.animation = "none"; void fEl.offsetWidth; fEl.style.animation = ""; }
+  if (fStep === 5) { $("#pageZone").appendChild(fEl); fEl.classList.add("landed"); }
+  fRender();
+});
+$("#fReset").addEventListener("click", () => {
+  fStep = 0; if (fEl) fEl.remove(); fEl = null; fRender();
+});
+fRender();
+function ih() { const v = $("#ihIn").value; $("#ihOut").innerHTML = v.replace(/<script/gi, "&lt;script").replace(/\son\w+=/gi, " data-x="); $("#tcOut").textContent = v; }
+$("#ihIn").addEventListener("input", ih); ih();
+
+/* ---------- event pads ---------- */
+let clicks = 0;
+$("#clickBtn").addEventListener("click", (e) => {
+  ripple(e); clicks++;
+  $("#clickCount").textContent = clicks;
+  const p = $("#padClick"); p.classList.add("hot"); setTimeout(() => p.classList.remove("hot"), 300);
+});
+$("#padHover").addEventListener("mouseover", () => { $("#padHover").classList.add("hot"); $("#hoverTxt").textContent = "🐵"; });
+$("#padHover").addEventListener("mouseout", () => { $("#padHover").classList.remove("hot"); $("#hoverTxt").textContent = "🙈"; });
+$("#keyIn").addEventListener("keydown", (e) => {
+  $("#keyTxt").textContent = e.key === " " ? "Space" : e.key;
+  const p = $("#padKey"); p.classList.add("hot"); setTimeout(() => p.classList.remove("hot"), 250);
+});
+
+/* ---------- recap table ---------- */
+const RECAP = [
+  ["HTML tags", "var(--pink)", [
+    ["<!DOCTYPE html>, <html>, <head>, <body>", "Page skeleton", "Wrap every page", "2"],
+    ["<title>, <link>, <script>", "Tab title, connect CSS, connect JS", '<script src="script.js">', "2–4"],
+    ["<h1>, <h2>, <p>", "Headings and text", "<h2>Minecraft</h2>", "2"],
+    ["<div>", "Group elements into a box", '<div class="product-card">', "2"],
+    ["<img>", "Image (src + alt)", '<img src="..." alt="...">', "2"],
+    ["<button>", "Clickable control", "Add to Cart / Remove", "2, 7"],
+    ["<span>", "Inline text inside a cart row", "<span>Qty: 2</span>", "6"],
+  ]],
+  ["Attributes", "var(--purple)", [
+    ["id", "Unique name for one element", 'id="cart-items"', "2–3"],
+    ["class", "Shared label (CSS + JS)", 'class="product-card"', "2"],
+    ["data-id", "Custom data: which product", 'data-id="game"', "5"],
+    ["src, alt, href, rel", "Image file, alt text, CSS link", 'href="styles.css"', "2–3"],
+  ]],
+  ["Find elements", "var(--blue)", [
+    ["document.getElementById(id)", "One element by id, or null", 'getElementById("product-list")', "4"],
+    ["document.querySelector(sel)", "First CSS-selector match, or null", 'querySelector(".my-div")', "4"],
+    ["document.querySelectorAll(sel)", "List of every match", 'querySelectorAll(".add-to-cart-button")', "5"],
+  ]],
+  ["Change the page", "var(--green)", [
+    ["document.createElement(tag)", "Make a new element in memory", 'createElement("div")', "4, 6"],
+    ["el.innerHTML", "Set or read the HTML inside", "card.innerHTML = createProductHTML(p)", "4"],
+    ["el.textContent", "Set or read plain text", 'removeButton.textContent = "Remove"', "7"],
+    ["el.className / el.classList.add()", "Set CSS classes", 'card.className = "product-card"', "4"],
+    ["el.setAttribute(name, value)", "Set any attribute", 'row.setAttribute("data-id", "x")', "—"],
+    ["parent.appendChild(child)", "Put the element on the page", "productList.appendChild(card)", "4"],
+    ["el.dataset.id", "Read data-id", "button.dataset.id", "5"],
+    ["el.style.display", "Show or hide", 'emptyMessage.style.display = "none"', "6"],
+  ]],
+  ["Events", "var(--gold)", [
+    ["el.addEventListener(event, fn)", "Run fn when the event happens", 'button.addEventListener("click", ...)', "5"],
+    ['"click", "mouseover", "keydown"', "Common event names", "—", "5"],
+    ["() => { ... }", "Arrow function (short form)", "() => addToCart(id)", "4–5"],
+  ]],
+  ["Arrays", "var(--red)", [
+    ["[ ], arr[i], arr.length", "Create, read by index (from 0), count", "products[0]", "4"],
+    ["arr.push(x)", "Add to the end", "cart.push({...product, quantity: 1})", "5"],
+    ["arr.pop()", "Remove the last item", "fruits.pop()", "—"],
+    ["arr.splice(i, n)", "Remove n items at index i", "cart.splice(index, 1)", "7"],
+    ["arr.forEach(fn)", "Run fn for each item", "products.forEach(...)", "4, 6"],
+    ["arr.find(fn)", "First matching item, or undefined", "products.find(p => p.id === id)", "5"],
+    ["arr.findIndex(fn)", "Position of the match, or -1", "cart.findIndex(...)", "7"],
+  ]],
+  ["Objects & values", "var(--purple)", [
+    ["{ key: value }", "Group facts about one thing", '{ id: "game", price: 29.99 }', "4"],
+    ["obj.key / obj.key = v", "Read, change, or add a field", "existingItem.quantity++", "5–6"],
+    ["{ ...obj }", "Spread: copy all fields", "{ ...product, quantity: 1 }", "5"],
+    ["`text ${value}`", "Template literal", "`<h2>${product.name}</h2>`", "4"],
+    ["num.toFixed(2)", "Format to 2 decimals", "total.toFixed(2)", "6"],
+    ["const / let", "Fixed vs changeable variable", "let total = 0", "4"],
+  ]],
+  ["Logic & math", "var(--gold)", [
+    ["if / else", "Choose a path", "if (existingItem) ... else ...", "5–7"],
+    ["=== !== > < >= <=", "Compare values", "index > -1", "5–7"],
+    ["+ - * / += ++ --", "Math and counters", "total += itemTotal", "6–7"],
+  ]],
+  ["Our functions", "var(--blue)", [
+    ["createProductHTML(product)", "Return a card's HTML string", "—", "4"],
+    ["displayProducts()", "Render every product card", "—", "4"],
+    ["addToCart(productId)", "Add or increase an item", "—", "5–6"],
+    ["updateCart()", "Redraw the cart and total", "—", "6–7"],
+    ["removeFromCart(productId)", "Decrease or remove an item", "—", "7"],
+  ]],
+];
+function renderRecap(q = "") {
+  q = q.toLowerCase();
+  let html = "<tr><th>Name</th><th>What it does</th><th>Example</th><th>Week</th></tr>";
+  RECAP.forEach(([g, c, rows]) => {
+    const rs = rows.filter((r) => !q || (g + r.join(" ")).toLowerCase().includes(q));
+    if (!rs.length) return;
+    html += `<tr class="grp" style="--c:${c}"><td colspan="4">${g}</td></tr>`;
+    rs.forEach((r) => (html += `<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td class="mono" style="font-size:12.5px">${esc(r[2])}</td><td class="wk">${r[3]}</td></tr>`));
+  });
+  $("#recap").innerHTML = html;
+}
+$("#rcFilter").addEventListener("input", (e) => renderRecap(e.target.value));
+renderRecap();
+
+window.__deck = { $, $$, wait, esc, hlJS, ripple, emojiImg };
+})();
+</script>
+<script>
+(() => {
+const { $, wait, esc, hlJS, ripple, emojiImg } = window.__deck;
+
+const SRC = [
+["products",'const products = ['],
+["",'  { id: "game", name: "Minecraft", price: 29.99, image: "minecraft.jpg" },'],
+["",'  { id: "candy", name: "Sour Patch Kids", price: 1.29, image: "candy.jpg" },'],
+["",'];'],
+["cart",'const cart = [];'],
+["",''],
+["sel1",'const productList = document.getElementById("product-list");'],
+["sel2",'const cartItemsContainer = document.getElementById("cart-items");'],
+["sel3",'const cartTotalContainer = document.getElementById("cart-total");'],
+["sel4",'const emptyMessage = document.getElementById("empty-cart-message");'],
+["",''],
+["cphDef",'function createProductHTML(product) {'],
+["cphRet",'  return `'],
+["",'    <img src="${product.image}" alt="${product.name}">'],
+["",'    <h2>${product.name}</h2>'],
+["",'    <p>$${product.price.toFixed(2)}</p>'],
+["",'    <button class="add-to-cart-button" data-id="${product.id}">Add to Cart</button>'],
+["",'  `;'],
+["",'}'],
+["",''],
+["dpDef",'function displayProducts() {'],
+["dpLoop",'  products.forEach((product) => {'],
+["dpCreate",'    const card = document.createElement("div");'],
+["dpClass",'    card.className = "product-card";'],
+["dpInner",'    card.innerHTML = createProductHTML(product);'],
+["dpAppend",'    productList.appendChild(card);'],
+["",'  });'],
+["",'}'],
+["",''],
+["atcDef",'function addToCart(productId) {'],
+["atcFind",'  const product = products.find((p) => p.id === productId);'],
+["atcExist",'  const existingItem = cart.find((item) => item.id === productId);'],
+["atcIf",'  if (existingItem) {'],
+["atcInc",'    existingItem.quantity++;'],
+["",'  } else {'],
+["atcPush",'    cart.push({ ...product, quantity: 1 });'],
+["",'  }'],
+["atcUpdate",'  updateCart();'],
+["",'}'],
+["",''],
+["rfDef",'function removeFromCart(productId) {'],
+["rfFind",'  const index = cart.findIndex((item) => item.id === productId);'],
+["rfIf",'  if (index > -1) {'],
+["rfQtyIf",'    if (cart[index].quantity > 1) {'],
+["rfDec",'      cart[index].quantity--;'],
+["",'    } else {'],
+["rfSplice",'      cart.splice(index, 1);'],
+["",'    }'],
+["",'  }'],
+["rfUpdate",'  updateCart();'],
+["",'}'],
+["",''],
+["ucDef",'function updateCart() {'],
+["ucClear",'  cartItemsContainer.innerHTML = "";'],
+["ucTotal0",'  let total = 0;'],
+["ucLoop",'  cart.forEach((item) => {'],
+["ucItemTotal",'    const itemTotal = item.price * item.quantity;'],
+["ucAdd",'    total += itemTotal;'],
+["ucLi",'    const cartItem = document.createElement("div");'],
+["ucLiClass",'    cartItem.className = "cart-item";'],
+["ucInner",'    cartItem.innerHTML = `<span>${item.name}</span> <span>Qty: ${item.quantity}</span> <span>$${itemTotal.toFixed(2)}</span>`;'],
+["ucBtn",'    const removeButton = document.createElement("button");'],
+["ucBtnText",'    removeButton.textContent = "Remove";'],
+["ucBtnListen",'    removeButton.addEventListener("click", () => removeFromCart(item.id));'],
+["ucAppendBtn",'    cartItem.appendChild(removeButton);'],
+["ucAppendLi",'    cartItemsContainer.appendChild(cartItem);'],
+["",'  });'],
+["ucIfEmpty",'  if (cart.length === 0) {'],
+["ucShow",'    emptyMessage.style.display = "block";'],
+["",'  } else {'],
+["ucHide",'    emptyMessage.style.display = "none";'],
+["",'  }'],
+["ucTotal",'  cartTotalContainer.innerHTML = `<h2>Total: $${total.toFixed(2)}</h2>`;'],
+["",'}'],
+["",''],
+["callDp",'displayProducts();'],
+["",''],
+["listenAll",'document.querySelectorAll(".add-to-cart-button").forEach((button) => {'],
+["listenAdd",'  button.addEventListener("click", () => {'],
+["callAdd",'    addToCart(button.dataset.id);'],
+["",'  });'],
+["",'});'],
+];
+
+const codeBox = $("#tCode");
+const lineEls = {};
+let inTemplate = false;
+SRC.forEach(([k, t], i) => {
+  const d = document.createElement("div");
+  d.className = "ln";
+  // lines inside a multi-line template literal are shown as string text
+  const html = inTemplate ? `<span class="t-str">${esc(t)}</span>` : hlJS(t);
+  if ((t.match(/`/g) || []).length % 2 === 1) inTemplate = !inTemplate;
+  d.innerHTML = `<span class="no">${i + 1}</span><span>${html || " "}</span>`;
+  codeBox.appendChild(d);
+  if (k) lineEls[k] = d;
+});
+
+const PRODUCTS = [
+  { id: "game", name: "Minecraft", price: 29.99, image: "🎮" },
+  { id: "candy", name: "Sour Patch Kids", price: 1.29, image: "🍬" },
+];
+let cart = [];
+let running = false;
+let loaded = false;
+let vars = {};
+const list = $("#t-list"), items = $("#t-items"), totalEl = $("#t-total"), emptyEl = $("#t-empty");
+const speed = () => +$("#tSpeed").value;
+let prevLine = null;
+
+function showVars() {
+  const rows = Object.entries(vars).map(([k, v]) => `<div class="row"><span class="k">${esc(k)}</span><span>${esc(v)}</span></div>`).join("");
+  const c = cart.length ? "[\n" + cart.map((i) => `  { id: "${i.id}", name: "${i.name}", price: ${i.price}, quantity: ${i.quantity} }`).join(",\n") + "\n]" : "[]";
+  $("#tVars").innerHTML = (rows || '<span class="muted">no local variables</span>') + `<div class="row" style="margin-top:6px"><span class="k">cart</span></div><pre>${esc(c)}</pre>`;
+}
+async function hit(key, v = {}, status) {
+  Object.assign(vars, v);
+  if (prevLine) { prevLine.classList.remove("cur"); prevLine.classList.add("was"); }
+  const el = lineEls[key];
+  el.classList.add("cur");
+  prevLine = el;
+  codeBox.scrollTop = el.offsetTop - codeBox.clientHeight / 2;
+  if (status) $("#tStatus").textContent = status;
+  showVars();
+  await wait(speed());
+}
+function clearTrail() { Object.values(lineEls).forEach((l) => l.classList.remove("was", "cur")); prevLine = null; }
+const fmt = (o) => (o === undefined ? "undefined" : `{ id: "${o.id}", name: "${o.name}", … }`);
+
+/* ---- page load ---- */
+async function loadPage() {
+  running = true; $("#tLoad").disabled = true; vars = {}; clearTrail();
+  await hit("products", {}, "Creating the products array…");
+  await hit("cart", {}, "Creating an empty cart array…");
+  for (const k of ["sel1", "sel2", "sel3", "sel4"]) await hit(k, {}, "Finding page elements by id and saving them in variables…");
+  await hit("callDp", {}, "Calling displayProducts()…");
+  await displayProducts();
+  vars = {};
+  await hit("listenAll", {}, "Finding every Add to Cart button…");
+  for (const btn of list.querySelectorAll(".add-to-cart-button")) {
+    btn.addEventListener("click", (e) => onAdd(e, btn));
+    btn.classList.add("glowz");
+    await hit("listenAdd", { button: `<button data-id="${btn.dataset.id}">` }, "Attaching a click listener to each button…");
+    btn.classList.remove("glowz");
+  }
+  vars = {}; showVars(); clearTrail();
+  $("#tStatus").textContent = "✅ Page ready. Click an Add to Cart button!";
+  running = false; loaded = true;
+}
+async function displayProducts() {
+  await hit("dpDef");
+  for (const product of PRODUCTS) {
+    vars = { product: fmt(product) };
+    await hit("dpLoop", {}, `forEach: now on "${product.name}"`);
+    const card = document.createElement("div");
+    await hit("dpCreate", { card: "<div> (in memory, not on page)" }, "createElement makes a new <div> in memory");
+    card.className = "product-card new";
+    await hit("dpClass", { card: '<div class="product-card">' });
+    await hit("dpInner", {}, "Calling createProductHTML(product)…");
+    await hit("cphDef");
+    await hit("cphRet", {}, "Building the card's HTML with a template literal");
+    card.innerHTML = `<img src="${emojiImg(product.image)}" alt="${esc(product.name)}"><h2>${esc(product.name)}</h2><p>$${product.price.toFixed(2)}</p><button class="add-to-cart-button" data-id="${product.id}">Add to Cart</button>`;
+    await hit("dpInner", { card: '<div class="product-card"> + img, h2, p, button' }, "innerHTML now holds the card contents");
+    list.appendChild(card);
+    await hit("dpAppend", {}, "appendChild puts the card on the page!");
+  }
+}
+
+/* ---- add ---- */
+function busy(e) { ripple(e); if (running) { $("#tStatus").textContent = "⏳ Wait for the current run to finish…"; return true; } return false; }
+async function onAdd(e, btn) {
+  if (busy(e)) return;
+  running = true; vars = {}; clearTrail();
+  btn.classList.add("glowz");
+  await hit("listenAdd", {}, "⚡ Click! The listener wakes up");
+  await hit("callAdd", { "button.dataset.id": `"${btn.dataset.id}"` }, "Reading data-id from the clicked button");
+  btn.classList.remove("glowz");
+  await addToCart(btn.dataset.id);
+  finish();
+}
+async function addToCart(productId) {
+  vars = { productId: `"${productId}"` };
+  await hit("atcDef", {}, `addToCart("${productId}") starts`);
+  const product = PRODUCTS.find((p) => p.id === productId);
+  await hit("atcFind", { product: fmt(product) }, "find() searched products for a matching id");
+  const existingItem = cart.find((item) => item.id === productId);
+  await hit("atcExist", { existingItem: existingItem ? `{ …, quantity: ${existingItem.quantity} }` : "undefined" }, existingItem ? "Already in the cart!" : "Not in the cart yet → undefined");
+  await hit("atcIf", {}, `if (existingItem) → ${!!existingItem}`);
+  if (existingItem) {
+    existingItem.quantity++;
+    await hit("atcInc", {}, `quantity++ → now ${existingItem.quantity}`);
+  } else {
+    cart.push({ ...product, quantity: 1 });
+    await hit("atcPush", {}, "push() adds a copy with quantity: 1 to the cart array");
+  }
+  await hit("atcUpdate", {}, "Data changed → now redraw the page");
+  await updateCart(productId);
+}
+
+/* ---- remove ---- */
+async function onRemove(e, id, btn) {
+  if (busy(e)) return;
+  running = true; vars = {}; clearTrail();
+  btn.classList.add("glowz");
+  await hit("ucBtnListen", { "item.id": `"${id}"` }, "⚡ Remove clicked! This listener was attached inside updateCart()");
+  await removeFromCart(id);
+  finish();
+}
+async function removeFromCart(productId) {
+  vars = { productId: `"${productId}"` };
+  await hit("rfDef", {}, `removeFromCart("${productId}") starts`);
+  const index = cart.findIndex((item) => item.id === productId);
+  await hit("rfFind", { index }, `findIndex() → ${index}`);
+  await hit("rfIf", {}, `index > -1 → ${index > -1}`);
+  if (index > -1) {
+    const q = cart[index].quantity;
+    await hit("rfQtyIf", {}, `quantity (${q}) > 1 → ${q > 1}`);
+    if (q > 1) { cart[index].quantity--; await hit("rfDec", {}, `quantity-- → now ${cart[index].quantity}`); }
+    else { cart.splice(index, 1); await hit("rfSplice", {}, "splice() removes the item from the array"); }
+  }
+  await hit("rfUpdate", {}, "Data changed → now redraw the page");
+  await updateCart(productId);
+}
+
+/* ---- updateCart ---- */
+async function updateCart(changedId) {
+  const keep = { productId: vars.productId };
+  vars = keep;
+  await hit("ucDef", {}, "updateCart() redraws the cart from the data");
+  items.innerHTML = "";
+  await hit("ucClear", {}, 'innerHTML = "" wipes the old rows');
+  let total = 0;
+  await hit("ucTotal0", { total: 0 });
+  for (const item of cart) {
+    await hit("ucLoop", { item: `{ id: "${item.id}", quantity: ${item.quantity} }` }, `forEach: drawing "${item.name}"`);
+    const itemTotal = item.price * item.quantity;
+    await hit("ucItemTotal", { itemTotal: `${item.price} * ${item.quantity} = ${itemTotal.toFixed(2)}` });
+    total += itemTotal;
+    await hit("ucAdd", { total: total.toFixed(2) });
+    const li = document.createElement("div");
+    await hit("ucLi", {}, "New <div> created in memory");
+    li.className = "cart-item";
+    await hit("ucLiClass", {}, 'className = "cart-item" styles it as a cart row');
+    li.innerHTML = `<span>${esc(item.name)}</span> <span>Qty: ${item.quantity}</span> <span>$${itemTotal.toFixed(2)}</span>`;
+    await hit("ucInner");
+    const rb = document.createElement("button");
+    await hit("ucBtn");
+    rb.textContent = "Remove";
+    await hit("ucBtnText");
+    const id = item.id;
+    rb.addEventListener("click", (e) => onRemove(e, id, rb));
+    await hit("ucBtnListen", {}, "The new Remove button gets its own listener");
+    li.appendChild(rb);
+    await hit("ucAppendBtn");
+    if (item.id === changedId) li.classList.add("new");
+    items.appendChild(li);
+    await hit("ucAppendLi", {}, "appendChild puts the row on the page!");
+  }
+  await hit("ucIfEmpty", {}, `cart.length === 0 → ${cart.length === 0}`);
+  if (cart.length === 0) { emptyEl.style.display = "block"; await hit("ucShow", {}, "Show the empty message"); }
+  else { emptyEl.style.display = "none"; await hit("ucHide", {}, "Hide the empty message"); }
+  totalEl.innerHTML = `<h2>Total: $${total.toFixed(2)}</h2>`;
+  await hit("ucTotal", {}, "Total updated with toFixed(2)");
+}
+function finish() {
+  running = false;
+  $("#tStatus").textContent = "✅ Done. The page now matches the cart array. Click again!";
+}
+function reset() {
+  if (running) return;
+  cart = []; vars = {}; loaded = false;
+  list.innerHTML = ""; items.innerHTML = ""; totalEl.innerHTML = ""; emptyEl.style.display = "block";
+  clearTrail(); codeBox.scrollTop = 0; showVars();
+  $("#tLoad").disabled = false;
+  $("#tStatus").textContent = 'Press "Load the page" to start.';
+}
+$("#tLoad").addEventListener("click", () => { if (!running && !loaded) loadPage(); });
+$("#tReset").addEventListener("click", reset);
+showVars();
+})();
+</script>
+</body>
+</html>
