@@ -199,6 +199,44 @@ pre.code{margin:0;font-family:var(--mono);font-size:13.5px;line-height:1.7;backg
 .vartype{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .vartype div{background:var(--panel2);border-radius:10px;padding:10px;font-size:13px}
 .vartype b{display:block;color:var(--c);font-family:var(--mono)}
+.vartype div.link,.optab tr.link{cursor:pointer;transition:background .2s}
+.vartype div.link:hover{background:#2d3366}
+.optab tr.link:hover td{background:rgba(255,255,255,.05)}
+
+/* ---------- js basics lab ---------- */
+.jb-pane{display:none}
+.jb-pane.on{display:block;animation:rise .35s both}
+.jb-stage{display:flex;gap:14px;flex-wrap:wrap;min-height:120px;align-items:flex-start;padding:14px;background:var(--ink);border-radius:12px}
+.vbox{text-align:center;animation:pop .45s cubic-bezier(.2,1.5,.4,1) both}
+.vbox .n{font:700 12px var(--mono);color:var(--gold);margin-bottom:4px}
+.vbox .val{min-width:96px;padding:14px 10px;border-radius:10px;background:var(--panel2);border:2px solid #3a4080;font:800 20px var(--mono);transition:border-color .3s}
+.vbox.const .val{border-color:var(--purple)}
+.vbox .kw{font:11px var(--mono);color:var(--muted);margin-top:4px}
+.vbox.flip .val{animation:flip .5s}
+.vbox.err .val{animation:shake .25s 2;border-color:var(--red)}
+@keyframes flip{0%{transform:rotateX(0)}50%{transform:rotateX(90deg)}100%{transform:rotateX(0)}}
+.codebtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.codebtns .btn{font-family:var(--mono);font-size:12.5px;padding:7px 10px}
+.out.err{box-shadow:inset 4px 0 0 var(--red);color:var(--pink)}
+.out.ok{box-shadow:inset 4px 0 0 var(--green)}
+.typebadge{display:inline-block;font:800 16px var(--mono);padding:6px 14px;border-radius:999px;background:var(--c);color:#111;margin:0 0 8px}
+.jb-cart{background:#fff;color:#222;border-radius:12px;padding:12px;font-size:13px}
+.jb-cart .row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #eee}
+.jb-cart .row:last-child{border-bottom:0}
+.jb-cart .qbtn{width:28px;height:28px;border-radius:6px;border:1px solid #ccc;background:#f6f6f6;cursor:pointer;font-weight:700;font-size:15px}
+.jb-cart .qty{font:700 15px var(--mono);min-width:20px;text-align:center}
+.trace{font-family:var(--mono);font-size:13px;background:var(--ink);border-radius:12px;padding:10px 12px;min-height:60px}
+.trace .ln{display:flex;justify-content:space-between;gap:12px;padding:3px 6px;border-radius:6px}
+.trace .ln .r{color:var(--green);text-align:right;white-space:nowrap}
+.trace .ln.chg{background:rgba(61,220,151,.18);animation:pop .3s both}
+.trace .ln.dim{opacity:.4}
+.trace .ln.bad .r{color:var(--red)}
+.cmp{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-family:var(--mono);font-size:15px}
+.cmp input{width:120px;background:#1b2046;border:1px solid #3a4080;color:var(--gold);font:700 15px var(--mono);border-radius:8px;padding:7px 8px}
+.cmp select{background:var(--panel2);color:var(--text);border:0;border-radius:8px;padding:8px;font:700 15px var(--mono)}
+.verdict{font:900 34px var(--mono);margin:10px 0 2px;min-height:40px}
+.verdict.t{color:var(--green)}.verdict.f{color:var(--red)}
+.slider{width:100%;accent-color:var(--gold);margin:4px 0 12px}
 
 /* ---------- objects ---------- */
 .obj{background:var(--ink);border-radius:12px;padding:12px 14px;font-family:var(--mono);font-size:14px;border:2px solid var(--c,var(--purple));transition:all .4s;min-width:240px}
@@ -595,7 +633,121 @@ buttons.forEach((button) =&gt; { ... });</pre>
  </div>
 </section>
 
-<!-- 10 OBJECTS -->
+<!-- 10 JS BASICS LAB -->
+<section class="slide" data-title="Lab: variables, operators, decisions">
+ <div class="slide-inner">
+  <span class="kicker">Part 3 · Lab</span>
+  <h2>🔬 Variables, operators, and decisions: live</h2>
+  <p class="sub">Every example here is a real line from the shopping cart. Click code to run it and watch what JavaScript does with the values.</p>
+  <div class="tabs" id="jbTabs">
+   <button class="tab-b sel" data-t="vars">Variables</button>
+   <button class="tab-b" data-t="types">Types</button>
+   <button class="tab-b" data-t="math">Math</button>
+   <button class="tab-b" data-t="cmp">Compare</button>
+   <button class="tab-b" data-t="decide">Decide</button>
+  </div>
+
+  <div class="jb-pane on" data-t="vars">
+   <div class="g2">
+    <div class="card"><h4>let vs const: labeled boxes</h4>
+     <div class="jb-stage" id="jbVarStage"><span class="muted">No variables yet. Run a line of code →</span></div>
+     <div class="out" id="jbVarOut">// click a line of code</div>
+    </div>
+    <div class="card"><h4>Run one line at a time</h4>
+     <div class="codebtns" id="jbVarBtns">
+      <button class="btn" data-a="let">let quantity = 1;</button>
+      <button class="btn" data-a="set2">quantity = 2;</button>
+      <button class="btn" data-a="inc">quantity++;</button>
+      <button class="btn" data-a="dec">quantity--;</button>
+      <button class="btn" data-a="const">const price = 29.99;</button>
+      <button class="btn" data-a="setPrice">price = 10;</button>
+      <button class="btn" data-a="relet">let quantity = 5;</button>
+      <button class="btn" data-a="reset">↺ Reset</button>
+     </div>
+     <p class="muted" style="font-size:13px;margin:12px 0 0"><b>let</b> makes a box whose value can be swapped. <b>const</b> makes a box that is sealed after the first value goes in. Both error if you try to make a box that already exists.</p>
+     <p class="muted" style="font-size:13px;margin:8px 0 0">In the project, <code>cart</code> and <code>products</code> are <code>const</code>: the label never moves, even though we push items into the array inside.</p>
+    </div>
+   </div>
+  </div>
+
+  <div class="jb-pane" data-t="types">
+   <div class="g2">
+    <div class="card"><h4>What is this value?</h4>
+     <div class="qline">typeof <input id="jbTypeIn" value="29.99" spellcheck="false" style="width:200px" /><button class="btn primary" id="jbTypeRun" style="margin-left:auto">Run ▶</button></div>
+     <div class="presets" id="jbTypePresets"></div>
+     <div id="jbTypeOut" class="out">// press Run</div>
+    </div>
+    <div class="card"><h4>Why types matter in the cart</h4>
+<pre class="code js"><span class="t-kw">const</span> price = <span class="t-num">29.99</span>;        <span class="t-cm">// number: math works</span>
+<span class="t-kw">const</span> label = <span class="t-str">"29.99"</span>;      <span class="t-cm">// string: it's text</span>
+
+price + <span class="t-num">1</span>;     <span class="t-cm">// 30.99</span>
+label + <span class="t-num">1</span>;     <span class="t-cm">// "29.991"  ← glued together!</span>
+
+button.dataset.id;          <span class="t-cm">// always a string</span>
+products.find((p) =&gt; p.id === productId);</pre>
+     <p class="muted" style="font-size:13px;margin:10px 0 0">Everything read from the page (<code>dataset</code>, <code>input.value</code>) is a <b>string</b>. Turn it into a number with <code>Number(value)</code> before doing math.</p>
+    </div>
+   </div>
+  </div>
+
+  <div class="jb-pane" data-t="math">
+   <div class="g2">
+    <div class="card"><h4>The cart (change the quantities)</h4>
+     <div class="jb-cart" id="jbCart"></div>
+     <div class="codebtns"><button class="btn" id="jbFloat">Why toFixed? Try 0.1 + 0.2</button></div>
+    </div>
+    <div class="card"><h4>updateCart() does the math</h4>
+     <div class="trace" id="jbTrace"></div>
+     <p class="muted" id="jbMathNote" style="font-size:13px;margin:10px 0 0"></p>
+    </div>
+   </div>
+  </div>
+
+  <div class="jb-pane" data-t="cmp">
+   <div class="g2">
+    <div class="card"><h4>Truth tester</h4>
+     <div class="cmp"><input id="jbA" value='"1"' spellcheck="false" /><select id="jbOp"><option>===</option><option>==</option><option>!==</option><option>&gt;</option><option>&lt;</option><option>&gt;=</option><option>&lt;=</option></select><input id="jbB" value="1" spellcheck="false" /><button class="btn primary" id="jbCmpRun">Run ▶</button></div>
+     <div class="presets" id="jbCmpPresets"></div>
+     <div class="verdict" id="jbVerdict"></div>
+     <div class="muted mono" id="jbCmpTypes" style="font-size:13px"></div>
+     <p class="muted" id="jbCmpNote" style="font-size:13px;margin:8px 0 0"></p>
+    </div>
+    <div class="card"><h4>Comparisons in the project</h4>
+<pre class="code js"><span class="t-cm">// addToCart: is it already in the cart?</span>
+<span class="t-kw">const</span> existing = cart.find((item) =&gt; item.id === productId);
+
+<span class="t-cm">// removeFromCart: one left, or more?</span>
+<span class="t-kw">if</span> (cart[index].quantity &gt; <span class="t-num">1</span>) { ... }
+
+<span class="t-cm">// updateCart: anything to show?</span>
+<span class="t-kw">if</span> (cart.length === <span class="t-num">0</span>) { emptyMessage.style.display = <span class="t-str">"block"</span>; }</pre>
+     <p class="muted" style="font-size:13px;margin:10px 0 0">A comparison always produces a <b>boolean</b>: <code>true</code> or <code>false</code>. That boolean is what <code>if</code> looks at.</p>
+    </div>
+   </div>
+  </div>
+
+  <div class="jb-pane" data-t="decide">
+   <div class="g2">
+    <div class="card"><h4>if / else if / else: shipping</h4>
+     <p style="margin:0 0 6px">total = <b class="mono" id="jbTotalLbl" style="color:var(--gold)">$34.99</b></p>
+     <input type="range" class="slider" id="jbTotal" min="0" max="60" step="0.01" value="34.99" />
+     <div class="branch" id="jbB1">if (total === 0) {<br/>&nbsp;&nbsp;message = "Your cart is empty.";</div>
+     <div class="branch" id="jbB2" style="margin-top:6px">} else if (total &lt; 35) {<br/>&nbsp;&nbsp;message = "Shipping: $5.99";</div>
+     <div class="branch" id="jbB3" style="margin-top:6px">} else {<br/>&nbsp;&nbsp;message = "Free shipping!";<br/>}</div>
+     <div class="out" id="jbDecideOut"></div>
+    </div>
+    <div class="card"><h4>Combining with &amp;&amp; and ||</h4>
+     <div class="branch on" style="opacity:1;box-shadow:none" id="jbAnd">if (total &gt; 0 &amp;&amp; total &lt; 35) {<br/>&nbsp;&nbsp;showBanner("Add $" + (35 - total).toFixed(2) + " for free shipping");<br/>}</div>
+     <div class="trace" id="jbAndTrace" style="margin-top:8px"></div>
+     <p class="muted" style="font-size:13px;margin:10px 0 0"><code>&amp;&amp;</code> is true only when <b>both</b> sides are true. <code>||</code> is true when <b>either</b> side is. <code>!</code> flips a boolean. JavaScript checks an <code>if / else if</code> chain top to bottom and runs the <b>first</b> branch that is true.</p>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- 11 OBJECTS -->
 <section class="slide" data-title="Objects">
  <div class="slide-inner">
   <span class="kicker">Part 3 · Objects</span>
@@ -635,7 +787,7 @@ cart.push({ ...product, quantity: 1 });</pre>
  </div>
 </section>
 
-<!-- 11 ARRAYS -->
+<!-- 12 ARRAYS -->
 <section class="slide" data-title="Arrays">
  <div class="slide-inner">
   <span class="kicker">Part 4 · Arrays</span>
@@ -671,7 +823,7 @@ products.length;    // 2</pre>
  </div>
 </section>
 
-<!-- 12 ARRAY LAB -->
+<!-- 13 ARRAY LAB -->
 <section class="slide" data-title="Lab: array methods">
  <div class="slide-inner">
   <span class="kicker">Part 4 · Lab</span>
@@ -695,7 +847,7 @@ products.length;    // 2</pre>
  </div>
 </section>
 
-<!-- 13 FUNCTIONS -->
+<!-- 14 FUNCTIONS -->
 <section class="slide" data-title="Functions">
  <div class="slide-inner">
   <span class="kicker">Part 5 · Functions</span>
@@ -725,7 +877,7 @@ function (p) { return p.id === productId; }
  </div>
 </section>
 
-<!-- 14 CALL MAP -->
+<!-- 15 CALL MAP -->
 <section class="slide" data-title="Who calls whom">
  <div class="slide-inner">
   <span class="kicker">Part 5 · Functions</span>
@@ -741,7 +893,7 @@ function (p) { return p.id === productId; }
  </div>
 </section>
 
-<!-- 15 ELEMENT FACTORY -->
+<!-- 16 ELEMENT FACTORY -->
 <section class="slide" data-title="Lab: building elements">
  <div class="slide-inner">
   <span class="kicker">Part 5 · Change the page</span>
@@ -784,7 +936,7 @@ card.innerHTML = `
  </div>
 </section>
 
-<!-- 16 EVENTS -->
+<!-- 17 EVENTS -->
 <section class="slide" data-title="Events & listeners">
  <div class="slide-inner">
   <span class="kicker">Part 5 · Listen</span>
@@ -811,7 +963,7 @@ removeButton.addEventListener("click", () =&gt; removeFromCart(item.id));</pre>
  </div>
 </section>
 
-<!-- 17 TRACER -->
+<!-- 18 TRACER -->
 <section class="slide" data-title="Lab: the full cart, line by line">
  <div class="slide-inner" style="max-width:1400px">
   <span class="kicker">Part 6 · Everything together</span>
@@ -840,7 +992,7 @@ removeButton.addEventListener("click", () =&gt; removeFromCart(item.id));</pre>
  </div>
 </section>
 
-<!-- 18 BUGS -->
+<!-- 19 BUGS -->
 <section class="slide" data-title="Common bugs & fixes">
  <div class="slide-inner">
   <span class="kicker">Part 6 · Debugging</span>
@@ -859,7 +1011,7 @@ removeButton.addEventListener("click", () =&gt; removeFromCart(item.id));</pre>
  </div>
 </section>
 
-<!-- 19 RECAP -->
+<!-- 20 RECAP -->
 <section class="slide" data-title="Reference: everything we used">
  <div class="slide-inner">
   <span class="kicker">Reference</span>
@@ -1241,6 +1393,229 @@ function branch() {
 }
 $("#qtyIn").addEventListener("input", branch);
 branch();
+
+/* ---------- js basics lab ---------- */
+const jbSlide = slides.findIndex((s) => s.dataset.title.startsWith("Lab: variables"));
+function jbTab(t) {
+  $$("#jbTabs .tab-b").forEach((b) => b.classList.toggle("sel", b.dataset.t === t));
+  $$(".jb-pane").forEach((p) => p.classList.toggle("on", p.dataset.t === t));
+}
+$$("#jbTabs .tab-b").forEach((b) => b.addEventListener("click", () => jbTab(b.dataset.t)));
+// Slide 9's type cards and operator rows open the matching station here.
+$$(".vartype div").forEach((d) => {
+  d.classList.add("link");
+  d.title = "Try it in the lab";
+  d.addEventListener("click", () => {
+    jbTab("types");
+    $("#jbTypeIn").value = d.querySelector("code").textContent;
+    go(jbSlide);
+    typeRun();
+  });
+});
+$$(".optab tr").forEach((tr) => {
+  const op = tr.firstElementChild.textContent.trim();
+  const inMath = /^(=|\+ -|\* \/|\+=|\+\+|--)$/.test(op);
+  tr.classList.add("link");
+  tr.title = "Try it in the lab";
+  tr.addEventListener("click", () => {
+    if (inMath) { jbTab("math"); }
+    else {
+      jbTab("cmp");
+      const o = op.split(" ")[0];
+      if ([...$("#jbOp").options].some((x) => x.text === o)) $("#jbOp").value = o;
+      cmpRun();
+    }
+    go(jbSlide);
+  });
+});
+
+// ---- Variables: let vs const
+const jbVars = new Map(); // name -> { value, kind }
+function jbVarsRender(changed, errName) {
+  const stage = $("#jbVarStage");
+  if (!jbVars.size) { stage.innerHTML = `<span class="muted">No variables yet. Run a line of code →</span>`; return; }
+  stage.innerHTML = [...jbVars].map(([n, v]) =>
+    `<div class="vbox ${v.kind} ${n === changed ? "flip" : ""} ${n === errName ? "err" : ""}"><div class="n">${n}</div><div class="val">${esc(String(v.value))}</div><div class="kw">${v.kind}${v.kind === "const" ? " 🔒" : ""}</div></div>`).join("");
+}
+function jbVarSay(msg, bad) {
+  const o = $("#jbVarOut");
+  o.className = "out " + (bad ? "err" : "ok");
+  o.innerHTML = msg;
+}
+const JB_VAR_ACTIONS = {
+  let() { return declare("quantity", 1, "let"); },
+  relet() { return declare("quantity", 5, "let"); },
+  const() { return declare("price", 29.99, "const"); },
+  set2() { return assign("quantity", 2); },
+  setPrice() { return assign("price", 10); },
+  inc() { return step("quantity", 1); },
+  dec() { return step("quantity", -1); },
+  reset() { jbVars.clear(); jbVarsRender(); jbVarSay("// fresh start: no variables exist"); },
+};
+function declare(name, value, kind) {
+  if (jbVars.has(name)) { jbVarsRender(null, name); return jbVarSay(`❌ SyntaxError: Identifier '${name}' has already been declared\n// A box called ${name} already exists. To change its value, assign without let: ${name} = ${value};`, true); }
+  jbVars.set(name, { value, kind });
+  jbVarsRender(name);
+  jbVarSay(`✅ ${kind} ${name} = ${value};\n// a new ${kind === "const" ? "sealed " : ""}box labeled "${name}" now holds ${value}`);
+}
+function assign(name, value) {
+  const v = jbVars.get(name);
+  if (!v) return jbVarSay(`❌ ReferenceError: ${name} is not defined\n// There is no box called ${name} yet. Declare it first with let or const.`, true);
+  if (v.kind === "const") { jbVarsRender(null, name); return jbVarSay(`❌ TypeError: Assignment to constant variable.\n// ${name} was made with const, so its box is sealed. Use let if a value needs to change.`, true); }
+  const old = v.value; v.value = value; jbVarsRender(name);
+  jbVarSay(`✅ ${name} = ${value};\n// the box labeled "${name}" swapped ${old} for ${value}`);
+}
+function step(name, d) {
+  const v = jbVars.get(name);
+  if (!v) return jbVarSay(`❌ ReferenceError: ${name} is not defined\n// ${name}${d > 0 ? "++" : "--"} means ${name} = ${name} ${d > 0 ? "+" : "-"} 1, and there is no ${name} yet.`, true);
+  if (v.kind === "const") { jbVarsRender(null, name); return jbVarSay(`❌ TypeError: Assignment to constant variable.`, true); }
+  const old = v.value; v.value = old + d; jbVarsRender(name);
+  jbVarSay(`✅ ${name}${d > 0 ? "++" : "--"};\n// shorthand for ${name} = ${name} ${d > 0 ? "+" : "-"} 1 → ${old} becomes ${v.value}`);
+}
+$("#jbVarBtns").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) JB_VAR_ACTIONS[b.dataset.a](); });
+
+// ---- Types: a tiny, safe reader of JavaScript literals (no eval)
+const TYPE_COLORS = { string: "var(--green)", number: "#ffb38a", boolean: "var(--purple)", object: "var(--gold)", undefined: "var(--muted)" };
+function readLiteral(src) {
+  const s = src.trim();
+  if (s === "") return { error: "SyntaxError: nothing to evaluate" };
+  if (/^(-?\d+(\.\d+)?|-?\.\d+)$/.test(s)) return { value: Number(s), type: "number" };
+  if (/^(["']).*\1$/s.test(s)) return { value: s.slice(1, -1), type: "string", shown: s };
+  if (s === "true" || s === "false") return { value: s === "true", type: "boolean" };
+  if (s === "null") return { value: null, type: "object", isNull: true };
+  if (s === "undefined") return { value: undefined, type: "undefined" };
+  if (/^\[.*\]$/s.test(s)) return { value: s, type: "object", isArray: true };
+  if (/^\{.*\}$/s.test(s)) return { value: s, type: "object", isObject: true };
+  if (/^[A-Za-z_$][\w$]*$/.test(s)) return { error: `ReferenceError: ${s} is not defined`, bare: s };
+  return { error: "SyntaxError: JavaScript can't read that value" };
+}
+const TYPE_NOTES = {
+  number: (r) => `A <b>number</b>. Math works: <code>${r.value} * 2</code> → <code>${+(r.value * 2).toFixed(10)}</code>.`,
+  string: (r) => /^-?\d+(\.\d+)?$/.test(r.value)
+    ? `A <b>string</b>: text in quotes, even though it looks like a number. <code>${r.shown} + 1</code> → <code>"${r.value}1"</code> (glued, not added!). Remove the quotes, or use <code>Number(${r.shown})</code>.`
+    : `A <b>string</b>: text in quotes. <code>${r.shown}.length</code> → <code>${r.value.length}</code>, and <code>+</code> glues strings together.`,
+  boolean: () => `A <b>boolean</b>: yes or no. Comparisons like <code>quantity &gt; 1</code> produce these, and <code>if</code> reads them.`,
+  object: (r) => r.isNull ? `<code>null</code> means “deliberately nothing”. <code>typeof null</code> says <code>"object"</code>, a famous JavaScript quirk. <code>getElementById</code> returns <code>null</code> when nothing matches.`
+    : r.isArray ? `An <b>array</b>: an ordered list, like <code>cart</code>. <code>typeof</code> says <code>"object"</code> because arrays are a kind of object; <code>Array.isArray(…)</code> tells them apart.`
+    : `An <b>object</b>: <code>key: value</code> pairs, like one product.`,
+  undefined: () => `<code>undefined</code>: a variable that exists but was never given a value, or a missing property like <code>product.color</code>.`,
+};
+function typeRun() {
+  const r = readLiteral($("#jbTypeIn").value);
+  const o = $("#jbTypeOut");
+  if (r.error) {
+    o.className = "out err";
+    o.innerHTML = `❌ ${esc(r.error)}${r.bare ? `<br/><span class="muted">Without quotes, JavaScript reads <code>${esc(r.bare)}</code> as a <b>variable name</b>, and no variable called ${esc(r.bare)} exists. Did you mean <code>"${esc(r.bare)}"</code>?</span>` : ""}`;
+    return;
+  }
+  o.className = "out ok";
+  o.innerHTML = `<span class="typebadge" style="--c:${TYPE_COLORS[r.type]}">"${r.type}"</span><br/>${TYPE_NOTES[r.type](r)}`;
+}
+["29.99", '"29.99"', "true", '"Minecraft"', "Minecraft", "[ ]", "{ }", "null", "undefined"].forEach((p) => {
+  const b = document.createElement("button");
+  b.textContent = p;
+  b.addEventListener("click", () => { $("#jbTypeIn").value = p; typeRun(); });
+  $("#jbTypePresets").appendChild(b);
+});
+$("#jbTypeRun").addEventListener("click", typeRun);
+$("#jbTypeIn").addEventListener("keydown", (e) => { if (e.key === "Enter") typeRun(); });
+typeRun();
+
+// ---- Math: the cart total, traced line by line
+const JB_ITEMS = [
+  { id: "game", name: "Minecraft", e: "🎮", price: 29.99, quantity: 2 },
+  { id: "candy", name: "Sour Patch Kids", e: "🍬", price: 1.29, quantity: 1 },
+];
+let jbPrevTrace = [];
+function jbCartRender() {
+  $("#jbCart").innerHTML = JB_ITEMS.map((it) =>
+    `<div class="row"><span style="font-size:22px">${it.e}</span><span style="flex:1"><b>${it.name}</b><br/>$${it.price.toFixed(2)}</span>
+     <button class="qbtn" data-id="${it.id}" data-d="-1" title="quantity--">−</button><span class="qty">${it.quantity}</span><button class="qbtn" data-id="${it.id}" data-d="1" title="quantity++">+</button></div>`).join("");
+}
+function jbMathTrace() {
+  const lines = [["let total = 0;", "total → 0"]];
+  let total = 0;
+  JB_ITEMS.forEach((it) => {
+    if (!it.quantity) { lines.push([`// ${it.e} ${it.name}: not in the cart`, ""]); return; }
+    const itemTotal = it.price * it.quantity;
+    lines.push([`itemTotal = ${it.price} * ${it.quantity};`, `→ ${itemTotal}`]);
+    total += itemTotal;
+    lines.push([`total += itemTotal;`, `total → ${total}`]);
+  });
+  lines.push([`cartTotal.textContent = "$" + total.toFixed(2);`, `→ "$${total.toFixed(2)}"`]);
+  $("#jbTrace").innerHTML = lines.map(([c, r], i) =>
+    `<div class="ln ${jbPrevTrace[i] && jbPrevTrace[i][1] !== r ? "chg" : ""} ${c.startsWith("//") ? "dim" : ""}"><span>${esc(c)}</span><span class="r">${esc(r)}</span></div>`).join("");
+  jbPrevTrace = lines;
+  const ugly = String(total).length > 6 && !/^\d+(\.\d{1,2})?$/.test(String(total));
+  $("#jbMathNote").innerHTML = ugly
+    ? `Notice <code>total → ${total}</code>. Computers store decimals in binary, so cents don't always add up exactly. <code>toFixed(2)</code> rounds to two decimals and turns the number into a <b>string</b> ready to display.`
+    : `<code>+=</code> adds to what's already in <code>total</code>. <code>toFixed(2)</code> gives a string with exactly two decimals, so <code>$1.3</code> shows as <code>$1.30</code>.`;
+}
+$("#jbCart").addEventListener("click", (e) => {
+  const b = e.target.closest(".qbtn"); if (!b) return;
+  const it = JB_ITEMS.find((x) => x.id === b.dataset.id);
+  it.quantity = Math.max(0, Math.min(9, it.quantity + +b.dataset.d));
+  jbCartRender(); jbMathTrace();
+});
+$("#jbFloat").addEventListener("click", () => {
+  $("#jbTrace").innerHTML = `<div class="ln chg"><span>0.1 + 0.2</span><span class="r">→ ${0.1 + 0.2}</span></div><div class="ln"><span>0.1 + 0.2 === 0.3</span><span class="r" style="color:var(--red)">→ ${0.1 + 0.2 === 0.3}</span></div><div class="ln chg"><span>(0.1 + 0.2).toFixed(2)</span><span class="r">→ "${(0.1 + 0.2).toFixed(2)}"</span></div><div class="ln"><span>29.99 * 3</span><span class="r">→ ${29.99 * 3}</span></div>`;
+  jbPrevTrace = [];
+  $("#jbMathNote").innerHTML = `This is not a bug in your code. Binary can't store 0.1 exactly, the same way decimal can't store ⅓ exactly. Always format money with <code>toFixed(2)</code> and never compare decimals with <code>===</code>. Click a quantity button to go back to the cart.`;
+});
+jbCartRender(); jbMathTrace();
+
+// ---- Compare: truth tester
+function cmpRun() {
+  const a = readLiteral($("#jbA").value), b = readLiteral($("#jbB").value), op = $("#jbOp").value;
+  const v = $("#jbVerdict"), note = $("#jbCmpNote");
+  if (a.error || b.error) { v.className = "verdict f"; v.textContent = "error"; $("#jbCmpTypes").textContent = (a.error || b.error); note.textContent = "Use quotes for text: \"1\" is a string, 1 is a number."; return; }
+  const A = a.isArray || a.isObject ? a.value : a.value, B = b.value;
+  const ops = { "===": (x, y) => x === y, "==": (x, y) => x == y, "!==": (x, y) => x !== y, ">": (x, y) => x > y, "<": (x, y) => x < y, ">=": (x, y) => x >= y, "<=": (x, y) => x <= y };
+  const result = ops[op](A, B);
+  v.className = "verdict " + (result ? "t" : "f");
+  v.textContent = String(result);
+  $("#jbCmpTypes").innerHTML = `typeof left → <span style="color:${TYPE_COLORS[a.type]}">"${a.type}"</span> &nbsp;·&nbsp; typeof right → <span style="color:${TYPE_COLORS[b.type]}">"${b.type}"</span>`;
+  if (a.type !== b.type && (op === "==" || op === "===")) {
+    note.innerHTML = op === "=="
+      ? `<code>==</code> quietly converted one side so the types matched before comparing. That hides mistakes, which is why the project always uses <code>===</code>.`
+      : `<code>===</code> checks value <b>and</b> type. Different types means <code>false</code>, no conversions. This is the one to use. (Try the same values with <code>==</code>.)`;
+  } else if (a.type === "string" && b.type === "string" && /[<>]/.test(op)) {
+    note.innerHTML = `Two strings compare <b>alphabetically</b>, character by character: <code>"9" &gt; "10"</code> is true! Convert to numbers first if you mean size.`;
+  } else {
+    note.innerHTML = `A comparison is a question with a <b>boolean</b> answer. In the project this answer goes straight into an <code>if</code>.`;
+  }
+}
+[['"1"', "===", "1"], ['"1"', "==", "1"], ["29.99", ">", "1.29"], ["2", ">", "1"], ["0", "===", "0"], ['"game"', "===", '"game"'], ['"9"', ">", '"10"'], ["true", "===", "1"]].forEach(([a, op, b]) => {
+  const btn = document.createElement("button");
+  btn.textContent = `${a} ${op} ${b}`;
+  btn.addEventListener("click", () => { $("#jbA").value = a; $("#jbOp").value = op; $("#jbB").value = b; cmpRun(); });
+  $("#jbCmpPresets").appendChild(btn);
+});
+$("#jbCmpRun").addEventListener("click", cmpRun);
+[$("#jbA"), $("#jbB")].forEach((i) => i.addEventListener("keydown", (e) => { if (e.key === "Enter") cmpRun(); }));
+$("#jbOp").addEventListener("change", cmpRun);
+cmpRun();
+
+// ---- Decide: if / else if / else and &&
+function decideRun() {
+  const total = +$("#jbTotal").value;
+  $("#jbTotalLbl").textContent = "$" + total.toFixed(2);
+  const c1 = total === 0, c2 = total < 35;
+  $("#jbB1").classList.toggle("on", c1);
+  $("#jbB2").classList.toggle("on", !c1 && c2);
+  $("#jbB3").classList.toggle("on", !c1 && !c2);
+  const steps = [`total === 0 → ${c1}${c1 ? "  ✓ run this branch, skip the rest" : "  ✗ keep checking"}`];
+  if (!c1) steps.push(`total < 35 → ${c2}${c2 ? "  ✓ run this branch, skip the rest" : "  ✗ fall through to else"}`);
+  const msg = c1 ? "Your cart is empty." : c2 ? "Shipping: $5.99" : "Free shipping!";
+  $("#jbDecideOut").className = "out ok";
+  $("#jbDecideOut").textContent = steps.join("\n") + `\nmessage → "${msg}"`;
+  const p = total > 0, q = total < 35, both = p && q;
+  $("#jbAndTrace").innerHTML = [[`total > 0`, p], [`total < 35`, q], [`${p} && ${q}`, both]].map(([c, r], i) =>
+    `<div class="ln ${i === 2 ? "chg" : ""} ${r ? "" : "bad"}"><span>${c}</span><span class="r">→ ${r}</span></div>`).join("")
+    + `<div class="ln dim"><span>${both ? `banner: "Add $${(35 - total).toFixed(2)} for free shipping"` : "// condition false: nothing happens"}</span><span></span></div>`;
+}
+$("#jbTotal").addEventListener("input", decideRun);
+decideRun();
 
 /* ---------- objects ---------- */
 let prod, copy;
