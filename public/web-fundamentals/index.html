@@ -143,6 +143,14 @@ pre.code{margin:0;font-family:var(--mono);font-size:13.5px;line-height:1.7;backg
 .result{margin-top:10px;padding:12px;border-radius:10px;background:var(--panel2);font-family:var(--mono);font-size:13.5px;min-height:46px;white-space:pre-wrap}
 .result.null{box-shadow:inset 4px 0 0 var(--red)}
 .result.ok{box-shadow:inset 4px 0 0 var(--green)}
+.result .rhead{color:var(--green);font-weight:700}
+.result .rnull{color:var(--red);font-weight:700}
+.result .rnote{display:block;margin:6px 0 10px;font-family:system-ui,sans-serif;font-size:13px;color:var(--muted)}
+.result .rsec{display:block;margin-top:10px;color:var(--gold);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.result .rk{color:var(--blue)}
+.result .rv{color:var(--green)}
+.result .rt{color:var(--pink)}
+.result .rdim{color:#6c7299}
 .mock{background:#fff;color:#222;border-radius:12px;padding:14px;display:grid;grid-template-columns:1.3fr 1fr;gap:12px;font-size:13px}
 .mock h2{font-size:14px;margin:4px 0}
 .mock p{margin:2px 0}
@@ -500,13 +508,13 @@ buttons.forEach((button) =&gt; { ... });</pre>
  <div class="slide-inner">
   <span class="kicker">Part 2 · Lab</span>
   <h2>🔬 Selector playground</h2>
-  <p class="sub">Choose a method, then a selector, or type your own. Matching elements light up on the real page below, numbered in the order JavaScript finds them.</p>
+  <p class="sub">Choose a method, then an id or selector, or type your own. What JavaScript finds lights up on the page below, and the panel on the right shows <b>exactly what the call returns</b>: one element, a list, or <code>null</code>.</p>
   <div class="tabs" id="pgTabs">
-   <button class="tab-b sel" data-m="querySelectorAll">querySelectorAll</button>
+   <button class="tab-b sel" data-m="getElementById">getElementById</button>
    <button class="tab-b" data-m="querySelector">querySelector</button>
-   <button class="tab-b" data-m="getElementById">getElementById</button>
+   <button class="tab-b" data-m="querySelectorAll">querySelectorAll</button>
   </div>
-  <div class="qline">document.<span id="pgMethod" style="color:var(--blue)">querySelectorAll</span>("<input id="pgInput" value=".add-to-cart-button" spellcheck="false" />")<button class="btn primary" id="pgRun" style="margin-left:auto">Run ▶</button></div>
+  <div class="qline">document.<span id="pgMethod" style="color:var(--blue)">getElementById</span>("<input id="pgInput" value="product-list" spellcheck="false" />")<button class="btn primary" id="pgRun" style="margin-left:auto">Run ▶</button></div>
   <div class="presets" id="pgPresets"></div>
   <div class="g2">
    <div class="mock" id="playground" style="grid-template-columns:1.3fr 1fr">
@@ -1035,6 +1043,10 @@ const PRESETS = {
   getElementById: ["product-list", "cart-items", "cart-total", "empty-cart-message", "#cart-items", "cart-item"],
 };
 const TIPS = {
+  "product-list": "You got the BOX, not the products. getElementById always returns one element; the two product cards live inside it as its .children. To get the cards themselves, use querySelectorAll(\".product-card\").",
+  "cart-items": "This is the empty-looking cart container. It already has one .cart-item child here; on the real page it starts empty and script.js fills it.",
+  "cart-total": "One element with one child (<b>) and a short textContent. Changing .textContent is how the total updates.",
+  "empty-cart-message": "A <p> with no children, just text. script.js hides it (style.display = \"none\") once the cart has items.",
   "#cart-items": "⚠ getElementById takes only the id name. The # is part of selector syntax, so this returns null.",
   "cart-item": "⚠ Typo: the real id is \"cart-items\". One letter off returns null, which causes the most common bug.",
   ".missing": "Nothing matches. querySelectorAll returns an empty list; querySelector returns null.",
@@ -1042,7 +1054,7 @@ const TIPS = {
   '[data-id="candy"]': "Attribute selector: finds elements by the value of an attribute.",
   "#cart-items .cart-item": "Descendant selector: only .cart-item rows inside #cart-items.",
 };
-let pgMode = "querySelectorAll";
+let pgMode = "getElementById";
 const pgInput = $("#pgInput");
 function renderPresets() {
   const box = $("#pgPresets");
@@ -1105,14 +1117,44 @@ function runPg() {
     return;
   }
   found.forEach((el, i) => mark(el, i + 1));
+  res.classList.add(found.length ? "ok" : "null");
   if (pgMode === "querySelectorAll") {
-    res.classList.add(found.length ? "ok" : "null");
-    res.textContent = `→ NodeList(${found.length}) [\n${found.map((e, i) => `  ${i}: ${describe(e)}`).join("\n")}${found.length ? "\n" : ""}]`;
+    res.innerHTML = `<span class="rhead">→ NodeList(${found.length})</span> [\n${found.map((e, i) => `  <span class="rdim">${i}:</span> <span class="rt">${esc(describe(e))}</span>`).join("\n")}${found.length ? "\n" : ""}]`
+      + `<span class="rnote">${found.length ? `A <b>list</b> of ${found.length} element${found.length === 1 ? "" : "s"}. Use <code>.forEach</code> or <code>[0]</code>, <code>[1]</code>… to reach each one.` : "An <b>empty list</b>. No error, but <code>.forEach</code> runs zero times."}</span>`;
+  } else if (!found.length) {
+    res.innerHTML = `<span class="rnull">→ null</span>\n<span class="rnote">Nothing was found, so the variable holds <code>null</code>. Trying <code>.textContent</code> or <code>.appendChild</code> on it crashes with “Cannot read properties of null”.</span>`;
   } else {
-    res.classList.add(found.length ? "ok" : "null");
-    res.textContent = found.length ? `→ ${describe(found[0])}` : "→ null   (nothing was found!)";
+    res.innerHTML = inspect(found[0]);
   }
   $("#pgTip").textContent = TIPS[sel] || (pgMode === "querySelector" && found.length ? "querySelector stops at the FIRST match, even if there are more." : "");
+}
+// What a single returned element looks like from JavaScript's side: the tag,
+// a few live properties, and the children it contains (one level down).
+function inspect(el) {
+  const kids = [...el.children].filter((k) => !k.classList.contains("badge"));
+  // Read the text from a copy with the playground's number badges removed.
+  const clean = el.cloneNode(true);
+  clean.querySelectorAll(".badge").forEach((b) => b.remove());
+  const text = clean.textContent.replace(/\s+/g, " ").trim();
+  const short = text.length > 42 ? text.slice(0, 42) + "…" : text;
+  const prop = (k, v) => `  <span class="rk">${k}</span> <span class="rdim">→</span> <span class="rv">${esc(v)}</span>`;
+  let out = `<span class="rhead">→ ${esc(describe(el))}</span>`;
+  out += `<span class="rnote"><b>One element</b> (an object), not a list. You can read its properties and call methods on it.</span>`;
+  out += `<span class="rsec">Properties</span>`;
+  out += [
+    prop(".id", JSON.stringify(el.id)),
+    prop(".className", JSON.stringify(el.className.replace(/\s*match\s*/, " ").trim())),
+    prop(".children.length", kids.length),
+    prop(".textContent", JSON.stringify(short)),
+  ].join("\n");
+  out += `<span class="rsec">Inside it (.children)</span>`;
+  out += kids.length
+    ? kids.map((k, i) => {
+        const sub = [...k.children].filter((c) => !c.classList.contains("badge")).length;
+        return `  <span class="rdim">${i}:</span> <span class="rt">${esc(describe(k))}</span>${sub ? ` <span class="rdim">(${sub} inside)</span>` : ""}`;
+      }).join("\n")
+    : `  <span class="rdim">(no child elements, only text)</span>`;
+  return out;
 }
 $("#pgRun").addEventListener("click", runPg);
 pgInput.addEventListener("keydown", (e) => { if (e.key === "Enter") runPg(); });
