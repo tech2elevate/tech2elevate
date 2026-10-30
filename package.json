@@ -1,0 +1,41 @@
+{
+  "name": "tech2elevate",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
+    "preview": "pnpm dlx serve@14.2.4 out",
+    "lint": "next lint",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "clean": "rm -rf .next",
+    "knip": "knip",
+    "postbuild": "pagefind --site .next/server/app --output-path out/_pagefind",
+    "prepare": "is-ci || lefthook install"
+  },
+  "dependencies": {
+    "next": "15.5.2",
+    "nextra": "4.4.0",
+    "nextra-theme-docs": "4.4.0",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "sharp": "0.34.3"
+  },
+  "devDependencies": {
+    "@types/node": "22.18.1",
+    "@types/react": "19.1.12",
+    "@types/react-dom": "19.1.9",
+    "gitzy": "5.9.0",
+    "is-ci": "4.1.0",
+    "knip": "5.63.1",
+    "lefthook": "1.12.3",
+    "pagefind": "1.4.0",
+    "prettier": "3.6.2",
+    "typescript": "5.9.2"
+  },
+  "packageManager": "pnpm@10.15.1",
+  "engines": {
+    "node": "22"
+  }
+}

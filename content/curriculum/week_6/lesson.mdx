@@ -1,0 +1,111 @@
+# Week 6: Track Quantity and Show Total Price
+
+## Today you’ll build...
+
+A smarter cart that:
+
+- **Tracks quantities** when a user adds the same item more than once
+- **Calculates the total price** of all items in the cart
+
+Your shopping cart will now reflect a real purchase experience.
+
+---
+
+## To do that, you’ll learn...
+
+- How to update quantities instead of adding duplicate items
+- How to calculate a running total
+- How to use:
+  - `.find()` to look for items in the cart
+  - Basic math operations
+  - `toFixed(2)` for formatting dollar values
+- How to keep the DOM in sync with the cart data
+
+---
+
+## By the end of today...
+
+Each student will:
+
+- See quantity increase when the same item is added again
+- View a total price displayed in the cart area
+
+### Example (cart view):
+
+```
+Minecraft - Qty: 2 - $59.98
+Sour Patch Kids - Qty: 1 - $1.29
+Total: $61.27
+```
+
+### Code snippets:
+
+```js
+function updateCart() {
+  cartItemsContainer.innerHTML = "";
+
+  let total = 0;
+
+  cart.forEach((item) => {
+    const itemTotal = item.price * item.quantity;
+    total += itemTotal;
+
+    const cartItem = document.createElement("li");
+    cartItem.innerHTML = `
+      <span>${item.name}</span>
+      <span>Qty: ${item.quantity}</span>
+      <span>$${itemTotal.toFixed(2)}</span>
+    `;
+    cartItemsContainer.appendChild(cartItem);
+  });
+
+  cartTotalContainer.innerHTML = `<h2>Total: $${total.toFixed(2)}</h2>`;
+}
+```
+
+---
+
+## Agenda (1 hour total)
+
+| Time   | Activity                                                                |
+| ------ | ----------------------------------------------------------------------- |
+| 5 min  | Warm-up question: “What’s something you always buy more than one of?”   |
+| 15 min | Instructor walkthrough: show how to manage quantity and calculate total |
+| 30 min | Students implement quantity and total logic with mentor support         |
+| 10 min | Wrap-up and what’s next                                                 |
+
+---
+
+## Instructor Notes
+
+### Setup
+
+- Students should already have:
+  - A `cart` array that stores item name, price, and quantity
+  - A way to render cart items
+  - A section (`#cart-total`) for displaying the total
+
+### Instructor Live Coding Goals
+
+- Walk through how to update `quantity` instead of pushing a new item
+- Show how to calculate and update the total dynamically
+- Discuss how the cart and UI stay in sync every time `updateCart()` runs
+
+### 1:1 Mentor Goals
+
+- Every student sees quantity increase for repeated clicks
+- Every student sees total update in real time
+- If ahead:
+  - Style the cart layout
+  - Show dollar signs and format all prices
+
+### Wrap-up and What’s Next
+
+Reinforce:
+
+- Your cart now reflects quantities and cost — a big milestone
+- You’re managing dynamic data and updating the UI
+
+Preview:
+
+> “Next week, we’ll add a **remove** button so users can take items out of their cart.”
