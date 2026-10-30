@@ -245,6 +245,36 @@ pre.code{margin:0;font-family:var(--mono);font-size:13.5px;line-height:1.7;backg
 .verdict.t{color:var(--green)}.verdict.f{color:var(--red)}
 .slider{width:100%;accent-color:var(--gold);margin:4px 0 12px}
 
+/* ---------- quick checks ---------- */
+.qc{margin-top:18px;border:1px solid rgba(255,201,77,.35);border-radius:var(--r);background:rgba(255,201,77,.06);overflow:hidden}
+.qc-bar{width:100%;display:flex;align-items:center;gap:10px;padding:12px 16px;background:transparent;border:0;color:var(--text);font:700 14px system-ui,sans-serif;cursor:pointer;text-align:left}
+.qc-bar:hover{background:rgba(255,201,77,.1)}
+.qc-bar .chev{display:inline-block;transition:transform .25s;color:var(--gold);font-size:11px}
+.qc.open .qc-bar .chev{transform:rotate(90deg)}
+.qc-bar .qc-state{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--gold)}
+.qc-bar .qc-state.done{color:var(--green)}
+.qc-body{padding:0 16px 16px;animation:rise .3s both}
+.qc-q{font-size:15px;margin:0 0 10px}
+.qc-q pre.code{margin:8px 0;font-size:13px}
+.qc-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.qc-row input{flex:1;min-width:200px;background:#1b2046;border:1px solid #3a4080;color:var(--gold);font:600 14px var(--mono);border-radius:8px;padding:9px 10px}
+.qc-chips{display:flex;gap:8px;flex-wrap:wrap}
+.qc-chips .chip.pick{border-color:var(--gold);background:#3a3420}
+.qc-chips .chip.ok{border-color:var(--green);background:#173a2c}
+.qc-chips .chip.bad{border-color:var(--red);opacity:.6}
+.qc-fb{margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--panel2);font-size:14px;display:none}
+.qc-fb.show{display:block;animation:rise .25s both}
+.qc-fb.ok{box-shadow:inset 4px 0 0 var(--green)}
+.qc-fb.bad{box-shadow:inset 4px 0 0 var(--red)}
+.qc-foot{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
+.qc-foot .lnk{background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;font-size:13px;padding:0}
+.qc-foot .btn.done{background:var(--green);color:#111}
+.qc-order{display:flex;gap:6px;flex-wrap:wrap;min-height:38px;padding:6px;border:1px dashed #3a4080;border-radius:8px;margin-bottom:8px;align-items:center}
+.qc-order:empty::before{content:"click the steps in the right order…";color:var(--muted);font-size:13px}
+.qc-score .srow{display:flex;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px}
+.qc-score .srow .bar{flex:1;height:6px;border-radius:3px;background:var(--panel2);overflow:hidden}
+.qc-score .srow .bar i{display:block;height:100%;background:var(--green);transition:width .4s}
+
 /* ---------- objects ---------- */
 .obj{background:var(--ink);border-radius:12px;padding:12px 14px;font-family:var(--mono);font-size:14px;border:2px solid var(--c,var(--purple));transition:all .4s;min-width:240px}
 .obj .row{display:flex;gap:6px;padding:3px 6px;border-radius:6px;transition:background .3s}
@@ -1628,6 +1658,146 @@ function decideRun() {
 }
 $("#jbTotal").addEventListener("input", decideRun);
 decideRun();
+
+/* ---------- quick checks: short self-tests at the bottom of concept slides ---------- */
+// Each entry attaches to the slide with that data-title. Answers are matched
+// after qcNorm() below, so quotes, spacing, semicolons and "document." are forgiving.
+const QC = [
+  { slide: "Attributes: labels for JavaScript", q: "Which attribute tells JavaScript which product an <b>Add to Cart</b> button belongs to?", a: ["data-id", "dataset.id", "data-id=\"…\""], show: 'data-id', hint: "Look at the attributes on the button inside each product card.", why: "<code>data-*</code> attributes are labels for JavaScript. The script reads it with <code>button.dataset.id</code>." },
+  { slide: "Attributes: labels for JavaScript", q: "<code>button.dataset.id</code> gives you a…", chips: ["a number", "a string", "an element"], ok: 1, hint: "Everything that comes from HTML is text.", why: "Attributes are always strings, so <code>\"1\" === 1</code> is false. That's why the project uses string ids." },
+  { slide: "The DOM: how JS sees HTML", q: "In the tree, which element is the <b>parent</b> of every <code>.product-card</code>?", chips: ['&lt;div id="product-list"&gt;', "&lt;body&gt;", '&lt;div class="cart-items"&gt;'], ok: 0, hint: "Cards are created and appended into one container by displayProducts().", why: "<code>displayProducts()</code> appends each card to <code>#product-list</code>, so that div is their parent and the cards are its <code>children</code>." },
+  { slide: "The DOM: how JS sees HTML", q: "Which property reads the <b>plain text</b> inside an element?", a: ["textcontent", ".textcontent", "el.textcontent"], show: ".textContent", hint: "It's in the table on this slide, right at the top.", why: "<code>textContent</code> is plain text; <code>innerHTML</code> is the HTML inside, as a string." },
+  { slide: "Finding elements", q: "Write the line that finds the cart total element. Its HTML is <code>&lt;div id=\"cart-total\"&gt;</code>.", a: ['getelementbyid("cart-total")', 'queryselector("#cart-total")'], show: 'document.getElementById("cart-total")', hint: "It has an id, so there's a method made for exactly that. No # in the id name.", why: "<code>getElementById(\"cart-total\")</code> is the direct route. <code>querySelector(\"#cart-total\")</code> also works, with the <code>#</code> because that one takes a CSS selector." },
+  { slide: "Finding elements", q: "<code>document.querySelector(\".product-card\")</code> returns…", chips: ["the first matching element", "a list of every match", "null, because there are two"], ok: 0, hint: "querySelector stops as soon as it finds one.", why: "<code>querySelector</code> returns the <b>first</b> match only. For all of them you need <code>querySelectorAll</code>." },
+  { slide: "Finding elements", q: "Predict the result: <code>document.getElementById(\"#cart-items\")</code>", a: ["null"], show: "null", hint: "Does an element with the id “#cart-items” exist? Check the first character.", why: "<code>getElementById</code> takes only the id name; the <code>#</code> is selector syntax. No element has that id, so JavaScript returns <code>null</code>." },
+  { slide: "JS basics: variables & operators", q: "Predict the result: <code>\"1\" === 1</code>", a: ["false"], show: "false", hint: "One side is text, the other is a number.", why: "<code>===</code> checks value <b>and</b> type. A string is never <code>===</code> a number." },
+  { slide: "JS basics: variables & operators", q: "After these lines, what is <code>total</code>?<pre class=\"code js\">let total = 0;\ntotal += 29.99 * 2;</pre>", a: ["59.98"], show: "59.98", hint: "+= adds the right side to what total already holds.", why: "<code>29.99 * 2</code> is <code>59.98</code>, and <code>total += …</code> adds it to the existing <code>0</code>." },
+  { slide: "JS basics: variables & operators", q: "Which keyword declares a variable whose value will <b>change</b> later, like a quantity?", a: ["let"], show: "let", hint: "The other keyword seals the box.", why: "<code>let</code> allows reassignment. <code>const</code> doesn't, which is why <code>products</code> and <code>cart</code> use it: the label never moves." },
+  { slide: "Objects", q: "Given this object, predict <code>product.price</code><pre class=\"code js\">const product = { id: \"candy\", name: \"Sour Patch Kids\", price: 1.29 };</pre>", a: ["1.29"], show: "1.29", hint: "Dot, then the key name.", why: "<code>product.price</code> reads the value stored under the key <code>price</code>." },
+  { slide: "Objects", q: "Write the expression that reads the product's <b>name</b> from the same object.", a: ["product.name", 'product["name"]'], show: "product.name", hint: "Same shape as product.price.", why: "<code>product.name</code> (or <code>product[\"name\"]</code>) reads the <code>name</code> key." },
+  { slide: "Arrays", q: "After these lines, what is <code>cart.length</code>?<pre class=\"code js\">const cart = [];\ncart.push(minecraft);\ncart.push(candy);</pre>", a: ["2"], show: "2", hint: "push adds one item to the end each time.", why: "Two pushes, two items. <code>length</code> counts items; the last one sits at position <code>1</code>." },
+  { slide: "Arrays", q: "Predict <code>products[1].name</code> for the products array on this slide.", a: ["sour patch kids"], show: '"Sour Patch Kids"', hint: "Positions start at 0.", why: "<code>[0]</code> is Minecraft, so <code>[1]</code> is Sour Patch Kids. Then <code>.name</code> reads that object's name." },
+  { slide: "Arrays", q: "Which array method removes an item from <b>any</b> position, like removeFromCart does?", a: ["splice", "splice()", "cart.splice()", "cart.splice(index,1)"], show: "splice", hint: "pop only takes the last one.", why: "<code>cart.splice(index, 1)</code> removes one item at <code>index</code>." },
+  { slide: "Functions", q: "When the script runs <code>addToCart(\"candy\")</code>, what does <code>productId</code> hold inside the function?", a: ["candy"], show: '"candy"', hint: "The value in the parentheses lands in the parameter.", why: "The argument <code>\"candy\"</code> is copied into the parameter <code>productId</code> for that one call." },
+  { slide: "Functions", q: "Fix this line so the function actually runs: <code>updateCart;</code>", a: ["updatecart()"], show: "updateCart();", hint: "Naming a function isn't calling it.", why: "The parentheses <b>call</b> the function. Without them the line just mentions it and nothing happens." },
+  { slide: "Lab: building elements", q: "Put the steps in the order the script runs them to add a cart row:", order: ['cartItems.appendChild(row)', 'const row = document.createElement("div")', 'row.textContent = "Banana"'], ok: [1, 2, 0], hint: "You can't fill or place a box before it exists.", why: "Create it in memory, fill it, then <code>appendChild</code> places it on the page. Before that last step it's invisible." },
+  { slide: "Lab: building elements", q: "Fill the blank: <code>cartItems.____(row)</code> puts the new row on the page.", a: ["appendchild"], show: "appendChild", hint: "It's the last line of the step-by-step demo.", why: "<code>appendChild</code> adds the element as the last child of <code>cartItems</code>, which makes it visible." },
+  { slide: "Events & listeners", q: "Fill the blank: <code>button.addEventListener(\"____\", () =&gt; addToCart(id))</code>", a: ["click"], show: '"click"', hint: "What does the shopper do to the button?", why: "The event name is <code>\"click\"</code>. Other common ones are <code>\"input\"</code> and <code>\"submit\"</code>." },
+  { slide: "Events & listeners", q: "Why can't the Remove buttons get their listeners when the page first loads?", chips: ["They don't exist yet; updateCart creates them later", "Listeners only work on buttons with an id", "addEventListener can only run once"], ok: 0, hint: "What is in the cart when the page loads?", why: "The cart starts empty, so there are no Remove buttons to listen to. Attach the listener right after creating each one inside <code>updateCart()</code>." },
+  { slide: "Common bugs & fixes", q: "Fix this line: <code>document.getElementById(\"#cart-total\")</code>", a: ['getelementbyid("cart-total")'], show: 'document.getElementById("cart-total")', hint: "This is the “Cannot read properties of null” bug.", why: "Drop the <code>#</code>. <code>getElementById</code> wants the bare id name." },
+  { slide: "Common bugs & fixes", q: "Fix the condition so it <b>compares</b> instead of assigning: <code>if (quantity = 1)</code>", a: ["if(quantity===1)", "quantity===1", "(quantity===1)", "if(quantity===1){"], show: "if (quantity === 1)", hint: "One = puts a value in; three check a value.", why: "<code>=</code> assigns, so the condition was always true. <code>===</code> compares value and type." },
+];
+const qcNorm = (s) => String(s).trim().toLowerCase().replace(/;+$/, "").replace(/^document\./, "").replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/'/g, '"').replace(/\s+/g, "").replace(/^"(.*)"$/, "$1");
+let qcState = {};
+try { qcState = JSON.parse(localStorage.getItem("t2e-checks") || "{}"); } catch (e) {}
+const qcSave = () => { try { localStorage.setItem("t2e-checks", JSON.stringify(qcState)); } catch (e) {} };
+const qcSolved = () => QC.filter((_, i) => qcState[i] === "ok").length;
+const qcBySlide = new Map();
+QC.forEach((q, i) => { q.i = i; if (!qcBySlide.has(q.slide)) qcBySlide.set(q.slide, []); qcBySlide.get(q.slide).push(q); });
+
+const tally = document.createElement("span");
+tally.id = "qcTally"; tally.className = "count"; tally.style.cssText = "margin-left:14px;color:var(--gold);cursor:pointer"; tally.title = "Quick checks solved. Click for the scorecard.";
+$("#count").after(tally);
+tally.addEventListener("click", () => go(slides.length - 1));
+function qcTally() { tally.textContent = `✎ ${qcSolved()}/${QC.length}`; qcScoreRender(); }
+
+qcBySlide.forEach((qs, title) => {
+  const slide = slides.find((s) => s.dataset.title === title);
+  if (!slide) return;
+  const box = document.createElement("div");
+  box.className = "qc";
+  box.innerHTML = `<button class="qc-bar"><span class="chev">▶</span>✎ Quick check <span class="muted" style="font-weight:400">· ${qs.length} question${qs.length > 1 ? "s" : ""}, test yourself</span><span class="qc-state"></span></button><div class="qc-body" hidden></div>`;
+  slide.querySelector(".slide-inner").appendChild(box);
+  let at = Math.max(0, qs.findIndex((q) => qcState[q.i] !== "ok"));
+  const state = box.querySelector(".qc-state"), body = box.querySelector(".qc-body");
+  const refreshState = () => { const n = qs.filter((q) => qcState[q.i] === "ok").length; state.textContent = n === qs.length ? `✓ ${n}/${qs.length} done` : `${n}/${qs.length}`; state.classList.toggle("done", n === qs.length); };
+  box.querySelector(".qc-bar").addEventListener("click", () => { const open = box.classList.toggle("open"); body.hidden = !open; if (open) render(); });
+  box.open = (idx) => { if (idx != null) at = idx; box.classList.add("open"); body.hidden = false; render(); };
+  box.querySelector(".qc-bar").title = "Open the quick check";
+  function render() {
+    const q = qs[at]; let misses = 0, picked = null, order = [];
+    body.innerHTML = `<p class="muted" style="margin:0 0 6px;font-size:12px;letter-spacing:.06em;text-transform:uppercase">Question ${at + 1} of ${qs.length}${qcState[q.i] === "ok" ? " · solved ✓" : ""}</p><div class="qc-q">${q.q}</div>` +
+      (q.chips ? `<div class="qc-chips">${q.chips.map((c, i) => `<button class="chip" data-i="${i}">${c}</button>`).join("")}</div>` :
+       q.order ? `<div class="qc-order"></div><div class="qc-chips">${q.order.map((c, i) => `<button class="chip" data-i="${i}">${esc(c)}</button>`).join("")}</div>` :
+       `<div class="qc-row"><input spellcheck="false" autocomplete="off" placeholder="type your answer and press Enter" /><button class="btn primary">Check ↵</button></div>`) +
+      `<div class="qc-fb"></div><div class="qc-foot"><button class="lnk hint">Hint</button><button class="lnk answer" hidden>Show answer</button><span style="flex:1"></span>${at > 0 ? '<button class="btn prev">← Previous</button>' : ""}${at < qs.length - 1 ? '<button class="btn next">Next →</button>' : '<button class="btn next done">Done on this slide ✓</button>'}</div>`;
+    const fb = body.querySelector(".qc-fb"), hintBtn = body.querySelector(".hint"), ansBtn = body.querySelector(".answer");
+    const say = (ok, html) => { fb.className = "qc-fb show " + (ok ? "ok" : "bad"); fb.innerHTML = html; };
+    const correct = () => { qcState[q.i] = "ok"; qcSave(); refreshState(); qcTally(); say(true, `✅ <b>Correct.</b> ${q.why}`); };
+    const wrong = (extra) => { misses++; if (qcState[q.i] !== "ok") { qcState[q.i] = "miss"; qcSave(); } say(false, `❌ <b>Not yet.</b> ${extra || ""} <span class="muted">Hint: ${q.hint}</span>`); if (misses >= 2) ansBtn.hidden = false; };
+    hintBtn.addEventListener("click", () => say(false, `💡 ${q.hint}`));
+    ansBtn.addEventListener("click", () => {
+      const shown = q.chips ? q.chips[q.ok] : q.order ? q.ok.map((i) => q.order[i]).join("  →  ") : q.show;
+      say(false, `Answer: <code>${q.chips ? shown : esc(shown)}</code>. ${q.why}`);
+      $$(".chip", body).forEach((c) => c.classList.toggle("ok", q.chips ? +c.dataset.i === q.ok : false));
+    });
+    if (q.chips) $$(".chip", body).forEach((c) => c.addEventListener("click", () => {
+      $$(".chip", body).forEach((x) => x.classList.remove("pick", "ok", "bad"));
+      picked = +c.dataset.i; c.classList.add(picked === q.ok ? "ok" : "bad");
+      picked === q.ok ? correct() : wrong();
+    }));
+    else if (q.order) {
+      const tray = body.querySelector(".qc-order");
+      $$(".chip", body).forEach((c) => c.addEventListener("click", () => {
+        if (c.classList.contains("pick")) return;
+        c.classList.add("pick"); order.push(+c.dataset.i);
+        tray.innerHTML = order.map((i, n) => `<span class="chip" style="cursor:default">${n + 1}. ${esc(q.order[i])}</span>`).join("");
+        if (order.length === q.order.length) {
+          if (order.every((v, n) => v === q.ok[n])) correct();
+          else { wrong("That order would crash or do nothing."); setTimeout(() => { order = []; tray.innerHTML = ""; $$(".chip", body).forEach((x) => x.classList.remove("pick")); }, 900); }
+        }
+      }));
+    } else {
+      const inp = body.querySelector("input");
+      const check = () => {
+        const v = qcNorm(inp.value);
+        if (!v) return;
+        if (q.a.some((x) => qcNorm(x) === v)) correct();
+        else wrong(q.show && /^(null|false|true|-?\d|")/.test(q.show) ? `JavaScript actually gives <code>${esc(q.show)}</code>.` : "");
+      };
+      body.querySelector(".btn.primary").addEventListener("click", check);
+      inp.addEventListener("keydown", (e) => { if (e.key === "Enter") check(); });
+      setTimeout(() => inp.focus(), 50);
+    }
+    body.querySelector(".next").addEventListener("click", () => { if (at < qs.length - 1) { at++; render(); } else { box.classList.remove("open"); body.hidden = true; } });
+    body.querySelector(".prev")?.addEventListener("click", () => { at--; render(); });
+  }
+  refreshState();
+  box.refresh = refreshState;
+  box.dataset.slideTitle = title;
+});
+
+// Scorecard on the reference slide
+const scoreCard = document.createElement("div");
+scoreCard.className = "card qc-score";
+scoreCard.style.marginTop = "18px";
+slides[slides.length - 1].querySelector(".slide-inner").appendChild(scoreCard);
+function qcScoreRender() {
+  const total = QC.length, solved = qcSolved();
+  let rows = "";
+  qcBySlide.forEach((qs, title) => {
+    const n = qs.filter((q) => qcState[q.i] === "ok").length;
+    const idx = slides.findIndex((s) => s.dataset.title === title);
+    rows += `<div class="srow"><span style="min-width:230px">${idx + 1}. ${esc(title)}</span><span class="bar"><i style="width:${(n / qs.length) * 100}%"></i></span><span class="mono" style="min-width:44px;text-align:right;color:${n === qs.length ? "var(--green)" : "var(--muted)"}">${n}/${qs.length}</span><button class="btn" data-go="${idx}" style="padding:5px 10px;font-size:12px">${n === qs.length ? "Review" : "Try"}</button></div>`;
+  });
+  scoreCard.innerHTML = `<h4>✎ Quick checks scorecard</h4><p style="margin:0 0 10px;font-size:22px;font-weight:800">${solved} / ${total} solved${solved === total ? " 🎉" : ""}</p>${rows}<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"><button class="btn gold" id="qcRetry">${solved === total ? "Start over" : "Go to the next unsolved check"}</button><button class="btn" id="qcClear">Clear my progress</button></div>`;
+  $$("[data-go]", scoreCard).forEach((b) => b.addEventListener("click", () => openCheck(+b.dataset.go)));
+  $("#qcRetry", scoreCard).addEventListener("click", () => {
+    if (solved === total) { qcState = {}; qcSave(); qcTally(); $$(".qc").forEach((b) => b.refresh()); return; }
+    const q = QC.find((x) => qcState[x.i] !== "ok");
+    openCheck(slides.findIndex((s) => s.dataset.title === q.slide), q);
+  });
+  $("#qcClear", scoreCard).addEventListener("click", () => { qcState = {}; qcSave(); qcTally(); $$(".qc").forEach((b) => b.refresh()); });
+}
+function openCheck(slideIdx, q) {
+  go(slideIdx);
+  const box = $(".qc", slides[slideIdx]);
+  if (!box) return;
+  const qs = qcBySlide.get(box.dataset.slideTitle);
+  box.open(q ? qs.indexOf(q) : null);
+  setTimeout(() => box.scrollIntoView({ block: "nearest", behavior: "smooth" }), 100);
+}
+qcTally();
 
 /* ---------- objects ---------- */
 let prod, copy;
