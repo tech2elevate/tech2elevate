@@ -9,6 +9,7 @@ The source for [tech2elevate.com](https://tech2elevate.com). tech2elevate brings
 | `content/`                 | Site pages in MDX: home, curriculum, project, resources                                        |
 | `public/images/`           | Images used by the pages                                                                       |
 | `public/web-fundamentals/` | The Web Fundamentals Guide, a standalone interactive page served as-is at `/web-fundamentals/` |
+| `starter/`                 | The student starter project; `pnpm build` zips it to `/downloads/tech2elevate-starter.zip`     |
 
 ## 🚀 Deployment
 

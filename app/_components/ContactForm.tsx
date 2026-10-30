@@ -5,7 +5,7 @@ export function ContactForm() {
   return (
     <form
       className="t2e-form"
-      action="https://formsubmit.co/edison.figueroa@target.com"
+      action="https://formsubmit.co/edison.figueroa@gmail.com"
       method="POST"
     >
       <input type="hidden" name="_cc" value="jason.byers@target.com" />

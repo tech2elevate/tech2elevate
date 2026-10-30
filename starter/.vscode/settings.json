@@ -1,0 +1,11 @@
+{
+  "livePreview.defaultPreviewPath": "/index.html",
+  "livePreview.autoRefreshPreview": "On Changes to Saved Files",
+  "livePreview.openPreviewTarget": "Embedded Preview",
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000,
+  "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+  "github.copilot.enable": { "*": false },
+  "github.copilot.nextEditSuggestions.enabled": false,
+  "chat.agent.enabled": false
+}

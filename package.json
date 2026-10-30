@@ -11,7 +11,7 @@
     "format:fix": "prettier --write .",
     "clean": "rm -rf .next",
     "knip": "knip",
-    "postbuild": "pagefind --site .next/server/app --output-path out/_pagefind",
+    "postbuild": "pagefind --site .next/server/app --output-path out/_pagefind && mkdir -p out/downloads && rm -f out/downloads/tech2elevate-starter.zip && cd starter && zip -qr ../out/downloads/tech2elevate-starter.zip . -x '.DS_Store'",
     "prepare": "is-ci || lefthook install"
   },
   "dependencies": {

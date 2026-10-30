@@ -4,13 +4,13 @@ Everyone in the program uses the same free tools on a laptop: **Google Chrome** 
 
 ## The starter project
 
-The [tech2elevate starter](https://github.com/tech2elevate/static-starter) is the folder every student builds their shopping cart in. It has three files:
+The tech2elevate starter is the folder every student builds their shopping cart in. It has three files:
 
 - `index.html`: the page content
 - `styles.css`: the page's appearance
 - `script.js`: the page's behavior
 
-[Download it as a zip](https://github.com/tech2elevate/static-starter/archive/refs/heads/main.zip), extract it, and open the extracted folder in VS Code with **File → Open Folder**. Edit any file and the preview updates to match.
+[Download it as a zip](/downloads/tech2elevate-starter.zip), extract it, and open the extracted `tech2elevate-starter` folder in VS Code with **File → Open Folder**. Edit any file and the preview updates to match. (Mentors: the source is the `starter/` folder of the [site repository](https://github.com/tech2elevate/tech2elevate).)
 
 ## Live Preview
 
