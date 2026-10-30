@@ -20,6 +20,9 @@ export function ContactForm() {
         value="https://tech2elevate.com/thanks"
       />
       <input type="hidden" name="_template" value="table" />
+      {/* FormSubmit's captcha page needs Google scripts that some networks
+          block, leaving a blank page. The _honey field still filters bots. */}
+      <input type="hidden" name="_captcha" value="false" />
       <input
         type="text"
         name="_honey"
