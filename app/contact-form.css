@@ -1,0 +1,73 @@
+/* Partner contact form (app/_components/ContactForm.tsx). Colors follow the
+   Nextra theme so the form reads correctly in light and dark mode. */
+.t2e-form {
+  display: grid;
+  gap: 1rem;
+  max-width: 36rem;
+  margin-top: 1.5rem;
+}
+
+.t2e-form label {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.t2e-form input,
+.t2e-form select,
+.t2e-form textarea {
+  font: inherit;
+  font-weight: 400;
+  color: inherit;
+  background: transparent;
+  border: 1px solid rgb(0 0 0 / 0.2);
+  border-radius: 0.5rem;
+  padding: 0.55rem 0.75rem;
+}
+
+.dark .t2e-form input,
+.dark .t2e-form select,
+.dark .t2e-form textarea {
+  border-color: rgb(255 255 255 / 0.25);
+}
+
+.t2e-form select option {
+  color: initial;
+}
+
+.t2e-form input:focus,
+.t2e-form select:focus,
+.t2e-form textarea:focus {
+  outline: 2px solid
+    hsl(
+      var(--nextra-primary-hue, 212) var(--nextra-primary-saturation, 100%) 50%
+    );
+  outline-offset: 1px;
+}
+
+.t2e-form button {
+  justify-self: start;
+  font: inherit;
+  font-weight: 600;
+  color: #fff;
+  background: hsl(
+    var(--nextra-primary-hue, 212) var(--nextra-primary-saturation, 100%) 42%
+  );
+  border: 0;
+  border-radius: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  cursor: pointer;
+}
+
+.t2e-form button:hover {
+  background: hsl(
+    var(--nextra-primary-hue, 212) var(--nextra-primary-saturation, 100%) 36%
+  );
+}
+
+.t2e-form-note {
+  margin: 0;
+  font-size: 0.8rem;
+  opacity: 0.75;
+}

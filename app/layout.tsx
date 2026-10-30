@@ -4,6 +4,7 @@ import { Footer, Layout, Navbar } from "nextra-theme-docs";
 import { Banner, Head } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
 import "nextra-theme-docs/style.css";
+import "./contact-form.css";
 
 export const metadata = {
   title: {
@@ -30,9 +31,9 @@ function Logo() {
 }
 
 const banner = (
-  <Banner storageKey="t2e-stem-2025">
-    <Link href="/stem-day-speaking-points-2025">
-      📢 Check out our STEM Day Speaking Points!
+  <Banner storageKey="t2e-partner-2026">
+    <Link href="/partner">
+      🤝 Want to bring tech2elevate to your company or school? Partner with us
     </Link>
   </Banner>
 );
