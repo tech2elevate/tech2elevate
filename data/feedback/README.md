@@ -25,10 +25,11 @@ embeds that year's Google Form. Results are published at
    responses sheet, pick **Comma-separated values (.csv)**, publish, and
    paste the URL as `csvUrl`. Publishing makes the raw responses readable by
    anyone with that URL, so keep the form anonymous.
-5. Add the year to `years.json`, create `content/feedback/<year>/` by copying
+5. Generate the QR code: `pnpm dlx qrcode@1.5.4 -t svg -e M -m 2 -o public/images/feedback/<year>-qr.svg https://tech2elevate.com/feedback/<year>` and the same with `-t png -w 1200` for printing. Copy the QR block from the previous year's survey page.
+6. Add the year to `years.json`, create `content/feedback/<year>/` by copying
    the previous year's folder, update the year inside the two pages, and add
    the year to `content/feedback/_meta.ts`.
-6. Commit and push. The deploy puts `/feedback/<year>` online.
+7. Commit and push. The deploy puts `/feedback/<year>` online.
 
 ## Refreshing results
 

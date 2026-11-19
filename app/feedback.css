@@ -141,3 +141,34 @@
 .dark .t2e-quotes li {
   background: rgb(255 255 255 / 0.05);
 }
+
+/* QR block on the survey page, for projecting or printing. White padding
+   keeps the code scannable in dark mode. */
+.t2e-qr {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border: 1px solid rgb(0 0 0 / 0.12);
+  border-radius: 0.5rem;
+}
+
+.dark .t2e-qr {
+  border-color: rgb(255 255 255 / 0.18);
+}
+
+.t2e-qr img {
+  flex: none;
+  width: 10rem;
+  height: 10rem;
+  padding: 0.5rem;
+  background: #fff;
+  border-radius: 0.4rem;
+}
+
+.t2e-qr div {
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
