@@ -1,0 +1,143 @@
+/* Student feedback pages (app/_components/FeedbackForm.tsx and
+   FeedbackResults.tsx). One hue from the Nextra theme; text stays in the
+   page's text color so nothing depends on color alone. */
+.t2e-feedback-embed {
+  margin-top: 1.5rem;
+}
+
+.t2e-feedback-embed iframe {
+  width: 100%;
+  min-height: 70vh;
+  border: 0;
+  border-radius: 0.5rem;
+  background: transparent;
+}
+
+.t2e-feedback-pending {
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  border: 1px dashed rgb(0 0 0 / 0.25);
+  border-radius: 0.5rem;
+  opacity: 0.85;
+}
+
+.dark .t2e-feedback-pending {
+  border-color: rgb(255 255 255 / 0.3);
+}
+
+.t2e-results {
+  margin-top: 1.5rem;
+}
+
+.t2e-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  gap: 0.75rem;
+}
+
+.t2e-tile {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgb(0 0 0 / 0.12);
+  border-radius: 0.5rem;
+}
+
+.dark .t2e-tile {
+  border-color: rgb(255 255 255 / 0.18);
+}
+
+.t2e-tile strong {
+  font-size: 1.75rem;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.t2e-tile span {
+  font-size: 0.8rem;
+  opacity: 0.75;
+}
+
+.t2e-chart {
+  margin-top: 2rem;
+}
+
+.t2e-chart h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.t2e-bars {
+  width: 100%;
+  margin-top: 0.5rem;
+  border-collapse: collapse;
+}
+
+.t2e-bars th,
+.t2e-bars td {
+  padding: 0.3rem 0.5rem 0.3rem 0;
+  border: 0;
+  text-align: left;
+  font-weight: 400;
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.t2e-bars th {
+  width: 30%;
+  max-width: 14rem;
+  overflow-wrap: anywhere;
+}
+
+.t2e-bars td:nth-child(2) {
+  width: 55%;
+}
+
+.t2e-bar {
+  display: block;
+  height: 0.75rem;
+  min-width: 2px;
+  border-radius: 0 4px 4px 0;
+  background: hsl(
+    var(--nextra-primary-hue, 212) var(--nextra-primary-saturation, 100%) 42%
+  );
+}
+
+.dark .t2e-bar {
+  background: hsl(
+    var(--nextra-primary-hue, 212) var(--nextra-primary-saturation, 100%) 60%
+  );
+}
+
+.t2e-bar-value {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.t2e-bar-value small {
+  opacity: 0.7;
+}
+
+.t2e-quotes {
+  margin: 0.5rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.t2e-quotes li {
+  padding: 0.6rem 0.9rem;
+  border-left: 3px solid
+    hsl(
+      var(--nextra-primary-hue, 212) var(--nextra-primary-saturation, 100%) 42%
+    );
+  background: rgb(0 0 0 / 0.03);
+  border-radius: 0 0.4rem 0.4rem 0;
+  white-space: pre-line;
+}
+
+.dark .t2e-quotes li {
+  background: rgb(255 255 255 / 0.05);
+}

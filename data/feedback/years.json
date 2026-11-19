@@ -1,0 +1,11 @@
+{
+  "2026": {
+    "title": "2026 cohort",
+    "formUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdtSwmhSuHTQIR_Vlk2ukM_Wirc48SWWR4Etre5d09tqt3h2w/viewform",
+    "csvUrl": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTMzC-YVDyIhxBVgcZAgFXh2h7uSQsXoLic-v_KIcVGjXqXPNzjh3N8Pp6KBEV4V5CqT5StJjqhDsgx/pub?gid=270663791&single=true&output=csv",
+    "overrides": {
+      "How would you rate the tech2elevate experience?": "rating",
+      "My mentor explained things in a way I could understand": "rating"
+    }
+  }
+}

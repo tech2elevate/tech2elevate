@@ -5,6 +5,7 @@ import { Banner, Head } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
 import "nextra-theme-docs/style.css";
 import "./contact-form.css";
+import "./feedback.css";
 
 export const metadata = {
   title: {

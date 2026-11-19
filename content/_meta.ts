@@ -11,6 +11,7 @@ export default {
   "project": "Project",
   "resources": "Additional Resources",
   "stem-day-speaking-points-2025": "STEM Day 2025",
+  "feedback": "Student Feedback",
   "thanks": {
     display: "hidden",
   },
