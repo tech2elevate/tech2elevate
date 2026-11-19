@@ -1,7 +1,11 @@
 import data from "../../../data/feedback/2026.json";
 
+{/* Not linked from navigation (see _meta.ts); data-pagefind-ignore keeps the numbers out of site search. */}
+
 # 2026 Survey Results
 
 What students told us at the end of the 2026 semester. Numbers come from the [anonymous survey](/feedback/2026); comments are reproduced as written.
 
-<FeedbackResults data={data} />
+<div data-pagefind-ignore="all">
+  <FeedbackResults data={data} />
+</div>
